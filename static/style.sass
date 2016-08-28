@@ -1,0 +1,91 @@
+$d: 0.2s
+
+*
+    margin: 0
+    padding: 0
+
+body
+    background-color: whitesmoke
+    font-family: "Clear Sans", sans-serif
+    font-size: 13px
+    line-height: 20px
+    color: black
+
+a
+    color: black
+    text-decoration: none
+    transition: color $d
+
+b, i
+    font-style: normal
+    font-weight: normal
+
+.menu, .main, .footer
+    margin: 0 auto
+    padding: 0 20px
+    max-width: 520px
+
+h1
+    font-size: 22px
+    line-height: 30px
+    overflow: hidden
+    padding: 20px 0
+    a
+        display: block
+        float: left
+        margin-right: 10px
+        color: silver
+        &.selected
+            color: black
+
+p
+    color: gray
+
+.entry
+    padding-bottom: 15px
+
+.title
+    font-size: 14px
+    a
+        color: black
+        &:visited
+            color: gray
+
+.small
+    overflow: hidden
+    a, b
+        color: silver
+        display: block
+        float: left
+        margin-right: 5px
+        &:last-child
+            margin-right: 0
+
+.summary
+    color: gray
+
+.footer
+    overflow: hidden
+    padding-bottom: 30px
+    a, b
+        color: silver
+        display: block
+        float: left
+        padding: 5px 0
+        margin-right: 5px
+        &:first-child
+            border-bottom: gainsboro 5px solid
+        &:last-child
+            margin-right: 0
+
+@font-face
+    font-family: "Clear Sans"
+    font-style: normal
+    font-weight: normal
+    src: url(/static/ClearSans-Regular.woff)
+
+@font-face
+    font-family: "Clear Sans"
+    font-style: normal
+    font-weight: bold
+    src: url(/static/ClearSans-Bold.woff)

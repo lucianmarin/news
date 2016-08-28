@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Subfeeder</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=0" />
+    <meta name="author" content="Lucian Marin" />
+    <meta name="description" content="tech front page" />
+    <link rel="apple-touch-icon" type="image/png" href="/static/icon.png" />
+    <link rel="icon" sizes="192x192" type="image/png" href="/static/icon.png" />
+    <link rel="stylesheet" type="text/css" href="/static/style.css" />
+</head>
+<body>
+
+<div class="menu">
+    <h1>
+        <a {% if view == 'home' %}class="selected"{% endif %} href="/">Subfeeder</a>
+        <a {% if view == 'last' %}class="selected"{% endif %} href="/recent">Recent</a>
+    </h1>
+</div>
+
+<div class="main">
+    {% for entry in entries %}
+        <div class="entry">
+            <h4 class="title">
+                <a target="_blank" href="{{ entry.link }}">
+                    {{ entry.title }}
+                </a>
+            </h4>
+            <div class="small">
+                <b>{{ entry.link | hostname }}</b>
+                <b>&bull;</b>
+                <b>{{ entry.published_parsed | shortdate }} ago</b>
+                {% if entry.facebook.share.share_count %}
+                    <b>&bull;</b>
+                    <b>{{ entry.facebook.share.share_count }} shares</b>
+                {% endif %}
+            </div>
+            {% if entry.facebook.og_object and verbose %}
+                <div class="summary">
+                    {{ entry.facebook.og_object.description }}
+                </div>
+            {% endif %}
+        </div>
+    {% endfor %}
+</div>
+
+<div class="footer">
+    <b>Subfeeder</b>
+    <b>&frasl;</b>
+    <b>{{ count }} articles</b>
+    <b>&frasl;</b>
+    {% if verbose %}
+        <a href="/succinct">succinct</a>
+    {% else %}
+        <a href="/verbose">verbose</a>
+    {% endif %}
+</div>
+
+</body>
+</html>
