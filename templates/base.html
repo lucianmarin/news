@@ -30,15 +30,15 @@
             <div class="small">
                 <b>{{ entry.link | hostname }}</b>
                 <b>&bull;</b>
-                <b>{{ entry.published_parsed | shortdate }} ago</b>
-                {% if entry.facebook.share.share_count %}
+                <b>{{ entry.time | shortdate }} ago</b>
+                {% if entry.facebook.shares %}
                     <b>&bull;</b>
-                    <b>{{ entry.facebook.share.share_count }} shares</b>
+                    <b>{{ entry.facebook.shares }} shares</b>
                 {% endif %}
             </div>
-            {% if entry.facebook.og_object and verbose %}
+            {% if entry.facebook.description and verbose %}
                 <div class="summary">
-                    {{ entry.facebook.og_object.description }}
+                    {{ entry.facebook.description }}
                 </div>
             {% endif %}
         </div>

@@ -1,10 +1,11 @@
+import datetime
+import feedparser
 import json
+import requests
 import urllib
-from config import feeds
-from datetime import datetime, timedelta
-from time import mktime
 
-from flask import Flask, redirect, render_template, request, jsonify
+from config import feeds
+from flask import Flask, jsonify, redirect, render_template, request
 from werkzeug.contrib.cache import MemcachedCache
 
 app = Flask('subfeeder')
@@ -18,10 +19,19 @@ def get_entries():
     return entries
 
 
-@app.route('/json')
+@app.route('/debug')
+def debug():
+    url = request.args.get('url', '')
+    if url:
+        entries = feedparser.parse(requests.get(url).content).entries
+    else:
+        entries = []
+    return jsonify(entries)
+
+
+@app.route('/api')
 def api():
     entries = get_entries()
-    entries = sorted(entries, key=lambda k: k['timed'], reverse=True)
     return jsonify(entries)
 
 
@@ -29,7 +39,7 @@ def api():
 def home():
     entries = get_entries()
     count = len(entries)
-    entries = sorted(entries, key=lambda k: k['facebook']['share']['share_count'], reverse=True)
+    entries = sorted(entries, key=lambda k: k['facebook']['shares'], reverse=True)
     verbose = request.cookies.get('verbose', 'true')
     verbose = json.loads(verbose)
 
@@ -45,7 +55,7 @@ def home():
 def recent():
     entries = get_entries()
     count = len(entries)
-    entries = sorted(entries, key=lambda k: k['timed'], reverse=True)
+    entries = sorted(entries, key=lambda k: k['time'], reverse=True)
     verbose = request.cookies.get('verbose', 'true')
     verbose = json.loads(verbose)
 
@@ -82,15 +92,15 @@ def filter_hostname(value):
 
 @app.template_filter('date')
 def filter_date(struct):
-    dt = datetime.fromtimestamp(mktime(struct))
-    return dt.strftime('%b %-e, %Y %H:%M')
+    timestamp = datetime.datetime.fromtimestamp(struct)
+    return timestamp.strftime('%b %-e, %Y %H:%M')
 
 
 @app.template_filter('shortdate')
 def filter_shortdate(struct):
     ''' Short time interval for a timestamp '''
-    timestamp = datetime.fromtimestamp(mktime(struct))
-    delta = datetime.utcnow() - timestamp + timedelta(hours=1)
+    timestamp = datetime.datetime.utcfromtimestamp(struct)
+    delta = datetime.datetime.utcnow() - timestamp
 
     miliseconds = abs(delta.microseconds) // 1000
     seconds = abs(delta.seconds)
