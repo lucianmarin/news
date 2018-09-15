@@ -15,7 +15,6 @@ magazines = ['http://feeds.arstechnica.com/arstechnica/index/',
              'http://feeds.feedburner.com/sub/verge']
 
 news = ['https://news.ycombinator.com/rss',
-        'https://lobste.rs/rss',
-        'https://bitmia.com/rss']
+        'https://lobste.rs/rss']
 
 feeds = magazines + news
