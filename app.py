@@ -1,11 +1,10 @@
 import datetime
 import feedparser
-import json
 import requests
 import urllib
 
 from config import cache, feeds
-from flask import Flask, jsonify, redirect, render_template, request
+from flask import Flask, jsonify, render_template, request
 
 app = Flask('subfeeder')
 
@@ -58,7 +57,7 @@ def recent():
 
 @app.template_filter('hostname')
 def filter_hostname(value):
-    ''' Get hostname from an url '''
+    """Get hostname from an url."""
     url = urllib.parse.urlsplit(value)
     return url.netloc.replace('www.', '')
 
@@ -71,7 +70,7 @@ def filter_date(struct):
 
 @app.template_filter('shortdate')
 def filter_shortdate(struct):
-    ''' Short time interval for a timestamp '''
+    """Short time interval for a timestamp."""
     timestamp = datetime.datetime.utcfromtimestamp(struct)
     delta = datetime.datetime.utcnow() - timestamp
 
