@@ -20,7 +20,7 @@ def get_entries():
         uniques[entry['link']] = entry
     entries = uniques.values()
 
-    week_ago = datetime.datetime.now - datetime.timedelta(days=7)
+    week_ago = datetime.datetime.now() - datetime.timedelta(days=7)
     past_time = week_ago.timestamp()
     recent = []
     for entry in entries:
