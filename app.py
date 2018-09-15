@@ -103,4 +103,4 @@ def filter_shortdate(struct):
             return "%dy, %dw" % (years, weeks)
 
 
-app.run(debug=True)
+app.run(debug=False)
