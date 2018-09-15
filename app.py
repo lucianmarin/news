@@ -6,7 +6,7 @@ import urllib
 from config import cache, feeds
 from flask import Flask, jsonify, render_template, request
 
-app = Flask('subfeeder')
+app = Flask('newscafe')
 
 
 def get_entries():
@@ -101,6 +101,3 @@ def filter_shortdate(struct):
             return "%dy, %dd" % (years, days)
         else:
             return "%dy, %dw" % (years, weeks)
-
-
-# app.run(debug=False)
