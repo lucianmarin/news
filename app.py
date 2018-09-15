@@ -14,10 +14,20 @@ def get_entries():
     for feed in feeds:
         fdict = cache.get(feed) or {}
         entries += fdict.values()
+
     uniques = {}
     for entry in entries:
         uniques[entry['link']] = entry
-    return uniques.values()
+    entries = uniques.values()
+
+    week_ago = datetime.datetime.now - datetime.timedelta(days=7)
+    past_time = week_ago.timestamp()
+    recent = []
+    for entry in entries:
+        if entry['time'] > past_time:
+            recent.append(entry)
+
+    return recent
 
 
 @app.route('/debug')
