@@ -1,0 +1,17 @@
+{
+    "lang": "en",
+    "name": "Newscafe",
+    "short_name": "Newscafe",
+    "description": "24/7 Breaking News",
+    "icons": [
+        {
+            "src": "/static/192.png",
+            "sizes": "192x192",
+            "type": "image/png"
+        }
+    ],
+    "start_url": "/",
+    "display": "standalone",
+    "orientation": "portrait",
+    "status": "ok"
+}
