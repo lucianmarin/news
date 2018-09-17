@@ -27,24 +27,23 @@ for feed in feeds:
                 item['shares'] = feed_cache[entry.link]['shares']
             if 'description' in feed_cache[entry.link]:
                 item['description'] = feed_cache[entry.link]['description']
-        if 'shares' not in item or 'description' not in item:
-            url = urllib.parse.quote(entry.link)
-            graph = 'https://graph.facebook.com/v2.7/?id={0}&access_token={1}'.format(url, token)
-            facebook = requests.get(graph).json()
-            try:
-                if 'error' not in facebook:
-                    if 'share' in facebook:
-                        item['shares'] = facebook['share']['share_count']
-                    else:
-                        item['shares'] = 0
-                    if 'og_object' in facebook:
-                        item['description'] = facebook['og_object']['description']
-                    else:
-                        item['description'] = ''
-                print(facebook)
-            except Exception as e:
-                print(e)
-                pass
+        url = urllib.parse.quote(entry.link)
+        graph = 'https://graph.facebook.com/v2.7/?id={0}&access_token={1}'.format(url, token)
+        facebook = requests.get(graph).json()
+        try:
+            if 'error' not in facebook:
+                if 'share' in facebook:
+                    item['shares'] = facebook['share']['share_count']
+                else:
+                    item['shares'] = 0
+                if 'og_object' in facebook:
+                    item['description'] = facebook['og_object']['description']
+                else:
+                    item['description'] = ''
+            print(facebook)
+        except Exception as e:
+            print(e)
+            pass
         item['time'] = to_date(entry.published_parsed).timestamp()
         item['published'] = to_date(entry.published_parsed).isoformat()
         item['author'] = entry.get('author', '')
