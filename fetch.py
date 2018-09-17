@@ -38,7 +38,7 @@ for feed in feeds:
                 item['shares'] = feed_cache[entry.link]['shares']
             if 'description' in feed_cache[entry.link]:
                 item['description'] = feed_cache[entry.link]['description']
-        if not item.get('shares', 0) and not item.get('description', ''):
+        if 'shares' not in item or 'description' not in item:
             url = urllib.parse.quote(entry.link)
             graph = api_path.format(url, token)
             facebook = requests.get(graph).json()
