@@ -7,6 +7,8 @@ from config import cache, feeds
 
 total = 0
 token = '531212323670365|wzDqeYsX6vQhiebyAr7PofFxCf0'
+week_ago = datetime.datetime.now() - datetime.timedelta(days=7)
+past_time = week_ago.timestamp()
 
 
 def to_date(s):
@@ -21,33 +23,36 @@ for feed in feeds:
     items = {}
     feed_cache = cache.get(feed) or []
     for entry in entries:
-        item = {'link': entry.link}
+        item = {
+            'link': entry.link,
+            'time': to_date(entry.published_parsed).timestamp(),
+            'published': to_date(entry.published_parsed).isoformat(),
+            'author': entry.get('author', ''),
+            'title': entry.get('title', '')
+        }
         if entry.link in feed_cache:
             if 'shares' in feed_cache[entry.link]:
                 item['shares'] = feed_cache[entry.link]['shares']
             if 'description' in feed_cache[entry.link]:
                 item['description'] = feed_cache[entry.link]['description']
-        url = urllib.parse.quote(entry.link)
-        graph = 'https://graph.facebook.com/v2.7/?id={0}&access_token={1}'.format(url, token)
-        facebook = requests.get(graph).json()
-        try:
-            if 'error' not in facebook:
-                if 'share' in facebook:
-                    item['shares'] = facebook['share']['share_count']
-                else:
-                    item['shares'] = 0
-                if 'og_object' in facebook:
-                    item['description'] = facebook['og_object']['description']
-                else:
-                    item['description'] = ''
-            print(facebook)
-        except Exception as e:
-            print(e)
-            pass
-        item['time'] = to_date(entry.published_parsed).timestamp()
-        item['published'] = to_date(entry.published_parsed).isoformat()
-        item['author'] = entry.get('author', '')
-        item['title'] = entry.get('title', '')
+        if item['time'] > past_time:
+            url = urllib.parse.quote(entry.link)
+            graph = 'https://graph.facebook.com/v2.7/?id={0}&access_token={1}'.format(url, token)
+            facebook = requests.get(graph).json()
+            try:
+                if 'error' not in facebook:
+                    if 'share' in facebook:
+                        item['shares'] = facebook['share']['share_count']
+                    else:
+                        item['shares'] = 0
+                    if 'og_object' in facebook:
+                        item['description'] = facebook['og_object']['description']
+                    else:
+                        item['description'] = ''
+                print(facebook)
+            except Exception as e:
+                print(e)
+                pass
         items[entry.link] = item
     end = datetime.datetime.utcnow()
     current = (end - start).total_seconds()
