@@ -2,6 +2,7 @@ import datetime
 import feedparser
 import requests
 import urllib
+from random import shuffle
 
 from config import cache, feeds
 
@@ -10,6 +11,7 @@ api_path = "https://graph.facebook.com/v2.8/?id={0}&access_token={1}"
 token = "531212323670365|wzDqeYsX6vQhiebyAr7PofFxCf0"
 week_ago = datetime.datetime.now() - datetime.timedelta(days=7)
 past_time = week_ago.timestamp()
+shuffle(feeds)
 
 
 def to_date(s):
