@@ -28,7 +28,7 @@ def load_db():
 
 
 def save_db(data):
-    week_ago = datetime.datetime.now() - datetime.timedelta(days=7)
+    week_ago = datetime.datetime.now() - datetime.timedelta(days=3)
     past_time = week_ago.timestamp()
     new = {}
     for link in data:
