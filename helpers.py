@@ -1,5 +1,5 @@
 import datetime
-import json
+import ujson
 
 feeds = ['http://feeds.feedburner.com/sub/daringfireball',
       'http://feeds.arstechnica.com/arstechnica/index/',
@@ -24,7 +24,7 @@ def to_date(s):
 
 def load_db():
     with open("db.json", "r") as db_file:
-        return json.loads(db_file.read())
+        return ujson.loads(db_file.read())
 
 
 def save_db(data):
@@ -35,4 +35,4 @@ def save_db(data):
         if data[link]['time'] > past_time:
             new[link] = data[link]
     with open("db.json", "w") as db_file:
-        return db_file.write(json.dumps(new, indent=2))
+        return db_file.write(ujson.dumps(new, indent=2))
