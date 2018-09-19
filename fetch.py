@@ -31,7 +31,7 @@ allowed = True
 temp = data
 for key in temp.keys():
     if allowed and ('shares' or 'description') not in data[key]:
-        url = urllib.parse.quote(data[key].link)
+        url = urllib.parse.quote(data[key]['link'])
         graph = api_path.format(url, token)
         facebook = requests.get(graph).json()
         if 'error' in facebook:
