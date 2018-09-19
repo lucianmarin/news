@@ -36,11 +36,15 @@ for key in temp:
         facebook = requests.get(graph).json()
         if 'error' in facebook:
             allowed = False
-        else:
+        elif facebook:
             if 'share' in facebook and 'share_count' in facebook['share']:
                 data[key]['shares'] = int(facebook['share']['share_count'])
+            else:
+                data[key]['shares'] = 0
             if 'og_object' in facebook and 'description' in facebook['og_object']:
                 data[key]['description'] = facebook['og_object']['description']
+            else:
+                data[key]['description'] = ''
         print(facebook)
 
 print(len(data.values()))
