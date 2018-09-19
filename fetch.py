@@ -16,30 +16,29 @@ for feed in feeds:
     print(feed)
 
 for entry in entries:
-    print(entry.link)
-    item = {
-        'link': entry.link,
-        'time': to_date(entry.published_parsed).timestamp(),
-        'published': to_date(entry.published_parsed).isoformat(),
-        'author': entry.get('author', ''),
-        'title': entry.get('title', '')
-    }
-    if entry.link in data:
-        if 'shares' in data[entry.link]:
-            item['shares'] = data[entry.link]['shares']
-        if 'description' in data[entry.link]:
-            item['description'] = data[entry.link]['description']
-    if 'shares' not in item or 'description' not in item:
+    if entry.link not in data:
+        print(entry.link)
+        item = {
+            'link': entry.link,
+            'time': to_date(entry.published_parsed).timestamp(),
+            'published': to_date(entry.published_parsed).isoformat(),
+            'author': entry.get('author', ''),
+            'title': entry.get('title', '')
+        }
+        data[entry.link] = item
+
+temp = data
+for key in temp:
+    if 'shares' not in data[key] or 'description' not in data[key]:
         url = urllib.parse.quote(entry.link)
         graph = api_path.format(url, token)
         facebook = requests.get(graph).json()
         if 'error' not in facebook:
             if 'share' in facebook and 'share_count' in facebook['share']:
-                item['shares'] = int(facebook['share']['share_count'])
+                data[key]['shares'] = int(facebook['share']['share_count'])
             if 'og_object' in facebook and 'description' in facebook['og_object']:
-                item['description'] = facebook['og_object']['description']
+                data[key]['description'] = facebook['og_object']['description']
         print(facebook)
-    data[entry.link] = item
 
 print(len(data.values()))
 
