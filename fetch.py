@@ -2,10 +2,13 @@ import feedparser
 import requests
 import urllib
 
+from datetime import datetime, timedelta
 from helpers import feeds, load_db, save_db, to_date
 
 token = "531212323670365|wzDqeYsX6vQhiebyAr7PofFxCf0"
 api_path = "https://graph.facebook.com/v2.8/?id={0}&access_token={1}"
+hours_ago = (datetime.now() - timedelta(days=1)).timestamp()
+days_ago = (datetime.now() - timedelta(days=3)).timestamp()
 
 data = load_db()
 
@@ -17,7 +20,6 @@ for feed in feeds:
 
 for entry in entries:
     if entry.link not in data:
-        print(entry.link)
         item = {
             'link': entry.link,
             'time': to_date(entry.published_parsed).timestamp(),
@@ -25,27 +27,32 @@ for entry in entries:
             'author': entry.get('author', ''),
             'title': entry.get('title', '')
         }
-        data[entry.link] = item
+        if item['time'] > days_ago:
+            data[entry.link] = item
+        else:
+            print(item['time'], item['link'])
 
 allowed = True
-temp = data
-for key in temp.keys():
-    if allowed and ('shares' or 'description') not in data[key]:
+for key in data.keys():
+    if allowed:
         url = urllib.parse.quote(data[key]['link'])
         graph = api_path.format(url, token)
-        facebook = requests.get(graph).json()
-        if 'error' in facebook:
-            allowed = False
-        elif facebook:
-            if 'share' in facebook and 'share_count' in facebook['share']:
-                data[key]['shares'] = int(facebook['share']['share_count'])
-            else:
-                data[key]['shares'] = 0
-            if 'og_object' in facebook and 'description' in facebook['og_object']:
-                data[key]['description'] = facebook['og_object']['description']
-            else:
-                data[key]['description'] = ''
-        print(facebook)
+        if 'description' not in data[key] and data[key]['time'] > hours_ago:
+            facebook = requests.get(graph).json()
+            if 'error' in facebook:
+                allowed = False
+            elif 'og_object' in facebook:
+                og = facebook['og_object']
+                data[key]['description'] = og.get('description', '')
+            print(facebook)
+        if 'shares' not in data[key] and data[key]['time'] < hours_ago:
+            facebook = requests.get(graph).json()
+            if 'error' in facebook:
+                allowed = False
+            elif 'share' in facebook:
+                share = facebook['share']
+                data[key]['shares'] = int(share.get('share_count', 0))
+            print(facebook)
 
 print(len(data.values()))
 

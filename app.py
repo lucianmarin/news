@@ -1,12 +1,15 @@
-import datetime
 import feedparser
 import requests
-import urllib
 
+from filters import hostname, date, shortdate
 from helpers import load_db
 from flask import Flask, jsonify, render_template, request
 
 app = Flask('newscafe')
+
+app.jinja_env.filters['hostname'] = hostname
+app.jinja_env.filters['date'] = date
+app.jinja_env.filters['shortdate'] = shortdate
 
 
 @app.route('/debug')
@@ -49,51 +52,3 @@ def recent():
     count = len(entries)
 
     return render_template('base.html', entries=entries[:15], count=count, view='last')
-
-
-@app.template_filter('hostname')
-def filter_hostname(value):
-    """Get hostname from an url."""
-    url = urllib.parse.urlsplit(value)
-    return url.netloc.replace('www.', '')
-
-
-@app.template_filter('date')
-def filter_date(struct):
-    timestamp = datetime.datetime.fromtimestamp(struct)
-    return timestamp.strftime('%b %-e, %Y %H:%M')
-
-
-@app.template_filter('shortdate')
-def filter_shortdate(struct):
-    """Short time interval for a timestamp."""
-    timestamp = datetime.datetime.utcfromtimestamp(struct)
-    delta = datetime.datetime.utcnow() - timestamp
-
-    miliseconds = abs(delta.microseconds) // 1000
-    seconds = abs(delta.seconds)
-    days = abs(delta.days) % 365
-    years = abs(delta.days) // 365
-    weeks = days // 7
-
-    if not years and not days:
-        if not seconds:
-            return "%dms" % miliseconds
-        elif seconds < 60:
-            return "%ds" % seconds
-        elif seconds < 3600:
-            return "%dm" % (seconds // 60)
-        else:
-            return "%dh" % (seconds // 3600)
-    elif not years:
-        if not weeks:
-            return "%dd" % days
-        else:
-            return "%dw" % weeks
-    else:
-        if not weeks and not days:
-            return "%dy" % years
-        elif not weeks:
-            return "%dy, %dd" % (years, days)
-        else:
-            return "%dy, %dw" % (years, weeks)

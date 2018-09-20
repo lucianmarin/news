@@ -1,5 +1,5 @@
-import datetime
 import ujson
+from datetime import datetime, timedelta, timezone
 
 feeds = ['http://feeds.feedburner.com/sub/daringfireball',
       'http://feeds.arstechnica.com/arstechnica/index/',
@@ -19,7 +19,7 @@ feeds = ['http://feeds.feedburner.com/sub/daringfireball',
 
 
 def to_date(s):
-    return datetime.datetime(s.tm_year, s.tm_mon, s.tm_mday, s.tm_hour, s.tm_min, s.tm_sec, tzinfo=datetime.timezone.utc)
+    return datetime(s.tm_year, s.tm_mon, s.tm_mday, s.tm_hour, s.tm_min, s.tm_sec, tzinfo=timezone.utc)
 
 
 def load_db():
@@ -28,11 +28,10 @@ def load_db():
 
 
 def save_db(data):
-    week_ago = datetime.datetime.now() - datetime.timedelta(days=3)
-    past_time = week_ago.timestamp()
+    days_ago = (datetime.now() - timedelta(days=3)).timestamp()
     new = {}
-    for link in data:
-        if data[link]['time'] > past_time:
-            new[link] = data[link]
+    for key in data.keys():
+        if data[key]['time'] > days_ago:
+            new[key] = data[key]
     with open("db.json", "w") as db_file:
         return db_file.write(ujson.dumps(new, indent=2))
