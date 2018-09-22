@@ -1,8 +1,8 @@
 import ujson
 from datetime import datetime, timedelta, timezone
 
-hours_ago = (datetime.now() - timedelta(hours=24)).timestamp()
-days_ago = (datetime.now() - timedelta(hours=48)).timestamp()
+hours_ago = (datetime.utcnow() - timedelta(hours=24)).timestamp()
+days_ago = (datetime.utcnow() - timedelta(hours=48)).timestamp()
 
 feeds = ['http://feeds.feedburner.com/sub/daringfireball',
       'http://feeds.arstechnica.com/arstechnica/index/',
