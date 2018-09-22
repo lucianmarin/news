@@ -19,11 +19,15 @@ def debug():
         entries = feedparser.parse(requests.get(url).content).entries
     else:
         data = load_db()
-        no_shares = [v for v in data.values() if 'shares' not in v and v['time'] < hours_ago]
-        no_description = [v for v in data.values() if 'description' not in v and v['time'] > hours_ago]
+        no_past_shares = [v for v in data.values() if 'shares' not in v and v['time'] < hours_ago]
+        no_past_description = [v for v in data.values() if 'description' not in v and v['time'] < hours_ago]
+        no_recent_shares = [v for v in data.values() if 'shares' not in v and v['time'] > hours_ago]
+        no_recent_description = [v for v in data.values() if 'description' not in v and v['time'] > hours_ago]
         entries = {
-            'no shares': len(no_shares),
-            'no description': len(no_description)
+            'no past shares': len(no_past_shares),
+            'no past description': len(no_past_description),
+            'no recent shares': len(no_recent_shares),
+            'no recent description': len(no_recent_description)
         }
     return jsonify(entries)
 
