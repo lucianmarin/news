@@ -58,6 +58,8 @@ for key in filtered:
             else:
                 share = fb.get('share', {})
                 data[key]['shares'] = share.get('share_count', 0)
+                og_object = fb.get('og_object', {})
+                data[key]['description'] = og_object.get('description', '')
             print(fb)
 
 print(len(data.keys()))
