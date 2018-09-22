@@ -2,13 +2,10 @@ import feedparser
 import requests
 import urllib
 
-from datetime import datetime, timedelta
-from helpers import feeds, load_db, save_db, to_date
+from helpers import feeds, load_db, save_db, to_date, hours_ago, days_ago
 
 token = "531212323670365|wzDqeYsX6vQhiebyAr7PofFxCf0"
 api_path = "https://graph.facebook.com/v2.8/?id={0}&access_token={1}"
-hours_ago = (datetime.now() - timedelta(days=1)).timestamp()
-days_ago = (datetime.now() - timedelta(days=2)).timestamp()
 allowed = True
 
 data = load_db()

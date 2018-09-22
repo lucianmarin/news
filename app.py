@@ -2,7 +2,7 @@ import feedparser
 import requests
 
 from filters import hostname, date, shortdate
-from helpers import load_db
+from helpers import load_db, hours_ago
 from flask import Flask, jsonify, render_template, request
 
 app = Flask('newscafe')
@@ -19,8 +19,8 @@ def debug():
         entries = feedparser.parse(requests.get(url).content).entries
     else:
         data = load_db()
-        no_shares = [d for d in data.values() if 'shares' not in d]
-        no_description = [d for d in data.values() if 'description' not in d]
+        no_shares = [v for v in data.values() if 'shares' not in v and v['time'] < hours_ago]
+        no_description = [v for v in data.values() if 'description' not in v and v['time'] > hours_ago]
         entries = {
             'no shares': len(no_shares),
             'no description': len(no_description)
