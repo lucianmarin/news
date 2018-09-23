@@ -1,7 +1,7 @@
 import ujson
 from datetime import datetime, timedelta, timezone
 
-hours_ago = (datetime.utcnow() - timedelta(hours=24)).timestamp()
+hours_ago = (datetime.utcnow() - timedelta(hours=12)).timestamp()
 days_ago = (datetime.utcnow() - timedelta(hours=48)).timestamp()
 
 feeds = ['http://feeds.feedburner.com/sub/daringfireball',
