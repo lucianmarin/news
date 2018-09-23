@@ -1,23 +1,29 @@
 import ujson
 from datetime import datetime, timedelta, timezone
 
-hours_ago = (datetime.utcnow() - timedelta(hours=12)).timestamp()
-days_ago = (datetime.utcnow() - timedelta(hours=48)).timestamp()
 
 feeds = ['http://feeds.feedburner.com/sub/daringfireball',
-      'http://feeds.arstechnica.com/arstechnica/index/',
-      'http://feeds.macrumors.com/MacRumors-Front',
-      'http://feeds.feedburner.com/sub/9to5google',
-      'http://feeds.feedburner.com/sub/9to5mac',
-      'http://feeds.feedburner.com/sub/anandtech',
-      'http://feeds.feedburner.com/sub/electrek',
-      'http://feeds.feedburner.com/sub/engadget',
-      'http://feeds.feedburner.com/sub/gsmarena',
-      'http://feeds.feedburner.com/sub/nautilus',
-      'http://feeds.feedburner.com/sub/techcrunch',
-      'http://feeds.feedburner.com/sub/verge',
-      'https://news.ycombinator.com/rss',
-      'https://lobste.rs/rss']
+        'http://feeds.arstechnica.com/arstechnica/index/',
+        'http://feeds.macrumors.com/MacRumors-Front',
+        'http://feeds.feedburner.com/sub/9to5google',
+        'http://feeds.feedburner.com/sub/9to5mac',
+        'http://feeds.feedburner.com/sub/anandtech',
+        'http://feeds.feedburner.com/sub/electrek',
+        'http://feeds.feedburner.com/sub/engadget',
+        'http://feeds.feedburner.com/sub/gsmarena',
+        'http://feeds.feedburner.com/sub/nautilus',
+        'http://feeds.feedburner.com/sub/techcrunch',
+        'http://feeds.feedburner.com/sub/verge',
+        'https://news.ycombinator.com/rss',
+        'https://lobste.rs/rss']
+
+
+def hours_ago():
+    return (datetime.utcnow() - timedelta(hours=12)).timestamp()
+
+
+def days_ago():
+    return (datetime.utcnow() - timedelta(hours=48)).timestamp()
 
 
 def to_date(s):

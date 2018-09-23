@@ -25,13 +25,13 @@ for entry in entries:
             'author': entry.get('author', ''),
             'title': entry.get('title', '')
         }
-        if item['time'] > days_ago:
+        if item['time'] > days_ago():
             data[entry.link] = item
         else:
             print(item['time'], item['link'])
 
 values = sorted(data.values(), key=lambda k: k['time'], reverse=True)
-filtered = {v['link'] for v in values if v['time'] > hours_ago}
+filtered = {v['link'] for v in values if v['time'] > hours_ago()}
 for key in filtered:
     if allowed:
         url = urllib.parse.quote(data[key]['link'])
@@ -46,7 +46,7 @@ for key in filtered:
             print(fb)
 
 values = sorted(data.values(), key=lambda k: k['time'])
-filtered = {v['link'] for v in values if v['time'] < hours_ago}
+filtered = {v['link'] for v in values if v['time'] < hours_ago()}
 for key in filtered:
     if allowed:
         url = urllib.parse.quote(data[key]['link'])
