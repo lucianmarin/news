@@ -31,7 +31,7 @@ def to_date(s):
 
 
 def load_db():
-    with open("db.json", "r") as db_file:
+    with open('db.json', 'r') as db_file:
         data = db_file.read()
     return ujson.loads(data)
 
@@ -41,6 +41,6 @@ def save_db(data):
     for key in data.keys():
         if data[key]['time'] > days_ago():
             new[key] = data[key]
-    with open("db.json", "w") as db_file:
+    with open('db.json', 'w') as db_file:
         db_file.write(ujson.dumps(new, indent=2))
     return new

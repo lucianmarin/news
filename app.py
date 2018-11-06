@@ -3,6 +3,7 @@ import requests
 from flask import Flask, jsonify, render_template, request
 from filters import hostname, date, shortdate
 from helpers import load_db, hours_ago
+from models import News
 
 app = Flask('newscafe')
 
@@ -28,18 +29,26 @@ def api_recent():
 
 @app.route('/')
 def home():
-    data = load_db()
-    entries = sorted(data.values(), key=lambda k: k['shares'] if 'shares' in k else 0, reverse=True)
-    count = len(entries)
-    return render_template('base.html', entries=entries[:15], count=count, view='home')
+    # data = load_db()
+    # entries = sorted(data.values(), key=lambda k: k['shares'] if 'shares' in k else 0, reverse=True)
+    # count = len(entries)
+    # entries = entries[:15]
+    count = News.query.count()
+    entries = News.query.order_by('-shares').limit(0, 15).execute()
+    return render_template('base.html', entries=entries,
+                           count=count, view='home')
 
 
 @app.route('/recent/')
 def recent():
-    data = load_db()
-    entries = sorted(data.values(), key=lambda k: k['time'], reverse=True)
-    count = len(entries)
-    return render_template('base.html', entries=entries[:15], count=count, view='last')
+    # data = load_db()
+    # entries = sorted(data.values(), key=lambda k: k['time'], reverse=True)
+    # count = len(entries)
+    # entries = entries[:15]
+    count = News.query.count()
+    entries = News.query.order_by('-time').limit(0, 15).execute()
+    return render_template('base.html', entries=entries,
+                           count=count, view='last')
 
 
 @app.route('/about/')
