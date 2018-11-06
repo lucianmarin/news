@@ -29,24 +29,24 @@ def api_recent():
 
 @app.route('/')
 def home():
-    # data = load_db()
-    # entries = sorted(data.values(), key=lambda k: k['shares'] if 'shares' in k else 0, reverse=True)
-    # count = len(entries)
-    # entries = entries[:15]
-    count = News.query.count()
-    entries = News.query.order_by('-shares').limit(0, 15).execute()
+    data = load_db()
+    entries = sorted(data.values(), key=lambda k: k['shares'] if 'shares' in k else 0, reverse=True)
+    count = len(entries)
+    entries = entries[:15]
+    # count = News.query.count()
+    # entries = News.query.order_by('-shares').limit(0, 15).execute()
     return render_template('base.html', entries=entries,
                            count=count, view='home')
 
 
 @app.route('/recent/')
 def recent():
-    # data = load_db()
-    # entries = sorted(data.values(), key=lambda k: k['time'], reverse=True)
-    # count = len(entries)
-    # entries = entries[:15]
-    count = News.query.count()
-    entries = News.query.order_by('-time').limit(0, 15).execute()
+    data = load_db()
+    entries = sorted(data.values(), key=lambda k: k['time'], reverse=True)
+    count = len(entries)
+    entries = entries[:15]
+    # count = News.query.count()
+    # entries = News.query.order_by('-time').limit(0, 15).execute()
     return render_template('base.html', entries=entries,
                            count=count, view='last')
 
