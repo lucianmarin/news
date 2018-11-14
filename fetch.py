@@ -47,7 +47,7 @@ for entry in News.query.filter(time=(time.time() - 8 * 3600, None)):
 
 
 for entry in News.query.filter(time=(None, time.time() - 8 * 3600)):
-    if is_allowed and entry.shares is None:
+    if is_allowed and entry.comments is None:
         fb = fetch_fb(entry.link)
         if 'error' in fb:
             is_allowed = False
@@ -56,6 +56,7 @@ for entry in News.query.filter(time=(None, time.time() - 8 * 3600)):
             og_object = fb.get('og_object', {})
             entry.description = og_object.get('description', '')
             share = fb.get('share', {})
+            entry.comments = share.get('comment_count', 0)
             entry.shares = share.get('share_count', 0)
             entry.save()
-            print(entry.shares)
+            print(entry.shares, entry.comments)

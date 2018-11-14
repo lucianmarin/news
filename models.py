@@ -9,3 +9,4 @@ class News(rom.Model):
     author = rom.Text()
     description = rom.Text()
     shares = rom.Integer(index=True)
+    comments = rom.Integer(index=True)

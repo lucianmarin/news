@@ -37,6 +37,10 @@
                     <b>&bull;</b>
                     <b>{{ entry.shares }} shares</b>
                 {% endif %}
+                {% if entry.comments %}
+                    <b>&bull;</b>
+                    <b>{{ entry.comments }} comments</b>
+                {% endif %}
             </div>
             {% if entry.description %}
                 <div class="summary">
