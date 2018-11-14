@@ -47,7 +47,7 @@ for entry in News.query.filter(time=(time.time() - 8 * 3600, None)):
 
 
 for entry in News.query.filter(time=(None, time.time() - 8 * 3600)):
-    if is_allowed and entry.comments is None:
+    if is_allowed and entry.shares is None:
         fb = fetch_fb(entry.link)
         if 'error' in fb:
             is_allowed = False
