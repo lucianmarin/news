@@ -61,6 +61,7 @@ def debug():
 
 @app.route('/text/<id>/')
 def text(id):
+    count = News.query.count()
     article = News.get(id)
     r = requests.get(article.link)
     soup = BeautifulSoup(r.content, features="lxml")
@@ -82,5 +83,4 @@ def text(id):
                 text = child.text.strip()
                 if text:
                     paragraphs.append(text)
-    # lines = [line.strip() for line in c.text.splitlines() if line.strip()]
-    return render_template('text.html', entry=article, lines=paragraphs)
+    return render_template('text.html', entry=article, lines=paragraphs, count=count)
