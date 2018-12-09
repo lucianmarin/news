@@ -63,7 +63,7 @@ def debug():
 def text(id):
     article = News.get(id)
     r = requests.get(article.link)
-    soup = BeautifulSoup(r.content)
+    soup = BeautifulSoup(r.content, features="lxml")
     candidates = {}
     for p in soup.findAll('p'):
         key = p.parent.get('class', ['_'])[0]
@@ -71,16 +71,16 @@ def text(id):
             candidates[key] += 1
         else:
             candidates[key] = 1
-    print(candidates)
     sorted_candidates = sorted(candidates.items(), key=lambda kv: kv[1])
     sorted_candidates.reverse()
     container = sorted_candidates[0][0]
     c = soup.select_one("." + container)
     paragraphs = []
     if c:
-        for p in c.findAll('p'):
-            text = p.text.strip()
-            if text:
-                paragraphs.append(text)
+        for child in c.children:
+            if child.name in ['p', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6']:
+                text = child.text.strip()
+                if text:
+                    paragraphs.append(text)
     # lines = [line.strip() for line in c.text.splitlines() if line.strip()]
     return render_template('text.html', entry=article, lines=paragraphs)
