@@ -1,7 +1,7 @@
 import requests
 import urllib
 from bs4 import BeautifulSoup
-from settings import TOKEN
+from settings import HEADERS, TOKEN
 
 
 def fetch_fb(link):
@@ -12,7 +12,7 @@ def fetch_fb(link):
 
 
 def fetch_desc(link):
-    r = requests.get(link)
+    r = requests.get(link, headers=HEADERS)
     soup = BeautifulSoup(r.text, features="lxml")
     description = soup.find("meta", attrs={'name': "description"})
     og_description = soup.find("meta", property="og:description")
