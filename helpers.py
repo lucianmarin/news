@@ -23,7 +23,10 @@ def get_paragraphs(soup):
                         subchild.decompose()
                 text = child.text.strip()
                 if text:
-                    paragraphs.append(text)
+                    if child.name in ['p', 'pre']:
+                        paragraphs.append((text, False))
+                    else:
+                        paragraphs.append((text, True))
     return paragraphs
 
 
@@ -63,7 +66,7 @@ def fetch_desc(link):
     if description:
         return description
     elif paragraphs:
-        return paragraphs[0]
+        return paragraphs[0][0]
     else:
         return ''
 

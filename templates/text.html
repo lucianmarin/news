@@ -39,7 +39,11 @@
             </div>
             <div class="textual">
                 {% for line in lines %}
-                    <p>{{ line }}</p>
+                    {% if line[1] %}
+                        <p><strong>{{ line[0] }}</strong></p>
+                    {% else %}
+                        <p>{{ line[0] }}</p>
+                    {% endif %}
                 {% else %}
                     <p>{{ entry.description }}</p>
                 {% endfor %}
