@@ -23,14 +23,19 @@ def get_paragraphs(soup):
 
 
 def get_description(soup):
-    desc = soup.find("meta", attrs={'name': "description"})
-    og_desc = soup.find("meta", property="og:description")
+    desc = soup.find('meta', attrs={'name': "description"})
+    t_desc = soup.find('meta', attrs={'name': "twitter:description"})
+    og_desc = soup.find('meta', attrs={'property': "og:description"})
     desc_content = desc.get('content', '') if desc else ''
+    t_desc_content = t_desc.get('content', '') if t_desc else ''
     og_desc_content = og_desc.get('content', '') if og_desc else ''
     desc_text = " ".join(desc_content.split())
+    t_desc_text = " ".join(t_desc_content.split())
     og_desc_text = " ".join(og_desc_content.split())
     if og_desc_text:
         return og_desc_text
+    elif t_desc_text:
+        return t_desc_text
     elif desc_text:
         return desc_text
     else:
