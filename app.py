@@ -1,11 +1,9 @@
 import feedparser
 import requests
-from bs4 import BeautifulSoup
 from flask import Flask, jsonify, render_template, request
 from helpers import fetch_paragraphs
 from filters import hostname, date, shortdate
 from models import News
-from settings import HEADERS
 
 app = Flask('newscafe')
 
@@ -37,7 +35,7 @@ def api_recent():
 def home():
     count = News.query.count()
     entries = News.query.order_by('-shares').limit(0, 15).execute()
-    return render_template('base.html', entries=entries, count=count,
+    return render_template('main.html', entries=entries, count=count,
                            view='home')
 
 
@@ -45,7 +43,7 @@ def home():
 def recent():
     count = News.query.count()
     entries = News.query.order_by('-time').limit(0, 15).execute()
-    return render_template('base.html', entries=entries, count=count,
+    return render_template('main.html', entries=entries, count=count,
                            view='last')
 
 
