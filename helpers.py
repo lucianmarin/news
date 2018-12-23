@@ -4,6 +4,13 @@ from bs4 import BeautifulSoup
 from settings import HEADERS, TOKEN
 
 
+def get_url(link):
+    url = urllib.parse.urlparse(link)
+    url_list = list(url)
+    url_list[4] = ''
+    return urllib.parse.urlunparse(url_list)
+
+
 def get_paragraphs(soup):
     allowed = ["p", "h1", "h2", "h3", "h4", "h5", "h6", "pre"]
     block = ["script", "ins"]

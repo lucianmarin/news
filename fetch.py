@@ -2,7 +2,7 @@ import feedparser
 import requests
 import time
 from dateutil.parser import parse
-from helpers import fetch_desc, fetch_fb
+from helpers import fetch_desc, fetch_fb, get_url
 from models import News
 from settings import FEEDS
 
@@ -10,19 +10,21 @@ from settings import FEEDS
 def grab_entries():
     entries = []
     for feed in FEEDS:
-        response = requests.get(feed)
-        entries += feedparser.parse(response.text).entries
+        r = requests.get(feed)
+        entries += feedparser.parse(r.text).entries
         print(feed)
     for entry in entries:
         try:
-            n = News(link=entry.link, title=entry.title)
+            orig = entry.get('feedburner_origlink', '')
+            entry.link = orig if orig else entry.link
+            url = get_url(entry.link)
+            n = News(link=url, title=entry.title)
             n.time = parse(entry.published).timestamp()
             n.author = getattr(entry, 'author', None)
-            n.save()
-            print(n.link)
-            print(n.author)
+            if n.time > time.time() - 48 * 3600:
+                n.save()
+                print(n.link)
         except Exception as e:
-            print(e)
             pass
     return entries
 
@@ -63,4 +65,4 @@ def grab_facebook():
 grab_entries()
 cleanup()
 grab_description()
-grab_facebook()
+# grab_facebook()

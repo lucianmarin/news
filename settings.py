@@ -1,6 +1,8 @@
 FEEDS = [
     "http://feeds.arstechnica.com/arstechnica/index/",
     "http://feeds.macrumors.com/MacRumors-Front",
+    "http://feeds.feedburner.com/neowin-main",
+    "http://feeds.feedburner.com/PetaPixel",
     "http://feeds.feedburner.com/sub/daringfireball",
     "http://feeds.feedburner.com/sub/9to5google",
     "http://feeds.feedburner.com/sub/9to5mac",
