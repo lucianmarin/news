@@ -38,20 +38,19 @@ def get_paragraphs(soup):
 
 
 def get_description(soup):
-    desc = soup.find('meta', attrs={'name': "description"})
-    t_desc = soup.find('meta', attrs={'name': "twitter:description"})
-    og_desc = soup.find('meta', attrs={'property': "og:description"})
-    desc_content = desc.get('content', '') if desc else ''
-    t_desc_content = t_desc.get('content', '') if t_desc else ''
-    og_desc_content = og_desc.get('content', '') if og_desc else ''
-    desc_text = " ".join(desc_content.split())
-    t_desc_text = " ".join(t_desc_content.split())
-    og_desc_text = " ".join(og_desc_content.split())
-    if og_desc_text:
-        return og_desc_text
-    if t_desc_text:
-        return t_desc_text
-    return desc_text
+    attrs = (
+        {'name': "description"},
+        {'name': "twitter:description"},
+        {'name': "og:description"},
+        {'property': "og:description"}
+    )
+    description = ""
+    for attr in attrs:
+        meta = soup.find('meta', attrs=attr)
+        meta_content = meta.get('content', '') if meta else ''
+        meta_pretty = " ".join(meta_content.split())
+        description = meta_pretty if meta_pretty else description
+    return description
 
 
 def fetch_fb(link):

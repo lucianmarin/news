@@ -22,7 +22,10 @@ LINKS = [
     "https://daringfireball.net/feeds/main",
     "https://news.ycombinator.com/rss",
     "https://lobste.rs/rss",
-    "https://www.techmeme.com/feed.xml"
+    "http://monocle.io/feed",
+    "https://www.designernews.co/?format=rss",
+    "https://www.techmeme.com/feed.xml",
+    "http://rss.slashdot.org/Slashdot/slashdotMain"
 ]
 
 TOKEN = "531212323670365|wzDqeYsX6vQhiebyAr7PofFxCf0"
