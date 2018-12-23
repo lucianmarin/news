@@ -15,7 +15,8 @@ FEEDS = [
     "http://feeds.feedburner.com/sub/omgubuntu",
     "http://feeds.feedburner.com/sub/qz",
     "http://feeds.feedburner.com/sub/npr",
-    "http://feeds.feedburner.com/sub/atlantic"
+    "http://feeds.feedburner.com/sub/atlantic",
+    "http://feeds.feedburner.com/sub/fastcompany"
 ]
 
 LINKS = [
