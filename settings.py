@@ -13,6 +13,7 @@ FEEDS = [
     "http://feeds.imore.com/theiphoneblog",
     "http://feeds.androidcentral.com/androidcentral",
     "http://feeds.windowscentral.com/wmexperts",
+    "http://feeds.feedburner.com/businessinsider",
     "http://feeds.feedburner.com/neowin-main",
     "http://feeds.feedburner.com/petapixel",
     "http://feeds.feedburner.com/thehackersnews",
