@@ -65,7 +65,8 @@ def fetch_desc(link):
     soup = BeautifulSoup(r.text, features="lxml")
     description = get_description(soup)
     paragraphs = get_paragraphs(soup)
-    description = '' if description.endswith(('…', '...')) else description
+    terms = ('…', '[…]', '...')
+    description = '' if description.endswith(terms) else description
     if not description and paragraphs:
         return paragraphs[0][0]
     return description
