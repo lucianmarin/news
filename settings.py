@@ -26,6 +26,7 @@ FEEDS = [
     "http://feeds.feedburner.com/sub/electrek",
     "http://feeds.feedburner.com/sub/engadget",
     "http://feeds.feedburner.com/sub/fastcompany",
+    "http://feeds.feedburner.com/sub/fubiz",
     "http://feeds.feedburner.com/sub/gsmarena",
     "http://feeds.feedburner.com/sub/longreads",
     "http://feeds.feedburner.com/sub/nautilus",
