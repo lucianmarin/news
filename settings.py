@@ -1,5 +1,6 @@
 FEEDS = [
     "http://feeds.macrumors.com/MacRumors-Front",
+    "http://feeds.windowscentral.com/wmexperts",
     "http://feeds.feedburner.com/neowin-main",
     "http://feeds.feedburner.com/PetaPixel",
     "http://feeds.feedburner.com/sub/9to5google",
