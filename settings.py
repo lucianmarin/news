@@ -1,24 +1,27 @@
 FEEDS = [
-    "http://feeds.macrumors.com/MacRumors-Front",
+    "http://rss.sciam.com/scientificamerican-global",
+    "http://feeds.macrumors.com/macrumors-front",
     "http://feeds.windowscentral.com/wmexperts",
     "http://feeds.feedburner.com/neowin-main",
-    "http://feeds.feedburner.com/PetaPixel",
+    "http://feeds.feedburner.com/petapixel",
+    "http://feeds.feedburner.com/thehackersnews",
     "http://feeds.feedburner.com/sub/9to5google",
     "http://feeds.feedburner.com/sub/9to5mac",
     "http://feeds.feedburner.com/sub/anandtech",
+    "http://feeds.feedburner.com/sub/atlantic",
     "http://feeds.feedburner.com/sub/electrek",
     "http://feeds.feedburner.com/sub/engadget",
+    "http://feeds.feedburner.com/sub/fastcompany",
     "http://feeds.feedburner.com/sub/gsmarena",
     "http://feeds.feedburner.com/sub/nautilus",
+    "http://feeds.feedburner.com/sub/npr",
+    "http://feeds.feedburner.com/sub/omgubuntu",
+    "http://feeds.feedburner.com/sub/producthunt",
+    "http://feeds.feedburner.com/sub/qz",
+    "http://feeds.feedburner.com/sub/smashing",
     "http://feeds.feedburner.com/sub/techcrunch",
     "http://feeds.feedburner.com/sub/verge",
-    "http://feeds.feedburner.com/sub/smashing",
-    "http://feeds.feedburner.com/sub/omgubuntu",
-    "http://feeds.feedburner.com/sub/qz",
-    "http://feeds.feedburner.com/sub/npr",
-    "http://feeds.feedburner.com/sub/atlantic",
-    "http://feeds.feedburner.com/sub/fastcompany",
-    "http://feeds.feedburner.com/sub/producthunt"
+    "http://feeds.feedburner.com/sub/wired"
 ]
 
 LINKS = [
