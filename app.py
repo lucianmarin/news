@@ -13,25 +13,30 @@ app.jinja_env.globals['v'] = 5
 
 @app.route('/api/0/newscafe/')
 def api_popular():
-    entries = News.query.order_by('-shares').limit(0, 15).execute()
-    dicts = []
+    uniques = {}
+    entries = News.query.order_by('shares').execute()
     for entry in entries:
-        dicts.append(entry.to_dict())
+        hn = hostname(entry.link)
+        uniques[hn] = entry
+    sorted_entries = sorted(uniques.values(), key=lambda v: v.shares, reverse=True)
+    dicts = [e.to_dict() for e in sorted_entries]
     return jsonify(dicts)
 
 
 @app.route('/api/0/recent/')
 def api_recent():
-    entries = News.query.order_by('-time').limit(0, 15).execute()
-    dicts = []
+    uniques = {}
+    entries = News.query.order_by('time').execute()
     for entry in entries:
-        dicts.append(entry.to_dict())
+        hn = hostname(entry.link)
+        uniques[hn] = entry
+    sorted_entries = sorted(uniques.values(), key=lambda v: v.time, reverse=True)
+    dicts = [e.to_dict() for e in sorted_entries]
     return jsonify(dicts)
 
 
 @app.route('/')
 def home():
-    # entries = News.query.order_by('-shares').limit(0, 15).execute()
     count = News.query.count()
     uniques = {}
     entries = News.query.order_by('shares').execute()
@@ -44,7 +49,6 @@ def home():
 
 @app.route('/recent/')
 def recent():
-    # entries = News.query.order_by('-time').limit(0, 15).execute()
     count = News.query.count()
     uniques = {}
     entries = News.query.order_by('time').execute()
@@ -57,7 +61,12 @@ def recent():
 
 @app.route('/about/')
 def about():
-    return render_template('about.html', view='about')
+    sites = set()
+    entries = News.query.all()
+    for entry in entries:
+        hn = hostname(entry.link)
+        sites.add(hn)
+    return render_template('about.html', sites=sites, view='about')
 
 
 @app.route('/debug/')
