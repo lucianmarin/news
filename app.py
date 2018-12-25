@@ -11,8 +11,8 @@ app.jinja_env.filters['shortdate'] = shortdate
 app.jinja_env.globals['v'] = 5
 
 
-@app.route('/api/0/newscafe/')
-def api_popular():
+@app.route('/api/0/top/')
+def api_top():
     uniques = {}
     entries = News.query.order_by('shares').execute()
     for entry in entries:
