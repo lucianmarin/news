@@ -9,6 +9,7 @@ def hostname(value):
 
 
 def date(struct):
+    """Format date time."""
     timestamp = datetime.fromtimestamp(struct)
     return timestamp.strftime('%b %-e, %Y %H:%M')
 

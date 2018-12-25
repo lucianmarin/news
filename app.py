@@ -66,8 +66,9 @@ def about():
 
 @app.route('/debug/')
 def debug():
-    url = request.args.get('url', '')
-    entries = feedparser.parse(requests.get(url).content).entries
+    # url = request.args.get('url', '')
+    # entries = feedparser.parse(requests.get(url).content).entries
+    entries = News.query.order_by('-shares').execute()
     return jsonify(entries)
 
 
