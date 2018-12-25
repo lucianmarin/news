@@ -27,7 +27,7 @@ def get_paragraphs(soup):
             if child.name in block:
                 child.decompose()
         for child in candidate.children:
-            if child.name in ["div", "ul"]:
+            if child.name == "ul":
                 child.unwrap()
         for child in candidate.children:
             if child.name in allowed:
