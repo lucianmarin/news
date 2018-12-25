@@ -23,10 +23,10 @@ def get_paragraphs(soup):
             counter = length
     paragraphs = []
     if candidate:
+        for child in candidate.findAll():
+            if child.name in block:
+                child.decompose()
         for child in candidate.children:
-            for subchild in child.findAll():
-                if subchild.name in block:
-                    subchild.decompose()
             if child.name == "ul":
                 child.unwrap()
         for child in candidate.children:
