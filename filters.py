@@ -23,9 +23,9 @@ def shortdate(stamp):
     minutes = seconds // 60
     hours = seconds // 3600
     if not hours and not minutes and not seconds:
-        return f"{miliseconds}ms"
+        return "{0}ms".format(miliseconds)
     if not hours and not minutes:
-        return f"{seconds}s"
+        return "{0}s".format(seconds)
     if not hours:
-        return f"{minutes}m"
-    return f"{hours}h"
+        return "{0}m".format(minutes)
+    return "{0}h".format(hours)
