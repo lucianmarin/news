@@ -59,6 +59,13 @@ def recent():
     return render_template('main.html', entries=sorted_entries[:15], count=count, view='last')
 
 
+@app.route('/<name>/')
+def site(name):
+    count = News.query.count()
+    entries = News.query.filter(site=name).order_by('-time').execute()
+    return render_template('site.html', entries=entries, count=count, view='site')
+
+
 @app.route('/about/')
 def about():
     sites = set()

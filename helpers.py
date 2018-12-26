@@ -1,6 +1,7 @@
 import requests
 import urllib
 from bs4 import BeautifulSoup
+from filters import hostname
 from settings import HEADERS, TOKEN
 
 
@@ -82,16 +83,13 @@ def fetch_paragraphs(link):
 
 
 def fetch_external(link):
-    def netloc(value):
-        url = urllib.parse.urlsplit(value)
-        return url.netloc.replace('www.', '')
-    hn = netloc(link)
+    hn = hostname(link)
     r = requests.get(link, headers=HEADERS)
     soup = BeautifulSoup(r.text, features="lxml")
     links = set()
     for a in soup.findAll('a', href=True):
         href = a['href']
-        if href.startswith(('https://', 'http://')) and netloc(href) != hn:
+        if href.startswith(('https://', 'http://')) and hostname(href) != hn:
             links.add(href)
     print(links)
     print(len(links))

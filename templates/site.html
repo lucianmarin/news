@@ -28,9 +28,7 @@
                     <a target="_blank" href="{{ entry.link }}">{{ entry.title }}</a>
                 </h4>
                 <div class="small">
-                    <a href="/{{ entry.link | hostname }}/">
-                        {{ entry.link | hostname }}
-                    </a>
+                    <b>{{ entry.link | hostname }}</b>
                     <b>&bull;</b>
                     <b>{{ entry.time | shortdate }} ago</b>
                     <b>&bull;</b>
