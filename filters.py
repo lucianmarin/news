@@ -1,5 +1,5 @@
-from datetime import datetime
 import urllib
+from datetime import datetime
 
 
 def hostname(value):
@@ -20,6 +20,6 @@ def shortdate(stamp):
     delta = datetime.utcnow() - timestamp
     minutes = round(delta.total_seconds() / 60)
     hours = round(delta.total_seconds() / 3600)
-    if not hours:
+    if minutes < 60:
         return "{0}m".format(minutes)
     return "{0}h".format(hours)
