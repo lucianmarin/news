@@ -28,7 +28,7 @@
                     <a target="_blank" href="{{ entry.link }}">{{ entry.title }}</a>
                 </h4>
                 <div class="small">
-                    <a href="/{{ entry.link | hostname }}/">
+                    <a href="/{{ entry.link | hostname }}/{% if view == 'last' %}recent{% else %}top{% endif %}/">
                         {{ entry.link | hostname }}
                     </a>
                     <b>&bull;</b>
