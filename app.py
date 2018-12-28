@@ -79,7 +79,7 @@ def about():
             sites[entry.site] += 1
         else:
             sites[entry.site] = 1
-    return render_template('about.html', sites=sites, view='about')
+    return render_template('about.html', sites=sorted(sites.items()), view='about')
 
 
 @app.route('/debug/')
