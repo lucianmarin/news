@@ -4,7 +4,7 @@ from app.models import Article
 
 
 def index(request):
-    distinct = Article.objects.order_by('domain', '-shares').distinct('domain').values('id')
+    distinct = Article.objects.exclude(shares=None).order_by('domain', '-shares').distinct('domain').values('id')
     index = Article.objects.filter(id__in=distinct).order_by('-shares')
     count = Article.objects.count()
 
