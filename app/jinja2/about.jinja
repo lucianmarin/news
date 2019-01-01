@@ -1,0 +1,65 @@
+{% extends 'base.jinja' %}
+
+{% block menu %}
+    <a class="{% if view == 'about' %}selected{% endif %}" href="{{ reverse('about') }}">
+        about
+    </a>
+    <a class="{% if view == 'index' %}selected{% endif %}" href="{{ reverse('index') }}">
+        newscafe
+    </a>
+{% endblock %}
+
+{% block main %}
+    <div class="entry">
+        <h4 class="title">
+            How it works?
+        </h4>
+        <div class="summary">
+            Newscafe fetches a bunch of important RSS feeds and ranks the links by number of shares on Facebook. It can be much more with better sources and interesting metadata gathered from different services people use.
+        </div>
+    </div>
+    <div class="entry">
+        <h4 class="title">
+            Who made it? Why?
+        </h4>
+        <div class="summary">
+            Newscafe is made by <a href="http://lucianmarin.com/">Lucian Marin</a>. It is part of Subcafe platform where the main app is <a href="https://sub.cafe/">Sub</a>, the social network. Newscafe is made for busy people who don't want to spent more than a few minutes getting the most important news of the day.
+        </div>
+    </div>
+    <div class="entry">
+        <h4 class="title">
+            What's the tech?
+        </h4>
+        <div class="summary">
+            Newscafe is a Flask app. It uses feedparser, requests, rom, Redis and Facebook API. It isn't database driven for good reasons. Instead it uses a buffer for the last 48 hours.
+        </div>
+    </div>
+    <div class="entry">
+        <h4 class="title">
+            What sites are monitored?
+        </h4>
+        <div class="summary">
+            In alphabetical order:
+            {% for key, value in sites %}
+                {{ key }}{{ value | superscript }},
+            {% endfor %}
+        </div>
+    </div>
+    <div class="entry">
+        <h4 class="title">
+            API Endpoints
+        </h4>
+        <div class="small">
+            <b>/api/0/top/</b>
+        </div>
+        <div class="summary">
+            Top news sorted by number of Facebook shares.
+        </div>
+        <div class="small">
+            <b>/api/0/recent/</b>
+        </div>
+        <div class="summary">
+            Recent news sorted by time they were published.
+        </div>
+    </div>
+{% endblock %}

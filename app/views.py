@@ -30,7 +30,7 @@ def recent(request):
 def about(request):
     count = Article.objects.count()
 
-    return render(request, 'index.jinja', {
+    return render(request, 'about.jinja', {
         'count': count,
         'view': 'about'
     })
