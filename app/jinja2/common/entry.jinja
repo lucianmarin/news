@@ -1,0 +1,23 @@
+<div class="entry">
+    <h4 class="title">
+        <a target="_blank" href="{{ article.url }}">
+            {{ article.title }}
+        </a>
+    </h4>
+    <div class="small">
+        <a>{{ article.url | hostname }}</a>
+        <b>&bull;</b>
+        <b>{{ article.pub | shortdate }} ago</b>
+        <b>&bull;</b>
+        <a href="/text/{{ article.id }}/">text</a>
+        {% if article.shares %}
+            <b>&bull;</b>
+            <b>{{ article.shares }} shares</b>
+        {% endif %}
+    </div>
+    {% if article.description %}
+        <div class="summary">
+            {{ article.description | truncate(320) }}
+        </div>
+    {% endif %}
+</div>

@@ -1,5 +1,5 @@
 from django.shortcuts import get_object_or_404, render
-from app.helpers import get_paragraphs
+from app.helpers import fetch_paragraphs
 from app.models import Article
 
 
@@ -27,14 +27,23 @@ def recent(request):
     })
 
 
-def text(request, id):
-    article = get_object_or_404(Article, id=id)
-    lines = get_paragraphs(article.url)
+def about(request):
     count = Article.objects.count()
 
     return render(request, 'index.jinja', {
+        'count': count,
+        'view': 'about'
+    })
+
+
+def text(request, id):
+    article = get_object_or_404(Article, id=id)
+    lines = fetch_paragraphs(article.url)
+    count = Article.objects.count()
+
+    return render(request, 'text.jinja', {
         'article': article,
         'count': count,
-        'line': lines,
+        'lines': lines,
         'view': 'text'
     })
