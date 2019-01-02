@@ -38,6 +38,7 @@ def about(request):
 
 def text(request, id):
     article = get_object_or_404(Article, id=id)
+    article.description = None
     lines = fetch_paragraphs(article.url)
     count = Article.objects.count()
 
