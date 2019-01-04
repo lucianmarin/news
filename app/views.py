@@ -29,9 +29,11 @@ def recent(request):
 
 def about(request):
     count = Article.objects.count()
+    sites = Article.objects.order_by('domain').distinct('domain').values_list('domain', flat=True)
 
     return render(request, 'about.jinja', {
         'count': count,
+        'sites': sites,
         'view': 'about'
     })
 
