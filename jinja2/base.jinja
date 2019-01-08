@@ -5,25 +5,20 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0">
     <meta name="author" content="Lucian Marin">
-    <meta name="description" content="24/7 Breaking News">
+    <meta name="description" content="24/7 Quality News">
     <link rel="apple-touch-icon" type="image/png" href="/static/192.png">
     <link rel="icon" sizes="192x192" type="image/png" href="/static/192.png">
     <link rel="stylesheet" type="text/css" href="/static/style.css?v={{v}}">
 </head>
 <body>
     <div class="menu">
-        <h5>
-            {% block submenu %}
-                <a href="{{ reverse('index') }}">24 &frasl; 7 quality news</a>
-            {% endblock %}
-        </h5>
         <h1>
             {% block menu %}
                 <a class="{% if view == 'index' %}selected{% endif %}" href="{{ reverse('index') }}">
-                    newscafe
+                    Newscafe
                 </a>
                 <a class="{% if view == 'recent' %}selected{% endif %}" href="{{ reverse('recent') }}">
-                    recent
+                    Recent
                 </a>
             {% endblock %}
         </h1>

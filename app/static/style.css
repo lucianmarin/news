@@ -8,11 +8,8 @@ b, i { font-style: normal; font-weight: normal; }
 
 .menu, .main, .footer { margin: 0 auto; max-width: 520px; padding: 0 20px; }
 
-h5 { font-size: 11px; font-weight: normal; line-height: 15px; padding-top: 15px; }
-h5 a { color: silver; }
-
-h1 { font-size: 21px; font-weight: normal; line-height: 30px; overflow: hidden; padding-bottom: 15px; }
-h1 a { color: silver; display: block; float: left; margin-right: 12.5px; }
+h1 { font-size: 21px; font-weight: normal; line-height: 30px; overflow: hidden; padding: 15px 0; text-transform: lowercase; }
+h1 a { color: silver; display: block; float: left; margin-right: 15px; }
 h1 a.selected { color: black; }
 
 .entry { padding-bottom: 15px; }
@@ -29,7 +26,7 @@ h1 a.selected { color: black; }
 .textual { color: dimgray; }
 .textual p { padding-bottom: 10px; }
 
-.footer { overflow: hidden; padding-bottom: 30px; }
+.footer { overflow: hidden; padding-bottom: 25px; }
 .footer a, .footer b { color: silver; display: block; float: left; margin-right: 5px; padding: 5px 0; }
 .footer a:first-child, .footer b:first-child { border-bottom: gainsboro 5px solid; }
 .footer a:last-child, .footer b:last-child { margin-right: 0; }
