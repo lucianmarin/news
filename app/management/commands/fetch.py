@@ -43,7 +43,9 @@ class Command(BaseCommand):
         print("Deleted {0} entries".format(c))
 
     def grab_description(self):
-        for article in Article.objects.filter(description=None):
+        for article in Article.objects.filter(
+            description=None
+        ).order_by('-id'):
             article.description = fetch_desc(article.url)
             article.save(update_fields=['description'])
             print(article.url)
@@ -54,7 +56,7 @@ class Command(BaseCommand):
         for article in Article.objects.filter(
             shares=None,
             pub__lt=time.time() - 8 * 3600
-        ):
+        ).order_by('id'):
             if is_allowed:
                 fb = fetch_fb(article.url)
                 if 'error' in fb:
