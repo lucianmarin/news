@@ -7,10 +7,10 @@ urlpatterns = [
     path('', views.index, name='index'),
     path('api/top/', api.top, name='api_top'),
     path('api/recent/', api.recent, name='api_recent'),
-    path('api/text/<int:id>/', api.text, name='api_text'),
+    path('api/story/<int:id>/', api.story, name='api_story'),
     path('recent/', views.recent, name='recent'),
     path('about/', views.about, name='about'),
     path('<str:domain>/', views.site_index, name='site_index'),
     path('<str:domain>/recent/', views.site_recent, name='site_recent'),
-    path('text/<int:id>/', views.text, name='text')
+    path('story/<int:id>/', views.story, name='story')
 ]

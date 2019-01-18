@@ -23,10 +23,10 @@ def recent(request):
     )
 
 
-def text(request, id):
+def story(request, id):
     article = get_object_or_404(Article, id=id)
     item = list(Article.objects.filter(id=id).values())[0]
-    item['paragraphs']= fetch_paragraphs(article.url)
+    item['paragraphs'] = fetch_paragraphs(article.url)
     return HttpResponse(
         json.dumps(item),
         content_type="application/json"

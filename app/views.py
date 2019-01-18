@@ -67,16 +67,16 @@ def about(request):
     })
 
 
-def text(request, id):
+def story(request, id):
     count = Article.objects.count()
 
     article = get_object_or_404(Article, id=id)
     article.description = None
     lines = fetch_paragraphs(article.url)
 
-    return render(request, 'text.jinja', {
+    return render(request, 'story.jinja', {
         'article': article,
         'count': count,
         'lines': lines,
-        'view': 'text'
+        'view': 'story'
     })
