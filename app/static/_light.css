@@ -25,7 +25,7 @@ h1 a.selected { color: black; }
 .textual { color: dimgray; }
 .textual p { padding-bottom: 10px; }
 
-.footer { overflow: hidden; padding-bottom: 25px; }
+.footer { overflow: hidden; padding-bottom: 20px; }
 .footer a, .footer b { color: silver; display: block; float: left; margin-right: 5px; padding: 5px 0; }
 .footer a:first-child, .footer b:first-child { border-bottom: gainsboro 5px solid; }
 .footer a:last-child, .footer b:last-child { margin-right: 0; }
