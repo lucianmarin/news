@@ -162,6 +162,7 @@ FEEDS = [
     "http://feeds.feedburner.com/sub/producthunt",
     "http://feeds.feedburner.com/sub/qz",
     "http://feeds.feedburner.com/sub/register",
+    "http://feeds.feedburner.com/sub/semiaccurate",
     "http://feeds.feedburner.com/sub/seth",
     "http://feeds.feedburner.com/sub/smashing",
     "http://feeds.feedburner.com/sub/techcrunch",
