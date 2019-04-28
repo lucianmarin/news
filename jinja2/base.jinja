@@ -19,6 +19,12 @@
                 <a class="{% if view == 'index' %}selected{% endif %}" href="{{ reverse('index') }}">
                     Newscafe
                 </a>
+                <a class="{% if view == 'reacted' %}selected{% endif %}" href="{{ reverse('reacted') }}">
+                    Reacted
+                </a>
+                <a class="{% if view == 'commented' %}selected{% endif %}" href="{{ reverse('commented') }}">
+                    Commented
+                </a>
                 <a class="{% if view == 'recent' %}selected{% endif %}" href="{{ reverse('recent') }}">
                     Recent
                 </a>

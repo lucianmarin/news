@@ -8,7 +8,15 @@
         <b>{{ article.pub | shortdate }} ago</b>
         <b>&bull;</b>
         <a href="{{ reverse('read', args=[article.id]) }}">read</a>
-        {% if article.shares %}
+        {% if article.comments and view == 'commented' %}
+            <b>&bull;</b>
+            <b>{{ article.comments }} comments</b>
+        {% endif %}
+        {% if article.reactions and view == 'reacted' %}
+            <b>&bull;</b>
+            <b>{{ article.reactions }} reactions</b>
+        {% endif %}
+        {% if article.shares and view == 'index' %}
             <b>&bull;</b>
             <b>{{ article.shares }} shares</b>
         {% endif %}
