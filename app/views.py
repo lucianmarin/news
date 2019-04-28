@@ -8,7 +8,7 @@ def index(request):
     count = Article.objects.count()
     theme = 'dark' if request.COOKIES.get('theme') == 'dark' else 'light'
 
-    distinct = Article.objects.exclude(shares=0).order_by('domain', '-shares').distinct('domain').values('id')
+    distinct = Article.objects.order_by('domain', '-shares').distinct('domain').values('id')
     index = Article.objects.filter(id__in=distinct).order_by('-shares')
 
     return render(request, 'index.jinja', {
@@ -23,7 +23,7 @@ def reacted(request):
     count = Article.objects.count()
     theme = 'dark' if request.COOKIES.get('theme') == 'dark' else 'light'
 
-    distinct = Article.objects.exclude(reactions=0).order_by('domain', '-reactions').distinct('domain').values('id')
+    distinct = Article.objects.order_by('domain', '-reactions').distinct('domain').values('id')
     index = Article.objects.filter(id__in=distinct).order_by('-reactions')
 
     return render(request, 'index.jinja', {
@@ -38,7 +38,7 @@ def commented(request):
     count = Article.objects.count()
     theme = 'dark' if request.COOKIES.get('theme') == 'dark' else 'light'
 
-    distinct = Article.objects.exclude(comments=0).order_by('domain', '-comments').distinct('domain').values('id')
+    distinct = Article.objects.order_by('domain', '-comments').distinct('domain').values('id')
     index = Article.objects.filter(id__in=distinct).order_by('-comments')
 
     return render(request, 'index.jinja', {

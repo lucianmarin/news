@@ -14,22 +14,23 @@
 </head>
 <body>
     <div class="menu">
-        <h1>
+        <h5><a href="{{ reverse('index') }}">Newcafe</a></h5>
+        <h2>
             {% block menu %}
                 <a class="{% if view == 'index' %}selected{% endif %}" href="{{ reverse('index') }}">
-                    Newscafe
+                    Shares
                 </a>
                 <a class="{% if view == 'reacted' %}selected{% endif %}" href="{{ reverse('reacted') }}">
-                    Reacted
+                    Reactions
                 </a>
                 <a class="{% if view == 'commented' %}selected{% endif %}" href="{{ reverse('commented') }}">
-                    Commented
+                    Comments
                 </a>
                 <a class="{% if view == 'recent' %}selected{% endif %}" href="{{ reverse('recent') }}">
                     Recent
                 </a>
             {% endblock %}
-        </h1>
+        </h2>
     </div>
     <div class="main">
         {% block main %}{% endblock %}
