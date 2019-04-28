@@ -19,7 +19,7 @@ def index(request):
     })
 
 
-def liked(request):
+def reacted(request):
     count = Article.objects.count()
     theme = 'dark' if request.COOKIES.get('theme') == 'dark' else 'light'
 
@@ -30,11 +30,11 @@ def liked(request):
         'articles': index[:15],
         'count': count,
         'theme': theme,
-        'view': 'liked'
+        'view': 'reacted'
     })
 
 
-def discussed(request):
+def commented(request):
     count = Article.objects.count()
     theme = 'dark' if request.COOKIES.get('theme') == 'dark' else 'light'
 
@@ -45,7 +45,7 @@ def discussed(request):
         'articles': index[:15],
         'count': count,
         'theme': theme,
-        'view': 'discussed'
+        'view': 'commented'
     })
 
 
