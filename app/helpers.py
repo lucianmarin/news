@@ -61,7 +61,9 @@ def fetch_fb(link):
     path = "https://graph.facebook.com/v3.2/?id={0}&fields=og_object,engagement&access_token={1}"
     url = urllib.parse.quote(link)
     graph = path.format(url, TOKEN)
-    return requests.get(graph).json()
+    r = requests.get(graph)
+    rdict = r.json() if r.text else {}
+    return rdict
 
 
 def fetch_desc(link):

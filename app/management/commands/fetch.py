@@ -52,25 +52,23 @@ class Command(BaseCommand):
             print(article.description)
 
     def grab_facebook(self):
-        is_allowed = True
         articles = Article.objects.filter(
             has_fb=False,
             pub__lt=time.time() - 8 * 3600
         ).order_by('id')
         for article in articles:
-            if is_allowed:
-                fb = fetch_fb(article.url)
-                if 'error' in fb:
-                    is_allowed = False
-                    print('error')
-                else:
-                    engagement = fb.get('engagement', {})
-                    article.comments = engagement.get('comment_count', 0)
-                    article.reactions = engagement.get('reaction_count', 0)
-                    article.shares = engagement.get('share_count', 0)
-                    article.score = article.comments + article.reactions + article.shares
-                    article.save(update_fields=['comments', 'reactions', 'shares', 'score'])
-                    print(article.url, article.score)
+            fb = fetch_fb(article.url)
+            print(fb)
+            if 'error' in fb:
+                return print('error')
+            else:
+                engagement = fb.get('engagement', {})
+                article.comments = engagement.get('comment_count', 0)
+                article.reactions = engagement.get('reaction_count', 0)
+                article.shares = engagement.get('share_count', 0)
+                article.score = article.comments + article.reactions + article.shares
+                article.save(update_fields=['comments', 'reactions', 'shares', 'score'])
+                print(article.url, article.score)
 
     def handle(self, *args, **options):
         self.grab_entries()
