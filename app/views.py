@@ -12,7 +12,7 @@ def index(request):
     index = Article.objects.filter(id__in=distinct).order_by('-score')
 
     return render(request, 'index.jinja', {
-        'articles': index[:15],
+        'articles': index,
         'count': count,
         'theme': theme,
         'view': 'index'
@@ -27,7 +27,7 @@ def recent(request):
     index = Article.objects.filter(id__in=distinct).order_by('-pub')
 
     return render(request, 'index.jinja', {
-        'articles': index[:15],
+        'articles': index,
         'count': count,
         'theme': theme,
         'view': 'recent'
