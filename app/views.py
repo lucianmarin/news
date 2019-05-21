@@ -42,7 +42,7 @@ def recent(request):
 
 def read(request, id):
     count = Article.objects.count()
-    theme = 'dark' if request.COOKIES.get('theme') == 'dark' else 'light'
+    theme = request.COOKIES.get('theme', 'light')
 
     article = get_object_or_404(Article, id=id)
     article.description = None
@@ -52,6 +52,7 @@ def read(request, id):
         'article': article,
         'count': count,
         'lines': lines,
+        'mode': 'details',
         'theme': theme,
         'view': 'read'
     })
@@ -59,13 +60,14 @@ def read(request, id):
 
 def about(request):
     count = Article.objects.count()
-    theme = 'dark' if request.COOKIES.get('theme') == 'dark' else 'light'
+    theme = request.COOKIES.get('theme', 'light')
 
     sites = Article.objects.order_by('domain').distinct('domain').values_list('domain', flat=True)
 
     return render(request, 'about.jinja', {
         'count': count,
         'sites': sites,
+        'mode': 'details',
         'theme': theme,
         'view': 'about'
     })
