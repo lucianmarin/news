@@ -13,5 +13,5 @@ def environment(**options):
     env.filters['superscript'] = superscript
     # globals
     env.globals['reverse'] = reverse
-    env.globals['v'] = 9
+    env.globals['v'] = 10
     return env

@@ -13,7 +13,10 @@ h1 a { color: gray; display: block; float: left; margin-right: 10px; }
 h1 a:last-child { margin-right: 0; }
 h1 a.selected { color: white; }
 
-.entry { padding-bottom: 10px; }
+.details { padding-bottom: 10px; }
+
+.compact { padding-bottom: 5px; }
+.compact .title { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 
 .title a:visited { color: lightgray; }
 
