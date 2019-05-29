@@ -2,3 +2,5 @@
 __pycache__
 db.json
 local.py
+news.pid
+news.socket
