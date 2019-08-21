@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en">
 <head>
-    <title>Newscafe</title>
+    <title>Newsfi</title>
     <meta charset="utf-8">
     <meta name="referrer" content="always">
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0">
@@ -17,7 +17,7 @@
         <h1>
             {% block menu %}
                 <a class="{% if view == 'index' %}selected{% endif %}" href="{{ reverse('index') }}">
-                    Newscafe
+                    Newsfi
                 </a>
                 <a class="{% if view == 'recent' %}selected{% endif %}" href="{{ reverse('recent') }}">
                     Recent
@@ -29,7 +29,7 @@
         {% block main %}{% endblock %}
     </div>
     <div class="footer">
-        <a href="{{ reverse('index') }}">Newscafe</a>
+        <a href="{{ reverse('index') }}">Newsfi</a>
         <b>&frasl;</b>
         <a href="{{ reverse('about') }}">About</a>
         <b>&frasl;</b>
