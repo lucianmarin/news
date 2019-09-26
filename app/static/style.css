@@ -11,7 +11,7 @@ b, i { font-style: normal; font-weight: normal; }
 
 .menu, .main, .footer { margin: 0 auto; max-width: 520px; padding: 0 20px; }
 
-h1 { font-size: 21px; line-height: 25px; overflow: hidden; margin: 15px 0; }
+h1 { font-size: 20px; line-height: 25px; overflow: hidden; margin: 15px 0; }
 h1 a { color: var(--silver); display: block; float: left; margin-right: 10px; }
 h1 a:last-child { margin-right: 0; }
 h1 a.selected { color: var(--black); }
@@ -37,4 +37,4 @@ h1 a.selected { color: var(--black); }
 .footer b { color: var(--gainsboro); padding: 5px 2px; }
 
 @font-face { font-family: "Clear Sans"; font-style: normal; font-weight: normal; src: url(/static/clearsans/regular.woff) format("woff"); }
-@font-face { { font-family: "Clear Sans"; font-style: normal; font-weight: bold; src: url(/static/clearsans/bold.woff) format("woff"); }
+@font-face { font-family: "Clear Sans"; font-style: normal; font-weight: bold; src: url(/static/clearsans/bold.woff) format("woff"); }
