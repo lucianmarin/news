@@ -6,7 +6,7 @@ from django.core.management.base import BaseCommand
 from app.filters import hostname
 from app.helpers import get_url, fetch_desc, fetch_fb
 from app.models import Article
-from news.settings import FEEDS
+from project.settings import FEEDS
 
 
 class Command(BaseCommand):
@@ -33,7 +33,7 @@ class Command(BaseCommand):
                         author=getattr(entry, 'author', '')
                     )
             except Exception as e:
-                pass
+                print(e)
         return entries
 
     def cleanup(self):
@@ -43,9 +43,8 @@ class Command(BaseCommand):
         print("Deleted {0} entries".format(c))
 
     def grab_description(self):
-        for article in Article.objects.filter(
-            description=None
-        ).order_by('-id'):
+        articles = Article.objects.filter(description=None).order_by('-id')
+        for article in articles:
             article.description = fetch_desc(article.url)
             article.save(update_fields=['description'])
             print(article.url)
@@ -53,12 +52,10 @@ class Command(BaseCommand):
 
     def grab_facebook(self):
         articles = Article.objects.filter(
-            has_fb=False,
-            pub__lt=time.time() - 8 * 3600
+            has_fb=False, pub__lt=time.time() - 8 * 3600
         ).order_by('id')
         for article in articles:
             fb = fetch_fb(article.url)
-            print(fb)
             if 'error' in fb:
                 return print('error')
             else:

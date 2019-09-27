@@ -1,5 +1,12 @@
+from os import environ
 import time
+from django import setup
+from django.conf import settings
 from django.db import models
+
+if not settings.configured:
+    environ.setdefault('DJANGO_SETTINGS_MODULE', 'project.settings')
+    setup()
 
 
 class Article(models.Model):

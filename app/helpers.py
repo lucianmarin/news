@@ -2,7 +2,7 @@ import requests
 import urllib
 from bs4 import BeautifulSoup
 from app.filters import hostname
-from news.settings import HEADERS, TOKEN
+from project.settings import HEADERS, TOKEN
 
 
 def get_url(link):

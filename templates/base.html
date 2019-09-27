@@ -15,29 +15,17 @@
 <body>
     <div class="menu">
         <h1>
-            {% block menu %}
-                <a class="{% if view == 'index' %}selected{% endif %}" href="{{ reverse('index') }}">
-                    {{ brand }}
-                </a>
-                <a class="{% if view == 'recent' %}selected{% endif %}" href="{{ reverse('recent') }}">
-                    Recent
-                </a>
-            {% endblock %}
+            <a href="/" class="{% if view == 'index' %}selected{% endif %}">{{ brand }}</a>
+            <a href="/recent" class="{% if view == 'recent' %}selected{% endif %}">Recent</a>
         </h1>
     </div>
-    <div class="main{% if view in ['index', 'recent'] %} {{ mode }}{% endif %}">
+    <div class="main">
         {% block main %}{% endblock %}
     </div>
     <div class="footer">
-        <a href="{{ reverse('index') }}">{{ brand }}</a>
+        <a href="/">{{ brand }}</a>
         <b>&frasl;</b>
-        <a href="{{ reverse('about') }}">About</a>
-        <b>&frasl;</b>
-        {% if mode == 'compact' %}
-            <a href="{{ reverse('set', args=['mode', 'details']) }}">Details</a>
-        {% else %}
-            <a href="{{ reverse('set', args=['mode', 'compact']) }}">Compact</a>
-        {% endif %}
+        <a href="/about">About</a>
         <b>&frasl;</b>
         <a>{{ count }} articles</a>
     </div>

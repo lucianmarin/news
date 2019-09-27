@@ -1,3 +1,4 @@
+falcon
 feedparser
 requests
 python-dateutil

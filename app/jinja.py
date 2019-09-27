@@ -1,18 +1,17 @@
-from django.urls import reverse
-from jinja2 import Environment, FileSystemBytecodeCache
+from jinja2 import Environment, FileSystemBytecodeCache, FileSystemLoader
 from app.filters import hostname, sitename, shortdate, superscript
 
 
-def environment(**options):
-    env = Environment(**options)
-    env.bytecode_cache = FileSystemBytecodeCache()
-    # filters
-    env.filters['hostname'] = hostname
-    env.filters['sitename'] = sitename
-    env.filters['shortdate'] = shortdate
-    env.filters['superscript'] = superscript
-    # globals
-    env.globals['reverse'] = reverse
-    env.globals['brand'] = "NewsFi"
-    env.globals['v'] = 18
-    return env
+env = Environment()
+env.loader = FileSystemLoader('templates/')
+env.bytecode_cache = FileSystemBytecodeCache()
+
+# filters
+env.filters['hostname'] = hostname
+env.filters['sitename'] = sitename
+env.filters['shortdate'] = shortdate
+env.filters['superscript'] = superscript
+
+# globals
+env.globals['brand'] = "NewsFi"
+env.globals['v'] = 18

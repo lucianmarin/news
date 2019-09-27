@@ -8,7 +8,7 @@ Group=lucian
 PIDFile=/home/lucian/newscafe/news.pid
 RuntimeDirectory=gunicorn
 WorkingDirectory=/home/lucian/newscafe
-ExecStart=/usr/local/bin/gunicorn news.wsgi:application --bind unix:news.socket --pid news.pid
+ExecStart=/usr/local/bin/gunicorn router:app --bind unix:news.socket --pid news.pid
 ExecReload=/bin/kill -s HUP $MAINPID
 ExecStop=/bin/kill -s TERM $MAINPID
 PrivateTmp=true
@@ -18,4 +18,4 @@ WantedBy=default.target
 
 # sudo cp news.service /etc/systemd/system/news.service
 # sudo systemctl daemon-reload
-# sudo systemctl restart news
+# sudo systemctl restart news.service

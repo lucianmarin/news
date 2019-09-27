@@ -7,13 +7,13 @@
         <b>&bull;</b>
         <a>{{ article.pub | shortdate }} ago</a>
         <b>&bull;</b>
-        <a href="{{ reverse('read', args=[article.id]) }}">read</a>
+        <a href="/read/{{ article.id }}">read</a>
         {% if article.score %}
             <b>&bull;</b>
             <a>{{ article.score // 3 }} score</a>
         {% endif %}
     </div>
-    {% if article.description and mode == 'details' %}
+    {% if article.description %}
         <div class="summary">
             {{ article.description | truncate(320) }}
         </div>
