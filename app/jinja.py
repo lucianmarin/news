@@ -1,5 +1,5 @@
 from jinja2 import Environment, FileSystemBytecodeCache, FileSystemLoader
-from app.filters import hostname, sitename, shortdate, superscript
+from app.filters import hostname, shortdate, sitename, superscript
 
 env = Environment()
 env.bytecode_cache = FileSystemBytecodeCache()

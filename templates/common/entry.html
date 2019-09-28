@@ -15,7 +15,7 @@
     </div>
     {% if article.description %}
         <div class="summary">
-            {{ article.description | truncate(320) }}
+            {{ article.description | truncate(240, True, '...', 16) }}
         </div>
     {% endif %}
 </div>
