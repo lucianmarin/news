@@ -3,6 +3,7 @@
 html { --white: white; --gray: dimgray; --silver: silver; --gainsboro: gainsboro; --black: black; --d: 0.2s; }
 
 @media (prefers-color-scheme: dark) { html { --black: white; --gray: lightgray; --silver: gray; --gainsboro: dimgray; --white: black; } }
+
 body { background-color: var(--white); color: var(--black); font-family: "Clear Sans", sans-serif; font-size: 14px; line-height: 20px; }
 
 a { color: var(--black); text-decoration: none; transition: color var(--d); }
@@ -12,8 +13,11 @@ b, i { font-style: normal; font-weight: normal; }
 .menu, .main, .footer { margin: 0 auto; max-width: 500px; padding: 0 20px; }
 
 h1 { font-size: 20px; line-height: 25px; overflow: hidden; margin: 15px 0; }
+
 h1 a { color: var(--silver); display: block; float: left; margin-right: 10px; }
+
 h1 a:last-child { margin-right: 0; }
+
 h1 a.selected { color: var(--black); }
 
 .entry { padding-bottom: 10px; }
@@ -23,18 +27,27 @@ h1 a.selected { color: var(--black); }
 .title a:visited { color: var(--gray); }
 
 .small { color: var(--silver); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+
 .small a { color: var(--silver); }
+
 .small b { color: var(--gainsboro); }
+
+.small img { border-radius: 8px; float: left; margin: 2px 0; margin-right: 5px; }
 
 .summary { color: var(--gray); }
 
 .textual { color: var(--gray); }
+
 .textual p { padding-bottom: 10px; }
 
 .footer { padding-top: 5px; padding-bottom: 30px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+
 .footer a { color: var(--silver); padding: 5px 0; }
+
 .footer a:first-child { border-bottom: var(--gainsboro) 5px solid; }
+
 .footer b { color: var(--gainsboro); padding: 5px 2px; }
 
 @font-face { font-family: "Clear Sans"; font-style: normal; font-weight: normal; src: url(/static/clearsans/regular.woff) format("woff"); }
+
 @font-face { font-family: "Clear Sans"; font-style: normal; font-weight: bold; src: url(/static/clearsans/bold.woff) format("woff"); }

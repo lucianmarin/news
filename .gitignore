@@ -4,3 +4,4 @@ db.json
 local.py
 news.pid
 news.socket
+*.log.gz

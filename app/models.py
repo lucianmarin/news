@@ -27,3 +27,10 @@ class Article(models.Model):
     reactions = models.IntegerField(default=0)
     shares = models.IntegerField(default=0)
     score = models.IntegerField(default=0, db_index=True)
+
+    @property
+    def icon(self):
+        if self.domain in ['axios.com', 'qz.com', 'vox.com']:
+            return "/icons/{0}.jpg".format(self.domain)
+        else:
+            return "/static/192.png"

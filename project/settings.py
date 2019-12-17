@@ -53,6 +53,7 @@ FEEDS = [
     "http://feeds.feedburner.com/sub/axios",
     "http://feeds.feedburner.com/sub/eff",
     "http://feeds.feedburner.com/sub/electrek",
+    "http://feeds.feedburner.com/sub/endpoints",
     # "http://feeds.feedburner.com/sub/engadget",
     "http://feeds.feedburner.com/sub/fastcompany",
     "http://feeds.feedburner.com/sub/fubiz",
