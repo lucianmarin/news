@@ -38,7 +38,7 @@ class MainResource:
         resp.content_type = MEDIA_HTML
         resp.body = template.render(
             articles=articles[:15], count=count, view='index',
-            title='Rad News'
+            title='Rad news'
         )
 
 
@@ -52,7 +52,7 @@ class RecentResource:
         resp.content_type = MEDIA_HTML
         resp.body = template.render(
             articles=articles[:15], count=count, view='recent',
-            title='Latest News'
+            title='Latest news'
         )
 
 
@@ -70,7 +70,7 @@ class ReadResource:
         resp.content_type = MEDIA_HTML
         resp.body = template.render(
             article=article, lines=lines, count=count, view='read',
-            title='Read Story'
+            title='Read story'
         )
 
 

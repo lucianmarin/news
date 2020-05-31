@@ -1,8 +1,8 @@
 * { margin: 0; padding: 0; }
 
-html { --white: white; --gray: dimgray; --silver: silver; --gainsboro: gainsboro; --black: black; --d: 0.2s; }
+html { --white: #fff; --gray: #808080; --silver: #c0c0c0; --gainsboro: #d0d0d0; --black: #000; --d: 0.2s; }
 
-@media (prefers-color-scheme: dark) { html { --black: white; --gray: lightgray; --silver: gray; --gainsboro: dimgray; --white: black; } }
+@media (prefers-color-scheme: dark) { html { --black: #fff; --gray: #c0c0c0; --silver: #808080; --gainsboro: #505050; --white: #000; } }
 
 body { background-color: var(--white); color: var(--black); font-family: "Clear Sans", sans-serif; font-size: 14px; line-height: 20px; }
 
@@ -12,17 +12,19 @@ b, i { font-style: normal; font-weight: normal; }
 
 .menu, .main, .footer { margin: 0 auto; max-width: 500px; padding: 0 20px; }
 
-h1 { font-size: 20px; line-height: 25px; overflow: hidden; margin: 15px 0; }
+h3 { font-size: 14px; font-weight: normal; line-height: 20px; margin-top: 15px; }
 
-h1 a { color: var(--silver); display: block; float: left; margin-right: 10px; }
+h3 a { color: var(--silver); }
 
-h1 a:last-child { margin-right: 0; }
+h2 { font-size: 20px; line-height: 25px; overflow: hidden; margin-bottom: 15px; }
 
-h1 a.selected { color: var(--black); }
+h2 a { color: var(--silver); display: block; float: left; margin-right: 15px; }
 
-.entry { padding-bottom: 10px; }
+h2 a:last-child { margin-right: 0; }
 
-.compact .entry { padding-bottom: 5px; }
+h2 a.selected { color: var(--black); }
+
+.entry { margin-bottom: 10px; }
 
 .title a:visited { color: var(--gray); }
 

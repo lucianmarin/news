@@ -1,8 +1,8 @@
 {
     "lang": "en",
-    "name": "Newsfi",
-    "short_name": "Newsfi",
-    "description": "24/7 Breaking News",
+    "name": "Rad-Fi",
+    "short_name": "Rad-Fi",
+    "description": "Rad news ranked by Facebook likes",
     "icons": [
         {
             "src": "/static/192.png",

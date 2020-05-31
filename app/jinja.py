@@ -1,10 +1,11 @@
 from jinja2 import Environment, FileSystemBytecodeCache, FileSystemLoader
 from app.filters import hostname, shortdate, sitename, superscript, truncate
+from project.settings import DEBUG
 
 env = Environment()
 env.bytecode_cache = FileSystemBytecodeCache()
 env.loader = FileSystemLoader('templates/')
-# env.auto_reload = True
+env.auto_reload = DEBUG
 
 env.filters['hostname'] = hostname
 env.filters['sitename'] = sitename
@@ -13,4 +14,4 @@ env.filters['superscript'] = superscript
 env.filters['truncate'] = truncate
 
 env.globals['brand'] = "Rad-Fi"
-env.globals['v'] = 20
+env.globals['v'] = 21

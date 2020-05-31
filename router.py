@@ -9,7 +9,7 @@ app.req_options.strip_url_path_trailing_slash = True
 app.resp_options.secure_cookies_by_default = False if DEBUG else True
 
 app.add_route('/', resources.MainResource())
-app.add_route('/fidelity', resources.RecentResource())
+app.add_route('/latest', resources.RecentResource())
 app.add_route('/about', resources.AboutResource())
 app.add_route('/read/{id}', resources.ReadResource())
 

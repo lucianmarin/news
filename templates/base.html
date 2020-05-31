@@ -6,7 +6,7 @@
     <meta name="referrer" content="always">
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0">
     <meta name="author" content="Lucian Marin">
-    <meta name="description" content="24/7 Quality News">
+    <meta name="description" content="Rad news ranked by Facebook likes">
     {% if view == 'read' %}
         <meta name="robots" content="noindex">
     {% endif %}
@@ -17,14 +17,15 @@
 </head>
 <body>
     <div class="menu">
-        <h1>
-            <a href="/" class="{% if view == 'index' %}selected{% endif %}">
-                Radio
-            </a>
-            <a href="/fidelity" class="{% if view == 'recent' %}selected{% endif %}">
-                Fidelity
-            </a>
-        </h1>
+        <h3><a href="/">Radio Fidelity</a></h3>
+        <h2>
+            {% if view == 'about' %}
+                <a href="/about" class="selected">About</a>
+            {% else %}
+                <a href="/" class="{% if view == 'index' %}selected{% endif %}">Rad news</a>
+                <a href="/latest" class="{% if view == 'recent' %}selected{% endif %}">Latest news</a>
+            {% endif %}
+        </h2>
     </div>
     <div class="main">
         {% block main %}{% endblock %}
@@ -34,7 +35,7 @@
         <b>&frasl;</b>
         <a href="/about">About</a>
         <b>&frasl;</b>
-        <a>{{ count }} articles</a>
+        <a>{{ count }} stories</a>
     </div>
 </body>
 </html>
