@@ -37,7 +37,8 @@ class MainResource:
         template = env.get_template('pages/index.html')
         resp.content_type = MEDIA_HTML
         resp.body = template.render(
-            articles=articles[:15], count=count, view='index'
+            articles=articles[:15], count=count, view='index',
+            title='Rad News'
         )
 
 
@@ -50,7 +51,8 @@ class RecentResource:
         template = env.get_template('pages/index.html')
         resp.content_type = MEDIA_HTML
         resp.body = template.render(
-            articles=articles[:15], count=count, view='recent'
+            articles=articles[:15], count=count, view='recent',
+            title='Latest News'
         )
 
 
@@ -67,7 +69,8 @@ class ReadResource:
         template = env.get_template('pages/read.html')
         resp.content_type = MEDIA_HTML
         resp.body = template.render(
-            article=article, lines=lines, count=count, view='read'
+            article=article, lines=lines, count=count, view='read',
+            title='Read Story'
         )
 
 
@@ -79,5 +82,6 @@ class AboutResource:
         template = env.get_template('pages/about.html')
         resp.content_type = MEDIA_HTML
         resp.body = template.render(
-            sites=sites, count=count, view='about'
+            sites=sites, count=count, view='about',
+            title='About'
         )
