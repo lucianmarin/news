@@ -1,5 +1,5 @@
 from urllib import parse
-from datetime import datetime
+from datetime import datetime, timezone
 
 
 def truncate(value, limit=256):
@@ -47,12 +47,11 @@ def date(stamp):
     return timestamp.strftime('%b %-e, %Y %H:%M')
 
 
-def shortdate(stamp):
+def shortdate(timestamp):
     """Short time interval for a timestamp."""
-    timestamp = datetime.utcfromtimestamp(stamp)
-    delta = datetime.utcnow() - timestamp
-    minutes = round(delta.total_seconds() / 60)
-    hours = round(delta.total_seconds() / 3600)
+    total_seconds = datetime.now(timezone.utc).timestamp() - timestamp
+    minutes = round(total_seconds / 60)
+    hours = round(total_seconds / 3600)
     if minutes < 60:
         return "{0}m".format(minutes)
     return "{0}h".format(hours)

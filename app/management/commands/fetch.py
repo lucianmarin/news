@@ -1,4 +1,4 @@
-import time
+from datetime import datetime, timezone
 
 import feedparser
 import requests
@@ -37,7 +37,7 @@ class Command(BaseCommand):
                 entry.link = origlink if origlink else entry.link
                 url = get_url(entry.link)
                 published = parse(entry.published).timestamp()
-                now = time.time()
+                now = datetime.now(timezone.utc).timestamp()
                 if now > published > now - 48 * 3600:
                     article, is_created = Article.objects.get_or_create(
                         url=url,
@@ -50,7 +50,8 @@ class Command(BaseCommand):
                 print(e)
 
     def cleanup(self):
-        q = Article.objects.filter(pub__lt=time.time() - 48 * 3600)
+        now = datetime.now(timezone.utc).timestamp()
+        q = Article.objects.filter(pub__lt=now - 48 * 3600)
         c = q.count()
         q.delete()
         print("Deleted {0} entries".format(c))
@@ -64,8 +65,9 @@ class Command(BaseCommand):
             print(article.description)
 
     def grab_facebook(self):
+        now = datetime.now(timezone.utc).timestamp()
         articles = Article.objects.filter(
-            has_fb=False, pub__lt=time.time() - 12 * 3600
+            has_fb=False, pub__lt=now - 12 * 3600
         ).order_by('id')
         for article in articles:
             fb = fetch_fb(article.url)

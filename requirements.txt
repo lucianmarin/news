@@ -4,3 +4,5 @@ feedparser
 lxml
 python-dateutil
 requests
+django
+django-extensions

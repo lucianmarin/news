@@ -8,7 +8,7 @@ from project.settings import HEADERS, TOKEN
 def get_url(link):
     url = urllib.parse.urlparse(link)
     url_list = list(url)
-    url_list[4] = ''
+    url_list[4] = ""
     return urllib.parse.urlunparse(url_list)
 
 
