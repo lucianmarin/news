@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en">
 <head>
-    <title>{{ brand }} / {{ title }}</title>
+    <title>{{ brand }} / {{ view | capitalize }}</title>
     <meta charset="utf-8">
     <meta name="referrer" content="always">
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0">
@@ -22,8 +22,12 @@
             {% if view == 'about' %}
                 <a href="/about" class="selected">About</a>
             {% else %}
-                <a href="/" class="{% if view == 'index' %}selected{% endif %}">Rad news</a>
-                <a href="/latest" class="{% if view == 'recent' %}selected{% endif %}">Latest news</a>
+                <a href="/" class="{% if view == 'breaking' %}selected{% endif %}">
+                    Breaking
+                </a>
+                <a href="/current" class="{% if view == 'current' %}selected{% endif %}">
+                    Current
+                </a>
             {% endif %}
         </h2>
     </div>
