@@ -1,5 +1,6 @@
-from os import environ
 import time
+from os import environ
+
 from django import setup
 from django.conf import settings
 from django.db import models
@@ -27,6 +28,15 @@ class Article(models.Model):
     reactions = models.IntegerField(default=0)
     shares = models.IntegerField(default=0)
     score = models.IntegerField(default=0, db_index=True)
+
+    @property
+    def base(self):
+        number = self.id
+        alphabet, base36 = "0123456789abcdefghijklmnopqrstuvwxyz", ""
+        while number:
+            number, i = divmod(number, 36)
+            base36 = alphabet[i] + base36
+        return base36 or alphabet[0]
 
     @property
     def icon(self):
