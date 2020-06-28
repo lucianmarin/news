@@ -31,6 +31,8 @@ USE_TZ = False
 USE_ETAGS = False
 
 FEEDS = [
+    "http://feeds.arstechnica.com/arstechnica/index",
+    # "http://feeds.arstechnica.com/arstechnica/features",
     "http://rss.sciam.com/scientificamerican-global",
     # "http://feeds.reuters.com/news/artsculture",
     # "http://feeds.reuters.com/reuters/businessNews",
