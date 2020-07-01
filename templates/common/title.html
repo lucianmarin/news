@@ -1,0 +1,14 @@
+<h3>
+    <b>&larr;</b>
+    <a href="/">Breaking</a>
+    <b>&frasl;</b>
+    <a href="/current">Current</a>
+</h3>
+
+<h2>
+    {% if view == 'about' %}
+        <a href="/about" class="selected">About</a>
+    {% else %}
+        <a href="/{{ article.base }}" class="selected">{{ article.title }}</a>
+    {% endif %}
+</h2>

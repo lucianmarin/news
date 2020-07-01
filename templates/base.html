@@ -18,29 +18,21 @@
 </head>
 <body>
     <div class="menu">
-        <h3><a href="/">{{ brand }}</a></h3>
-        <h2>
-            {% if view == 'about' %}
-                <a href="/about" class="selected">About</a>
-            {% else %}
-                <a href="/" class="{% if view == 'breaking' %}selected{% endif %}">
-                    Breaking
-                </a>
-                <a href="/current" class="{% if view == 'current' %}selected{% endif %}">
-                    Current
-                </a>
-            {% endif %}
-        </h2>
+        {% if view in ['about', 'read'] %}
+            {% include "common/title.html" %}
+        {% else %}
+            {% include "common/header.html" %}
+        {% endif %}
     </div>
     <div class="main">
         {% block main %}{% endblock %}
     </div>
     <div class="footer">
-        <a href="/">Rad-Fi</a>
+        <a href="/">EN</a>
         <b>&frasl;</b>
         <a href="/about">About</a>
         <b>&frasl;</b>
-        <a>{{ count }} stories</a>
+        <a href="/about">{{ count }} articles</a>
     </div>
 </body>
 </html>
