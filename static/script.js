@@ -8,10 +8,12 @@ function utterThis(synth, p) {
         p.innerHTML = initial;
     };
     utterance.onboundary = function(e) {
-        before = initial.slice(0, e.charIndex);
-        inner = initial.slice(e.charIndex, e.charIndex + e.charLength);
-        after = initial.slice(e.charIndex + e.charLength);
-        p.innerHTML = before + '<u>' + inner + '</u>' + after;
+        if (e.charLength) {
+            before = initial.slice(0, e.charIndex);
+            inner = initial.slice(e.charIndex, e.charIndex + e.charLength);
+            after = initial.slice(e.charIndex + e.charLength);
+            p.innerHTML = before + '<u>' + inner + '</u>' + after;
+        }
     }
     synth.speak(utterance);
 }
