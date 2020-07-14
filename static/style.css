@@ -54,7 +54,7 @@ h2 a.selected { color: var(--black); }
 
 .small img { border-radius: 8px; float: left; margin: 2px 0; margin-right: 5px; }
 
-.summary { color: var(--gray); cursor: text; }
+.summary { color: var(--black); cursor: text; }
 
 .summary a { color: var(--gray); text-decoration: underline; }
 
