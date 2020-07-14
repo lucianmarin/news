@@ -64,9 +64,9 @@ svg
 h2
     font-size: var(--big)
     line-height: 24px
-    padding: 3px 0
     overflow: hidden
-    width: 90%;
+    padding: 3px 0
+    width: 95%
     a
         color: var(--silver)
         display: block
@@ -92,14 +92,17 @@ h2
     background-color: var(--black)
     border-radius: 15px
     display: block
-    float: right
     height: 20px
-    margin: 15px
     padding: 5px
     width: 20px
+    position: absolute
+    top: calc(50% - 15px)
+    bottom: calc(50% - 15px)
+    left: -45px
 
 .menu
     margin: 15px 0
+    position: relative
 
 .entry
     margin-bottom: 10px
@@ -168,8 +171,7 @@ h2
         display: grid
         grid-template-columns: 0 15.625% 84.375% 0
     .logo
-        margin-left: 10px
-        margin-right: 10px
+        left: -40px
     h2 a
         margin-right: 10px
     .meta

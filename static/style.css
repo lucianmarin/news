@@ -16,7 +16,7 @@ svg { fill: var(--black); }
 
 svg path { fill: var(--white); stroke-linecap: round; stroke-linejoin: round; stroke-width: 0; }
 
-h2 { font-size: var(--big); line-height: 24px; padding: 3px 0; overflow: hidden; width: 90%; }
+h2 { font-size: var(--big); line-height: 24px; overflow: hidden; padding: 3px 0; width: 95%; }
 
 h2 a { color: var(--silver); display: block; float: left; margin-right: 15px; }
 
@@ -32,9 +32,9 @@ h2 a.selected { color: var(--black); }
 
 .leftside, .sidebar { background-color: var(--whitesmoke); }
 
-.logo { background-color: var(--black); border-radius: 15px; display: block; float: right; height: 20px; margin: 15px; padding: 5px; width: 20px; }
+.logo { background-color: var(--black); border-radius: 15px; display: block; height: 20px; padding: 5px; width: 20px; position: absolute; top: calc(50% - 15px); bottom: calc(50% - 15px); left: -45px; }
 
-.menu { margin: 15px 0; }
+.menu { margin: 15px 0; position: relative; }
 
 .entry { margin-bottom: 10px; position: relative; }
 
@@ -74,7 +74,7 @@ h2 a.selected { color: var(--black); }
 
 .footer b { color: var(--gainsboro); padding: 5px 2px; }
 
-@media (max-width: 680px) { .container { display: grid; grid-template-columns: 0 15.625% 84.375% 0; } .logo { margin-left: 10px; margin-right: 10px; } h2 a { margin-right: 10px; } .meta { left: -175px; } .menu, .main, .footer { padding-left: 10px; padding-right: 10px; } }
+@media (max-width: 680px) { .container { display: grid; grid-template-columns: 0 15.625% 84.375% 0; } .logo { left: -40px; } h2 a { margin-right: 10px; } .meta { left: -175px; } .menu, .main, .footer { padding-left: 10px; padding-right: 10px; } }
 
 @font-face { font-family: "Fira Sans"; font-style: normal; font-weight: normal; src: url(/static/firasans-regular.woff2) format("woff2"); }
 
