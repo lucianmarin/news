@@ -2,37 +2,43 @@
 
 {% block main %}
     <div class="entry">
-        <h4 class="title">How it works?</h4>
+        <div class="meta"><p>how</p></div>
         <div class="summary">
             {{ brand }} fetches a curated list of RSS feeds and picks top article from each publication based on how many people shared, commented or liked it on Facebook.
         </div>
     </div>
     <div class="entry">
-        <h4 class="title">Who made it? Donate?</h4>
+        <div class="meta"><p>why</p></div>
         <div class="summary">
-            {{ brand }} is product created by <a href="https://lucianmarin.com/products.php">Lucian Marin</a>. It's made for busy people who don't want to spent more than a few minutes getting the most important news of the day. You might consider <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=RZMPR9EL9VPPG">donating with PayPal</a> for all services provided for free.
+            {{ brand }} is made for busy people who don't want to spent more than a few minutes getting the most important news of the day.
         </div>
     </div>
     <div class="entry">
-        <h4 class="title">When? And why?</h4>
+        <div class="meta"><p>who</p></div>
+        <div class="summary">
+            {{ brand }} is product created by <a href="https://lucianmarin.com/products.php">Lucian Marin</a>. You might consider <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=RZMPR9EL9VPPG">donating with PayPal</a> for all services provided for free.
+        </div>
+    </div>
+    <div class="entry">
+        <div class="meta"><p>when</p></div>
         <div class="summary">
             {{ brand }} started when I was <a href="https://twitter.com/lucianmarin/status/1000086132447686661">replying to Elon Musk</a> on Twitter that I can code Pravduh for him. After I exchanged a few DMs with him, I started to get hooked on the idea and after each code iteration it go closer to an actual product.
         </div>
     </div>
     <div class="entry">
-        <h4 class="title"> What's the tech stack?</h4>
+        <div class="meta"><p>tech</p></div>
         <div class="summary">
             {{ brand }} is powered by Falcon web framework, Django ORM, feedparser, requests, BeautifulSoup, PostgreSQL, PgBouncer, Facebook API and Google feedburner for feed caching. It's hosted on a high frequency <a href="https://www.vultr.com/?ref=8538483-6G">Vultr cloud server</a>.
         </div>
     </div>
     <div class="entry">
-        <h4 class="title">Disclaimer?</h4>
+        <div class="meta"><p>disclaimer</p></div>
         <div class="summary">
             Links are cached for 48 hours then permanently erased. Content isn't cached at all, it's fetched when reading it. It's virtually impossible to keep content of all articles ever fetched.
         </div>
     </div>
     <div class="entry">
-        <h4 class="title">What sites are fetched?</h4>
+        <div class="meta"><p>sites</p></div>
         <div class="summary">
             In alphabetical order: {{ ", ".join(sites) }}.
         </div>

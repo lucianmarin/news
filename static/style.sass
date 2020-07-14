@@ -11,13 +11,14 @@ html
     -ms-text-size-adjust: 100%
     -webkit-text-size-adjust: 100%
     --regular: 13.5px
-    --big: 19.5px
+    --big: 19px
     --d: 0.2s
     --hl: yellow
     --white: #fff
     --gray: #808080
     --silver: #c0c0c0
     --gainsboro: #d0d0d0
+    --whitesmoke: #f0f0f0
     --black: #000
 
 
@@ -28,13 +29,14 @@ html
         --gray: #c0c0c0
         --silver: #808080
         --gainsboro: #404040
+        --whitesmoke: #202020
         --white: #000
 
 body
     background-color: var(--white)
     color: var(--black)
     cursor: default
-    font-family: "Fira Sans", "Clear Sans", sans-serif
+    font-family: "Fira Sans", sans-serif
     font-size: var(--regular)
     line-height: 20px
 
@@ -49,9 +51,15 @@ b, i
     font-weight: normal
 
 .menu, .main, .footer
-    margin: 0 auto
-    max-width: 480px
-    padding: 0 20px
+    padding: 0 15px
+
+svg
+    fill: var(--black)
+    path
+        fill: var(--white)
+        stroke-linecap: round
+        stroke-linejoin: round
+        stroke-width: 0
 
 h3
     font-size: var(--regular)
@@ -68,8 +76,8 @@ h3
 
 h2
     font-size: var(--big)
-    line-height: 25px
-    margin-bottom: 15px
+    line-height: 24px
+    padding: 3px 0
     overflow: hidden
     width: 90%;
     a
@@ -84,12 +92,46 @@ h2
         &.selected
             color: var(--black)
 
+.container
+    display: grid
+    grid-template-columns: calc(50% - 340px) 170px 510px calc(50% - 340px)
+    &> div
+        min-height: 100vh
+
+.leftside, .sidebar
+    background-color: var(--whitesmoke)
+
+// .sidebar
+//     background-color: var(--gainsboro)
+
+.logo
+    background-color: var(--black)
+    border-radius: 15px
+    display: block
+    float: right
+    height: 24px
+    margin: 15px
+    padding: 3px
+    width: 24px
+
+.menu
+    margin: 15px 0
+
 .entry
     margin-bottom: 10px
+    position: relative
 
 .title
     a:visited
         color: var(--gray)
+
+.meta
+    position: absolute
+    width: 155px
+    text-align: right
+    left: -185px
+    p:first-child
+        font-weight: bold
 
 .small
     color: var(--silver)
@@ -137,17 +179,19 @@ h2
         color: var(--gainsboro)
         padding: 5px 2px
 
-@font-face
-    font-family: "Clear Sans"
-    font-style: normal
-    font-weight: normal
-    src: url(/static/clearsans-regular.woff) format("woff")
-
-@font-face
-    font-family: "Clear Sans"
-    font-style: normal
-    font-weight: bold
-    src: url(/static/clearsans-bold.woff) format("woff")
+@media (max-width: 680px)
+    .container
+        display: grid
+        grid-template-columns: 0 15.625% 84.375% 0
+    .logo
+        margin: 10px
+    .menu
+        margin: 10px 0
+    .meta
+        left: -175px
+    .menu, .main, .footer
+        padding-left: 10px
+        padding-right: 10px
 
 @font-face
     font-family: "Fira Sans"
