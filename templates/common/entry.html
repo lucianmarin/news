@@ -1,21 +1,18 @@
 <div class="entry">
-    <div class="meta">
-        <p>
-            {% if view == 'read' %}
-                <a onclick="listen(event)">listen</a>
-            {% else %}
-                <a href="/{{ article.base }}" rel="nofollow">
-                    {{ article.domain | sitename }}
-                </a>
-            {% endif %}
-        </p>
-        <p>
-            {% if article.score %}
-                <b>{{ article.reach }}</b>
-                <b>&frasl;</b>
-            {% endif %}
-            <b>{{ article.pub | shortdate }}</b>
-        </p>
+    <div class="small">
+        {% if view == 'read' %}
+            <a onclick="listen(event)">listen</a>
+        {% else %}
+            <a href="/{{ article.base }}" rel="nofollow">
+                {{ article.domain | sitename }}
+            </a>
+        {% endif %}
+        <b>&nbsp;</b>
+        <b>{{ article.pub | shortdate }}</b>
+        {% if article.score %}
+            <b>&frasl;</b>
+            <b>{{ article.reach }}</b>
+        {% endif %}
     </div>
     {% if view != 'read' %}
         <h4 class="title">

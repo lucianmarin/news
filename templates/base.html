@@ -17,32 +17,22 @@
     <script type="text/javascript" src="/static/script.js?v={{v}}" async defer></script>
 </head>
 <body>
-    <div class="container">
-        <div class="leftside"></div>
-        <div class="sidebar"></div>
-        <div class="content">
-            <div class="menu">
-                <a class="logo" href="/">
-                    {% include "common/logo.html" %}
-                </a>
-                {% if view in ['about', 'read'] %}
-                    {% include "common/title.html" %}
-                {% else %}
-                    {% include "common/header.html" %}
-                {% endif %}
-            </div>
-            <div class="main">
-                {% block main %}{% endblock %}
-            </div>
-            <div class="footer">
-                <a href="/">EN</a>
-                <b>&frasl;</b>
-                <a href="/about">About</a>
-                <b>&frasl;</b>
-                <a href="/about">{{ count }} articles</a>
-            </div>
-        </div>
-        <div class="rightside"></div>
+    <div class="menu">
+        {% if view in ['about', 'read'] %}
+            {% include "common/title.html" %}
+        {% else %}
+            {% include "common/header.html" %}
+        {% endif %}
+    </div>
+    <div class="main">
+        {% block main %}{% endblock %}
+    </div>
+    <div class="footer">
+        <a href="/">EN</a>
+        <b>&frasl;</b>
+        <a href="/about">About</a>
+        <b>&frasl;</b>
+        <a href="/about">{{ count }} articles</a>
     </div>
 </body>
 </html>

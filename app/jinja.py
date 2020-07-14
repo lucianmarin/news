@@ -14,4 +14,4 @@ env.filters['superscript'] = superscript
 env.filters['truncate'] = truncate
 
 env.globals['brand'] = "Artificial Feed"
-env.globals['v'] = 10
+env.globals['v'] = 11
