@@ -84,6 +84,7 @@ FEEDS = [
     "http://feeds.feedburner.com/sub/seth",
     "http://feeds.feedburner.com/sub/smashing",
     # "http://feeds.feedburner.com/sub/techcrunch",
+    "http://feeds.feedburner.com/sub/spacenews",
     "http://feeds.feedburner.com/sub/tidbits",
     "http://feeds.feedburner.com/sub/verge",
     "http://feeds.feedburner.com/sub/vice",
