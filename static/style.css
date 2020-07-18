@@ -42,13 +42,17 @@ h2 a.selected { color: var(--black); }
 
 .summary a { color: var(--gray); text-decoration: underline; }
 
-.text { color: var(--black); cursor: text; }
+.text { color: var(--black); cursor: text; margin-bottom: 10px; }
 
-.text p { padding-bottom: 10px; }
+.text a { text-decoration: underline; }
+
+.text p { margin-bottom: 10px; }
+
+.text p:last-child { margin-bottom: 0; }
 
 .text u { background-color: var(--hl); text-decoration: none; }
 
-.footer { padding-top: 5px; padding-bottom: 30px; }
+.footer { margin-top: 10px; margin-bottom: 30px; }
 
 .footer a { color: var(--silver); padding: 5px 0; }
 
