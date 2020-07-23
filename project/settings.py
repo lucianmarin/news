@@ -59,6 +59,7 @@ FEEDS = [
     "http://feeds.feedburner.com/sub/atlantic",
     "http://feeds.feedburner.com/sub/axios",
     "http://feeds.feedburner.com/sub/balkaninsight",
+    "http://feeds.feedburner.com/sub/berkeley",
     "http://feeds.feedburner.com/sub/dailyartmag",
     "http://feeds.feedburner.com/sub/deepmind",
     "http://feeds.feedburner.com/sub/distill",
