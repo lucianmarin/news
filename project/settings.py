@@ -84,6 +84,7 @@ FEEDS = [
     "http://feeds.feedburner.com/sub/omgubuntu",
     "http://feeds.feedburner.com/sub/polygon",
     "http://feeds.feedburner.com/sub/producthunt",
+    "http://feeds.feedburner.com/sub/quantamagazine",
     "http://feeds.feedburner.com/sub/qz",
     "http://feeds.feedburner.com/sub/register",
     "http://feeds.feedburner.com/sub/semiaccurate",
