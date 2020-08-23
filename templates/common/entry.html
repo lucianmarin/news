@@ -10,13 +10,8 @@
         <b>&nbsp;</b>
         <a class="done" href="/{{ article.base }}" rel="nofollow">
             {{ article.pub | shortdate }}
+            {% if article.score %}&mdash; {{ article.reach }}{% else %}ago{% endif %}
         </a>
-        {% if article.score %}
-            <b>&nbsp;</b>
-            <a class="done" href="/{{ article.base }}" rel="nofollow">
-                {{ article.reach }}
-            </a>
-        {% endif %}
     </div>
     {% if view != 'read' %}
         <h4 class="title">
