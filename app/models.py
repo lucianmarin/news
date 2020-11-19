@@ -31,7 +31,7 @@ class Article(models.Model):
 
     @property
     def base(self):
-        number = self.id
+        number = self.pk
         alphabet, base36 = "0123456789abcdefghijklmnopqrstuvwxyz", ""
         while number:
             number, i = divmod(number, 36)

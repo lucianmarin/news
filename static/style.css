@@ -1,10 +1,10 @@
 * { margin: 0; padding: 0; }
 
-html { -ms-text-size-adjust: 100%; -webkit-text-size-adjust: 100%; --regular: 14px; --big: 20px; --d: 0.2s; --hl: yellow; --white: #fff; --gray: #808080; --silver: #c0c0c0; --gainsboro: #d0d0d0; --whitesmoke: #f0f0f0; --black: #000; }
+html { -ms-text-size-adjust: 100%; -webkit-text-size-adjust: 100%; --small: 13px; --regular: 14px; --big: 20px; --d: 0.2s; --hl: yellow; --white: #fff; --gray: #808080; --silver: #c0c0c0; --gainsboro: #d0d0d0; --whitesmoke: #f0f0f0; --black: #000; }
 
 @media (prefers-color-scheme: dark) { html { --hl: darkcyan; --black: #fff; --gray: #c0c0c0; --silver: #808080; --gainsboro: #404040; --whitesmoke: #202020; --white: #000; } }
 
-body { background-color: var(--white); color: var(--black); cursor: default; font-family: "Fira Sans", sans-serif; font-size: var(--regular); line-height: 20px; }
+body { background-color: var(--white); color: var(--black); cursor: default; font-family: "Route 159", sans-serif; font-size: var(--regular); line-height: 20px; }
 
 a { color: var(--black); cursor: pointer; text-decoration: none; transition: color var(--d); }
 
@@ -40,7 +40,7 @@ svg path { stroke: var(--black); stroke-width: 2; stroke-linecap: round; stroke-
 
 .title a:visited { color: var(--gray); }
 
-.small { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.small { font-size: var(--small); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 
 .small a { color: var(--gray); }
 
@@ -64,7 +64,7 @@ svg path { stroke: var(--black); stroke-width: 2; stroke-linecap: round; stroke-
 
 .text u { background-color: var(--hl); text-decoration: none; }
 
-.footer { margin-top: 10px; margin-bottom: 30px; }
+.footer { font-size: var(--small); margin-top: 10px; margin-bottom: 30px; }
 
 .footer a { color: var(--silver); padding: 5px 0; }
 
@@ -74,6 +74,6 @@ svg path { stroke: var(--black); stroke-width: 2; stroke-linecap: round; stroke-
 
 .footer b { color: var(--gainsboro); padding: 5px 2px; }
 
-@font-face { font-family: "Fira Sans"; font-style: normal; font-weight: normal; src: url(/static/firasans-regular.woff2) format("woff2"); }
+@font-face { font-family: "Route 159"; font-style: normal; font-weight: normal; src: url(/static/route159-regular.woff2) format("woff2"); }
 
-@font-face { font-family: "Fira Sans"; font-style: normal; font-weight: bold; src: url(/static/firasans-bold.woff2) format("woff2"); }
+@font-face { font-family: "Route 159"; font-style: normal; font-weight: bold; src: url(/static/route159-bold.woff2) format("woff2"); }

@@ -5,6 +5,7 @@
 html
     -ms-text-size-adjust: 100%
     -webkit-text-size-adjust: 100%
+    --small: 13px
     --regular: 14px
     --big: 20px
     --d: 0.2s
@@ -31,7 +32,7 @@ body
     background-color: var(--white)
     color: var(--black)
     cursor: default
-    font-family: "Fira Sans", sans-serif
+    font-family: "Route 159", sans-serif
     font-size: var(--regular)
     line-height: 20px
 
@@ -97,6 +98,7 @@ svg
         color: var(--gray)
 
 .small
+    font-size: var(--small)
     overflow: hidden
     text-overflow: ellipsis
     white-space: nowrap
@@ -131,6 +133,7 @@ svg
         text-decoration: none
 
 .footer
+    font-size: var(--small)
     margin-top: 10px
     margin-bottom: 30px
     a
@@ -145,13 +148,13 @@ svg
         padding: 5px 2px
 
 @font-face
-    font-family: "Fira Sans"
+    font-family: "Route 159"
     font-style: normal
     font-weight: normal
-    src: url(/static/firasans-regular.woff2) format("woff2")
+    src: url(/static/route159-regular.woff2) format("woff2")
 
 @font-face
-    font-family: "Fira Sans"
+    font-family: "Route 159"
     font-style: normal
     font-weight: bold
-    src: url(/static/firasans-bold.woff2) format("woff2")
+    src: url(/static/route159-bold.woff2) format("woff2")
