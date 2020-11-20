@@ -74,6 +74,6 @@ svg path { stroke: var(--black); stroke-width: 2; stroke-linecap: round; stroke-
 
 .footer b { color: var(--gainsboro); padding: 5px 2px; }
 
-@font-face { font-family: "Route 159"; font-style: normal; font-weight: normal; src: url(/static/route159-regular.woff2) format("woff2"); }
+@font-face { font-family: "Route 159"; font-style: normal; font-weight: normal; src: url(/static/route159-regular.woff) format("woff"); }
 
-@font-face { font-family: "Route 159"; font-style: normal; font-weight: bold; src: url(/static/route159-bold.woff2) format("woff2"); }
+@font-face { font-family: "Route 159"; font-style: normal; font-weight: bold; src: url(/static/route159-bold.woff) format("woff"); }
