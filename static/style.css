@@ -40,7 +40,7 @@ svg path { stroke: var(--black); stroke-width: 2; stroke-linecap: round; stroke-
 
 .title a:visited { color: var(--gray); }
 
-.small { font-size: var(--small); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.small { color: var(--silver); font-size: var(--small); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 
 .small a { color: var(--gray); }
 

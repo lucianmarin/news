@@ -4,7 +4,7 @@ from project.settings import DEBUG
 
 env = Environment()
 env.bytecode_cache = FileSystemBytecodeCache()
-env.loader = FileSystemLoader('templates/')
+env.loader = FileSystemLoader('templates')
 env.auto_reload = DEBUG
 
 env.filters['hostname'] = hostname
@@ -14,4 +14,4 @@ env.filters['superscript'] = superscript
 env.filters['truncate'] = truncate
 
 env.globals['brand'] = "Artificial Feed"
-env.globals['v'] = 20
+env.globals['v'] = 21
