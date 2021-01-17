@@ -30,39 +30,36 @@ class StaticResource(object):
 
 
 class MainResource:
-    def on_get(self, req, resp):
-        count = Article.objects.count()
-        distinct = Article.objects.order_by('domain', '-score').distinct('domain').values('id')
-        articles = Article.objects.filter(id__in=distinct).order_by('-score')
-        template = env.get_template('pages/index.html')
-        resp.body = template.render(
-            articles=articles[:32], count=count, view='breaking'
-        )
+    def ids(self, mode):
+        return Article.objects.order_by('domain', mode).distinct('domain').values('id')
 
-
-class RecentResource:
     def on_get(self, req, resp):
-        count = Article.objects.count()
-        distinct = Article.objects.order_by('domain', '-pub').distinct('domain').values('id')
-        articles = Article.objects.filter(id__in=distinct).order_by('-pub')
-        template = env.get_template('pages/index.html')
+        articles = Article.objects.count()
+        sites = Article.objects.distinct('domain').count()
+
+        breaking = Article.objects.filter(id__in=self.ids('-score')).order_by('-score')
+        current = Article.objects.filter(id__in=self.ids('-pub')).order_by('-pub')
+
+        template = env.get_template('pages/main.html')
         resp.body = template.render(
-            articles=articles[:32], count=count, view='current'
+            breaking=breaking[:24], current=current[:24],
+            articles=articles, sites=sites, view='main'
         )
 
 
 class ReadResource:
     def on_get(self, req, resp, base):
-        count = Article.objects.count()
         articles = Article.objects.filter(id=int(base, 36))
         if not articles:
             raise HTTPNotFound()
+
         article = articles[0]
         article.description = None
         lines = fetch_paragraphs(article.url)
+
         template = env.get_template('pages/read.html')
         resp.body = template.render(
-            article=article, lines=lines, count=count, view='read'
+            article=article, lines=lines, view='read'
         )
 
 

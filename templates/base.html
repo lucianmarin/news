@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en">
 <head>
-    <title>{{ brand }} / {{ view | capitalize }}</title>
+    <title>{{ brand }}</title>
     <meta charset="utf-8">
     <meta name="referrer" content="always">
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0">
@@ -15,22 +15,10 @@
     <script type="text/javascript" src="/static/script.js?v={{v}}" async defer></script>
 </head>
 <body>
-    <div class="menu">
-        {% if view in ['about', 'read'] %}
-            {% include "common/title.html" %}
-        {% else %}
-            {% include "common/header.html" %}
-        {% endif %}
-    </div>
-    <div class="main">
+    <div class="{{ view }}">
+        <div class="side left"></div>
         {% block main %}{% endblock %}
-    </div>
-    <div class="footer">
-        <a href="/">EN</a>
-        <b>&frasl;</b>
-        <a href="/about">About</a>
-        <b>&frasl;</b>
-        <b>{{ count }} articles</b>
+        <div class="side right"></div>
     </div>
 </body>
 </html>

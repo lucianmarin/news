@@ -1,3 +1,19 @@
+$col: 360px
+$center: 480px
+$small: 13px
+$regular: 14px
+$big: 20px
+$d: 0.2s
+$hl: yellow
+$white: #fff
+$almostblack: #202020
+$darkgray: #404040
+$gray: #808080
+$silver: #c0c0c0
+$gainsboro: #d0d0d0
+$whitesmoke: #f0f0f0
+$black: #000
+
 *
     margin: 0
     padding: 0
@@ -5,148 +21,135 @@
 html
     -ms-text-size-adjust: 100%
     -webkit-text-size-adjust: 100%
-    --small: 13px
-    --regular: 14px
-    --big: 20px
-    --d: 0.2s
-    --hl: yellow
-    --white: #fff
-    --gray: #808080
-    --silver: #c0c0c0
-    --gainsboro: #d0d0d0
-    --whitesmoke: #f0f0f0
-    --black: #000
-
-
-@media (prefers-color-scheme: dark)
-    html
-        --hl: darkcyan
-        --black: #fff
-        --gray: #c0c0c0
-        --silver: #808080
-        --gainsboro: #404040
-        --whitesmoke: #202020
-        --white: #000
 
 body
-    background-color: var(--white)
-    color: var(--black)
+    background-color: $almostblack
+    color: $black
     cursor: default
     font-family: "Route 159", sans-serif
-    font-size: var(--regular)
+    font-size: $regular
     line-height: 20px
 
 a
-    color: var(--black)
+    color: $black
     cursor: pointer
     text-decoration: none
-    transition: color var(--d)
+    transition: color $d
 
 b, i
     font-style: normal
     font-weight: normal
 
-.menu, .main, .footer
-    margin: 0 auto
-    max-width: 512px
-    padding: 0 20px
-
 h3
-    font-size: var(--regular)
+    font-size: $regular
     font-weight: normal
     line-height: 15px
-    a
-        color: var(--gray)
-        &:hover
-            color: var(--black)
 
 h2
-    font-size: var(--big)
-    line-height: 24px
-    padding: 3px 0
-    width: 95%
-    a
-        color: var(--silver)
-        &:hover
-            color: var(--gray)
-        &.selected
-            color: var(--black)
+    font-size: $big
+    line-height: 25px
 
-svg
-    fill: none
-    path
-        stroke: var(--black)
-        stroke-width: 2
-        stroke-linecap: round
-        stroke-linejoin: round
+.main
+    display: grid
+    grid-template-columns: calc(50% - #{$col}) $col $col calc(50% - #{$col})
+    .side.left
+        background-color: $almostblack
+    .side.right
+        background-color: $whitesmoke
 
-.switch
-    float: right
-    padding: 6px 0
-    svg
-        margin-left: 6px
+.column.left
+    background-color: $almostblack
+    padding-right: 10px
+    h3 a
+        color: $gray
+    h2 a
+        color: $white
+    .title a
+        color: $white
+    .title a:visited
+        color: $gainsboro
+    .small a:first-child
+        color: $silver
+    .small a
+        color: $gray
+    .summary
+        color: $silver
 
-.menu
-    padding-top: 15px
-    padding-bottom: 10px
+.column.right
+    background-color: $whitesmoke
+    padding-left: 10px
+    h2 a
+        color: $black
+    .title a
+        color: $black
+    .title a:visited
+        color: $darkgray
+    .small a:first-child
+        color: $gray
+    .small a
+        color: $silver
+    .summary
+        color: $gray
 
-.entry
-    margin-bottom: 10px
-
-.title
-    a:visited
-        color: var(--gray)
-
-.small
-    color: var(--silver)
-    font-size: var(--small)
-    overflow: hidden
-    text-overflow: ellipsis
-    white-space: nowrap
-    a
-        color: var(--gray)
-        &:hover
-            color: var(--black)
-        &.done
-            color: var(--silver)
-            &:hover
-                color: var(--gray)
-
-.summary
-    color: var(--gray)
-    cursor: text
-    a
-        color: var(--gray)
-        text-decoration: underline
-
-.text
-    color: var(--black)
-    cursor: text
-    margin-bottom: 10px
-    a
-        text-decoration: underline
-    p
+.column
+    h3
+        margin-top: 10px
+    h2
         margin-bottom: 10px
-        &:last-child
-            margin-bottom: 0
-    u
-        background-color: var(--hl)
-        text-decoration: none
+    .entry
+        margin-bottom: 10px
+    .small
+        font-size: $small
+        overflow: hidden
+        text-overflow: ellipsis
+        white-space: nowrap
+    .summary
+        cursor: text
 
-.footer
-    font-size: var(--small)
-    margin-top: 10px
-    margin-bottom: 30px
-    a
-        color: var(--silver)
-        padding: 5px 0
-        &:hover
-            color: var(--gray)
-        &:first-child
-            border-bottom: var(--gainsboro) 5px solid
-    b
-        color: var(--gainsboro)
-        padding: 5px 2px
+.read
+    display: grid
+    grid-template-columns: calc(50% - #{$center / 2}) $center calc(50% - #{$center / 2})
+    .side.left, .side.right
+        background-color: $whitesmoke
+
+.center
+    background-color: $whitesmoke
+    h3
+        margin-top: 10px
+    h3 a
+        color: $silver
+    h2
+        margin-bottom: 10px
+    h2 a
+        color: $black
+    .entry
+        margin: 10px 0
+        .small a:first-child
+            color: $gray
+        .small a
+            color: $silver
+    .text
+        color: $black
+        cursor: text
+        p
+            margin-bottom: 10px
+        u
+            background-color: $hl
+            text-decoration: none
+
+@media (max-width: $col * 2)
+    .main
+        grid-template-columns: 0 50% 50% 0
+        .column.left, .column.right
+            padding: 0 10px
+    .read
+        grid-template-columns: 0 100% 0
+        .center
+            padding: 0 20px
+    .summary
+        overflow: hidden
+        text-overflow: ellipsis
+        white-space: nowrap
 
 @font-face
     font-family: "Route 159"

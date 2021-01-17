@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block main %}
+    <div class="column left">
+        <h3><a href="/">{{ brand }}</a></h3>
+        <h2><a href="/">Breaking</a></h2>
+        {% for article in breaking %}
+            {% include 'common/entry.html' %}
+        {% else %}
+            <div class="entry">
+                <div class="summary">Processing content...</div>
+            </div>
+        {% endfor %}
+        <div class="entry">
+            <div class="small">
+                <a href="https://lucianmarin.com/">lucianmarin</a>
+                <b>&nbsp;</b>
+                <a class="done" href="/">{{ articles }} articles</a>
+            </div>
+        </div>
+    </div>
+    <div class="column right">
+        <h3>&nbsp;</h3>
+        <h2><a href="/">Current</a></h2>
+        {% for article in current %}
+            {% include 'common/entry.html' %}
+        {% else %}
+            <div class="entry">
+                <div class="summary">Processing content...</div>
+            </div>
+        {% endfor %}
+        <div class="entry">
+            <div class="small">
+                <a href="https://lucianmarin.com/">lucianmarin</a>
+                <b>&nbsp;</b>
+                <a class="done" href="/">{{ sites }} websites</a>
+            </div>
+        </div>
+    </div>
+{% endblock %}
