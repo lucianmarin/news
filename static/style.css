@@ -60,7 +60,7 @@ h2 { font-size: 20px; line-height: 25px; }
 
 .column .summary { cursor: text; }
 
-.read { display: grid; grid-template-columns: calc(50% - 256px - 25px) 50px 512px calc(50% - 256px - 25px); }
+.read { display: grid; grid-template-columns: calc(50% - 240px - 25px) 50px 480px calc(50% - 240px - 25px); }
 
 .pane.left { background-color: #202020; }
 
