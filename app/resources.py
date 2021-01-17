@@ -36,7 +36,7 @@ class MainResource:
         articles = Article.objects.filter(id__in=distinct).order_by('-score')
         template = env.get_template('pages/index.html')
         resp.body = template.render(
-            articles=articles[:16], count=count, view='breaking'
+            articles=articles, count=count, view='breaking'
         )
 
 
@@ -47,7 +47,7 @@ class RecentResource:
         articles = Article.objects.filter(id__in=distinct).order_by('-pub')
         template = env.get_template('pages/index.html')
         resp.body = template.render(
-            articles=articles[:16], count=count, view='current'
+            articles=articles, count=count, view='current'
         )
 
 
