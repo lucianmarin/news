@@ -3,7 +3,7 @@
     <h4 class="title">
         <a href="{{ article.url }}">{{ article.title }}</a>
     </h4>
-    {% if article.description %}
+    {% if article.description and not is_mobile %}
         <div class="summary">
             {{ article.description | truncate }}
         </div>

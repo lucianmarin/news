@@ -7,3 +7,4 @@ lxml
 python-dateutil
 requests
 tldextract
+user-agents

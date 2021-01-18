@@ -5,6 +5,8 @@ from app.helpers import fetch_paragraphs
 from app.jinja import env
 from app.models import Article
 
+from user_agents import parse
+
 
 class StaticResource(object):
     binary = ['png', 'jpg', 'woff', 'woff2']
@@ -33,6 +35,12 @@ class MainResource:
     def ids(self, mode):
         return Article.objects.order_by('domain', mode).distinct('domain').values('id')
 
+    def is_mobile(self, req):
+        user_agent = req.headers.get('USER-AGENT', '').strip()
+        user_agent = user_agent if user_agent else 'empty'
+        ua = parse(user_agent)
+        return ua.is_mobile
+
     def on_get(self, req, resp):
         articles = Article.objects.count()
         sites = Article.objects.distinct('domain').count()
@@ -43,7 +51,8 @@ class MainResource:
         template = env.get_template('pages/main.html')
         resp.body = template.render(
             breaking=breaking[:24], current=current[:24],
-            articles=articles, sites=sites, view='main'
+            articles=articles, sites=sites,
+            is_mobile=self.is_mobile(req), view='main'
         )
 
 
