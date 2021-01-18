@@ -1,6 +1,5 @@
 import requests
 import urllib
-from functools import lru_cache
 from bs4 import BeautifulSoup
 from app.filters import hostname
 from project.settings import HEADERS, TOKEN
@@ -37,9 +36,9 @@ def get_paragraphs(soup):
                 text = text.encode('latin-1', 'ignore').decode('latin-1')
                 if text:
                     if child.name in ["p", "pre", "li"]:
-                        paragraphs.append((text, False))
+                        paragraphs.append(text)
                     else:
-                        paragraphs.append((text, True))
+                        paragraphs.append(f"<strong>{text}</strong>")
     return paragraphs
 
 
@@ -67,7 +66,7 @@ def fetch_fb(link):
     return r.json() if r.text else {}
 
 
-def fetch_desc(link):
+def fetch_content(link):
     r = requests.get(link, headers=HEADERS)
     soup = BeautifulSoup(r.text, features="lxml")
     description = get_description(soup)
@@ -75,16 +74,13 @@ def fetch_desc(link):
     terms = ('…', '[…]', '...')
     description = '' if description.endswith(terms) else description
     if not description and paragraphs:
-        return paragraphs[0][0]
+        p = paragraphs[0]
+        description = p[8:-9] if p.startswith('<strong>') else p
     description = " ".join([d for d in description.split()])
-    return description.encode('latin-1', 'ignore').decode('latin-1')
-
-
-@lru_cache(maxsize=128)
-def fetch_paragraphs(link):
-    r = requests.get(link, headers=HEADERS)
-    soup = BeautifulSoup(r.text, features="lxml")
-    return get_paragraphs(soup)
+    description = description.encode('latin-1', 'ignore').decode('latin-1')
+    if not paragraphs:
+        paragraphs = [description]
+    return description, paragraphs
 
 
 def fetch_external(link):

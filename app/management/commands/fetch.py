@@ -4,7 +4,7 @@ from datetime import datetime, timezone
 import feedparser
 import requests
 from app.filters import hostname
-from app.helpers import fetch_desc, fetch_fb, get_url
+from app.helpers import fetch_fb, get_url, fetch_content
 from app.models import Article
 from dateutil.parser import parse
 from django.core.management.base import BaseCommand
@@ -57,16 +57,18 @@ class Command(BaseCommand):
         q.delete()
         print("Deleted {0} entries".format(c))
 
-    def get_description(self, article):
-        article.description = fetch_desc(article.url)
-        article.save(update_fields=['description'])
-        print(article.url)
+    def get_content(self, article):
+        description, paragraphs = fetch_content(article.url)
+        article.description = description
+        article.paragraphs = paragraphs
+        article.save(update_fields=['description', 'paragraphs'])
+        print(article.url, len(paragraphs))
         print(article.description)
 
-    def grab_description(self):
+    def grab_content(self):
         articles = Article.objects.filter(description=None).order_by('-id')
         with ThreadPoolExecutor(max_workers=self.cores) as executor:
-            executor.map(self.get_description, articles)
+            executor.map(self.get_content, articles)
 
     def get_facebook(self, article):
         fb = fetch_fb(article.url)
@@ -95,6 +97,6 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
         self.grab_entries()
         self.cleanup()
-        self.grab_description()
+        self.grab_content()
         if not options['skip_fb']:
             self.grab_facebook()

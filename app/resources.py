@@ -1,7 +1,6 @@
 from falcon import status_codes
 from falcon.errors import HTTPNotFound
 
-from app.helpers import fetch_paragraphs
 from app.jinja import env
 from app.models import Article
 
@@ -33,7 +32,9 @@ class StaticResource(object):
 
 class MainResource:
     def ids(self, mode):
-        return Article.objects.order_by('domain', mode).distinct('domain').values('id')
+        return Article.objects.order_by(
+            'domain', mode
+        ).distinct('domain').values('id')
 
     def is_mobile(self, req):
         user_agent = req.headers.get('USER-AGENT', '').strip()
@@ -62,13 +63,9 @@ class ReadResource:
         if not articles:
             raise HTTPNotFound()
 
-        article = articles[0]
-        article.description = None
-        lines = fetch_paragraphs(article.url)
-
         template = env.get_template('pages/read.html')
         resp.body = template.render(
-            article=article, lines=lines, view='read'
+            article=articles[0], view='read'
         )
 
 

@@ -4,6 +4,8 @@ from os import environ
 from django import setup
 from django.conf import settings
 from django.db import models
+from django.contrib.postgres import fields
+
 
 if not settings.configured:
     environ.setdefault('DJANGO_SETTINGS_MODULE', 'project.settings')
@@ -28,6 +30,7 @@ class Article(models.Model):
     reactions = models.IntegerField(default=0)
     shares = models.IntegerField(default=0)
     score = models.IntegerField(default=0, db_index=True)
+    paragraphs = fields.ArrayField(models.TextField(), default=list)
 
     @property
     def base(self):
