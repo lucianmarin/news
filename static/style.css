@@ -2,7 +2,7 @@
 
 html { -ms-text-size-adjust: 100%; -webkit-text-size-adjust: 100%; }
 
-body { background-color: #f0f0f0; color: #000; cursor: default; font-family: "Route 159", sans-serif; font-size: 14px; line-height: 20px; }
+body { background-color: #808080; color: #000; cursor: default; font-family: "Route 159", sans-serif; font-size: 14px; line-height: 20px; }
 
 a { color: #000; cursor: pointer; text-decoration: none; transition: color 0.2s; }
 
