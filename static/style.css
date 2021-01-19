@@ -60,7 +60,7 @@ h2 { font-size: 20px; line-height: 25px; }
 
 .column .summary { cursor: text; }
 
-.read { display: grid; grid-template-columns: calc(50% - 240px - 25px) 50px 480px calc(50% - 240px - 25px); }
+.read { display: grid; grid-template-columns: calc(50% - 255px - 25px) 50px 510px calc(50% - 255px - 25px); }
 
 .pane.left { background-color: #202020; }
 
@@ -70,7 +70,7 @@ h2 { font-size: 20px; line-height: 25px; }
 
 .pane.left .small .done { color: #808080; }
 
-.pane.right { background-color: #f0f0f0; padding-left: 15px; }
+.pane.right { background-color: #f0f0f0; padding: 0 15px; }
 
 .pane.right h3 { margin-top: 15px; }
 
