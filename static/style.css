@@ -28,25 +28,27 @@ h2 { font-size: var(--big); line-height: 25px; }
 
 .column h3 { margin-top: 15px; }
 
+.column h3 a { color: var(--gray); }
+
 .column h2 { margin-bottom: 10px; }
+
+.column h2 a { color: var(--black); }
 
 .column .entry { margin-bottom: 10px; }
 
 .column .small { font-size: var(--small); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 
-.column .summary { cursor: text; }
-
-.column h2 a { color: var(--black); }
+.column .summary { color: var(--gray); cursor: text; }
 
 .column .title a { color: var(--black); }
 
 .column .title a:visited { color: var(--darkgray); }
 
+.column .small { color: var(--silver); }
+
 .column .small a { color: var(--gray); }
 
 .column .small .done { color: var(--silver); }
-
-.column .summary { color: var(--gray); }
 
 .read { display: grid; grid-template-columns: calc(50% - var(--read) / 2 - 25px) 50px var(--read) calc(50% - var(--read) / 2 - 25px); }
 

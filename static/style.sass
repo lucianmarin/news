@@ -83,8 +83,12 @@ h2
 .column
     h3
         margin-top: 15px
+        a
+            color: var(--gray)
     h2
         margin-bottom: 10px
+        a
+            color: var(--black)
     .entry
         margin-bottom: 10px
     .small
@@ -93,19 +97,19 @@ h2
         text-overflow: ellipsis
         white-space: nowrap
     .summary
+        color: var(--gray)
         cursor: text
-    h2 a
-        color: var(--black)
-    .title a
-        color: var(--black)
-    .title a:visited
-        color: var(--darkgray)
-    .small a
-        color: var(--gray)
-    .small .done
+    .title
+        a
+            color: var(--black)
+            &:visited
+                color: var(--darkgray)
+    .small
         color: var(--silver)
-    .summary
-        color: var(--gray)
+        a
+            color: var(--gray)
+        .done
+            color: var(--silver)
 
 .read
     display: grid
@@ -130,18 +134,19 @@ h2
     padding: 0 15px
     h3
         margin-top: 15px
-    h3 a
-        color: var(--gray)
+        a
+            color: var(--gray)
     h2
         margin-bottom: 10px
-    h2 a
-        color: var(--black)
+        a
+            color: var(--black)
     .entry
         margin: 10px 0
-        .small a
-            color: var(--gray)
-        .small .done
-            color: var(--silver)
+        .small
+            a
+                color: var(--gray)
+            .done
+                color: var(--silver)
     .text
         color: var(--black)
         cursor: text
