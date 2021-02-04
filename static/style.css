@@ -1,8 +1,8 @@
 * { margin: 0; padding: 0; }
 
-html { --col: 390px; --read: 510px; --small: 13px; --regular: 14px; --big: 20px; --d: 0.2s; --hl: yellow; --white: #fff; --almostblack: #202020; --darkgray: #404040; --gray: #808080; --silver: #c0c0c0; --gainsboro: #d0d0d0; --whitesmoke: #f0f0f0; --black: #000; -ms-text-size-adjust: 100%; -webkit-text-size-adjust: 100%; }
+html { --col: 390px; --read: 510px; --small: 13px; --regular: 14px; --big: 20px; --d: 0.2s; --hl: yellow; --white: #fff; --whitesmoke: #f0f0f0; --gainsboro: #d0d0d0; --silver: #c0c0c0; --gray: #808080; --darkgray: #404040; --almostblack: #202020; --black: #000; -ms-text-size-adjust: 100%; -webkit-text-size-adjust: 100%; }
 
-@media (prefers-color-scheme: dark) { html { --white: #000; --whitesmoke: #181818; --gainsboro: #282828; --silver: #484848; --gray: #808080; --black: #e0e0e0; --aqua: #00d0f0; --ocean: #00f0ff; } }
+@media (prefers-color-scheme: dark) { html { --white: #000; --whitesmoke: #141414; --gainsboro: #282828; --silver: #404040; --gray: #808080; --darkgray: #c0c0c0; --almostblack: #e0e0e0; --black: #fff; } }
 
 body { background-color: var(--gray); color: var(--black); cursor: default; font-family: "Route 159", sans-serif; font-size: var(--regular); line-height: 20px; }
 
