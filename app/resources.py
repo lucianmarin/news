@@ -31,6 +31,8 @@ class StaticResource(object):
 
 
 class MainResource:
+    limit = 24
+
     def ids(self, mode):
         return Article.objects.order_by(
             'domain', mode
@@ -51,7 +53,7 @@ class MainResource:
 
         template = env.get_template('pages/main.html')
         resp.body = template.render(
-            breaking=breaking[:24], current=current[:24],
+            breaking=breaking[:self.limit], current=current[:self.limit],
             is_mobile=self.is_mobile(req),
             articles=articles, sites=sites, view='main'
         )
