@@ -1,4 +1,4 @@
-from concurrent.futures import ThreadPoolExecutor
+from concurrent.futures import ProcessPoolExecutor
 from datetime import datetime, timezone
 
 import feedparser
@@ -51,7 +51,7 @@ class Command(BaseCommand):
                 print(e)
 
     def grab_entries(self):
-        with ThreadPoolExecutor(max_workers=self.cores) as executor:
+        with ProcessPoolExecutor(max_workers=self.cores) as executor:
             executor.map(self.get_entries, FEEDS)
 
     def cleanup(self):
@@ -70,7 +70,7 @@ class Command(BaseCommand):
 
     def grab_content(self):
         articles = Article.objects.filter(description=None).order_by('-id')
-        with ThreadPoolExecutor(max_workers=self.cores) as executor:
+        with ProcessPoolExecutor(max_workers=self.cores) as executor:
             executor.map(self.get_content, articles)
 
     def get_facebook(self, article):
@@ -94,7 +94,7 @@ class Command(BaseCommand):
         articles = Article.objects.filter(
             has_fb=False, pub__lt=self.now - 12 * 3600
         ).order_by('id')
-        with ThreadPoolExecutor(max_workers=self.cores) as executor:
+        with ProcessPoolExecutor(max_workers=self.cores) as executor:
             executor.map(self.get_facebook, articles)
 
     def handle(self, *args, **options):
