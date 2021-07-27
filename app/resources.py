@@ -4,8 +4,6 @@ from falcon.errors import HTTPNotFound
 from app.jinja import env
 from app.models import Article
 
-from user_agents import parse
-
 
 class StaticResource(object):
     binary = ['png', 'jpg', 'woff', 'woff2']
@@ -36,12 +34,6 @@ class MainResource:
             'domain', mode
         ).distinct('domain').values('id')
 
-    def is_mobile(self, req):
-        user_agent = req.headers.get('USER-AGENT', '').strip()
-        user_agent = user_agent if user_agent else 'empty'
-        ua = parse(user_agent)
-        return ua.is_mobile
-
     def on_get(self, req, resp):
         articles = Article.objects.count()
         sites = Article.objects.distinct('domain').count()
@@ -53,7 +45,6 @@ class MainResource:
         template = env.get_template('pages/main.html')
         resp.body = template.render(
             breaking=breaking[:limit], current=current[:limit],
-            is_mobile=False,
             articles=articles, sites=sites, view='main'
         )
 

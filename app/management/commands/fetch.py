@@ -13,17 +13,10 @@ from project.settings import FEEDS
 
 class Command(BaseCommand):
     help = "Fetch articles from feeds."
-    cores = 4
+    cores = 8
     ignored = [
         "https://kottke.org/quick-links"
     ]
-
-    def add_arguments(self, parser):
-        parser.add_argument(
-            '--skip-fb',
-            action='store_true',
-            help='Skip Facebook API calls',
-        )
 
     @property
     def now(self):
@@ -101,5 +94,4 @@ class Command(BaseCommand):
         self.grab_entries()
         self.cleanup()
         self.grab_content()
-        # if not options['skip_fb']:
-        #     self.grab_facebook()
+        # self.grab_facebook()
