@@ -30,9 +30,9 @@ class StaticResource:
 
 
 class MainResource:
-    def ids(self, mode):
+    def ids(self, *args):
         return Article.objects.order_by(
-            'domain', mode
+            'domain', *args
         ).distinct('domain').values('id')
 
     def on_get(self, req, resp):
@@ -41,7 +41,7 @@ class MainResource:
         limit = sites // 2
         ip = req.remote_addr
 
-        breaking = Article.objects.filter(id__in=self.ids('pub')).order_by('pub')
+        breaking = Article.objects.filter(id__in=self.ids('-score', 'pub')).order_by('-score', 'pub')
         current = Article.objects.filter(id__in=self.ids('-pub')).order_by('-pub')
 
         template = env.get_template('pages/main.html')
@@ -74,7 +74,8 @@ class PlusResource:
 
         article.pluses += [req.remote_addr]
         article.pluses = list(set(article.pluses))
-        article.save(update_fields=['pluses'])
+        article.score = len(article.pluses)
+        article.save(update_fields=['pluses', 'score'])
 
         raise HTTPFound(f'/read/{base}')
 
