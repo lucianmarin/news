@@ -1,5 +1,6 @@
 from falcon import status_codes
 from falcon.errors import HTTPNotFound
+from falcon.redirects import HTTPFound
 from user_agents import parse
 
 from app.jinja import env
@@ -51,6 +52,21 @@ class MainResource:
         )
 
 
+class LinkResource:
+    def on_get(self, req, resp, base):
+        articles = Article.objects.filter(id=int(base, 36))
+        if not articles:
+            raise HTTPNotFound()
+        article = articles[0]
+        ip = req.access_route[0]
+        agent = parse(req.user_agent)
+
+        if ip and not agent.is_bot:
+            article.increment(ip)
+
+        raise HTTPFound(article.url)
+
+
 class ReadResource:
     def on_get(self, req, resp, base):
         articles = Article.objects.filter(id=int(base, 36))
@@ -61,10 +77,7 @@ class ReadResource:
         agent = parse(req.user_agent)
 
         if ip and not agent.is_bot:
-            article.ips += [ip]
-            article.ips = list(set(article.ips))
-            article.score = len(article.ips)
-            article.save(update_fields=['ips', 'score'])
+            article.increment(ip)
 
         template = env.get_template('pages/read.html')
         resp.body = template.render(

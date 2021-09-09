@@ -1,14 +1,14 @@
 <div class="small">
-    <a href="{{ article.url }}">
+    <a href="/link/{{ article.base }}" rel="nofollow">
         {{ article.domain | sitename }}
     </a>
     {% if view == 'read' %}
         <a class="done" onclick="listen(event)">listen</a>
     {% endif %}
-    <a class="done" href="/{{ article.base }}" rel="nofollow">
+    <a class="done" href="/read/{{ article.base }}" rel="nofollow">
         {{ article.pub | shortdate }} ago
     </a>
-    <a class="{% if ip not in article.ips %}done{% endif %}" href="/{{ article.base }}" rel="nofollow">
+    <a class="{% if ip not in article.ips %}done{% endif %}" href="/read/{{ article.base }}" rel="nofollow">
         +{% if article.score %}{{ article.score }}{% endif %}
     </a>
 </div>

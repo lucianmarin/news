@@ -49,3 +49,9 @@ class Article(models.Model):
             return "{0}k".format(rounded)
         else:
             return self.score
+
+    def increment(self, ip):
+        self.ips += [ip]
+        self.ips = list(set(self.ips))
+        self.score = len(self.ips)
+        self.save(update_fields=['ips', 'score'])
