@@ -31,8 +31,8 @@ USE_TZ = False
 USE_ETAGS = False
 
 FEEDS = [
-    # "http://feeds.arstechnica.com/arstechnica/index",
-    # "http://feeds.arstechnica.com/arstechnica/features",
+    "http://feeds.arstechnica.com/arstechnica/index",
+    "http://feeds.arstechnica.com/arstechnica/features",
     "http://rss.sciam.com/scientificamerican-global",
     # "http://feeds.reuters.com/news/artsculture",
     # "http://feeds.reuters.com/reuters/businessNews",
@@ -49,6 +49,7 @@ FEEDS = [
     "http://feeds.androidcentral.com/androidcentral",
     "http://feeds.windowscentral.com/wmexperts",
     # "http://feeds.feedburner.com/businessinsider",
+    "http://feeds.feedburner.com/fubiz",
     "http://feeds.feedburner.com/neowin-main",
     "http://feeds.feedburner.com/petapixel",
     "http://feeds.feedburner.com/thehackersnews",
