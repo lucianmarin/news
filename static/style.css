@@ -46,7 +46,7 @@ h2 { font-size: var(--big); line-height: 25px; }
 
 .column .small { color: var(--silver); font-size: var(--small); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 
-.column .small a { float: left; color: var(--gray); margin-right: 10px; }
+.column .small a { color: var(--gray); margin-right: 10px; }
 
 .column .small .done { color: var(--silver); }
 
