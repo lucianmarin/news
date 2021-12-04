@@ -7,9 +7,7 @@
     <div class="pane right">
         <h3><a href="/">Unfeeder</a></h3>
         <h2>
-            <a href="/link/{{ article.base }}" target="_blank">
-                {{ article.title }}
-            </a>
+            <a href="/link/{{ article.base }}">{{ article.title }}</a>
         </h2>
         <div id="article" class="text">
             {% for paragraph in article.paragraphs %}

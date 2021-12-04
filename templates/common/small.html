@@ -1,5 +1,5 @@
 <div class="small">
-    <a href="/link/{{ article.base }}" target="_blank" rel="nofollow">
+    <a href="/link/{{ article.base }}" rel="nofollow">
         {{ article.domain | sitename }}{% if article.score %}<sup>{{ article.score }}</sup>{% endif %}
     </a>
     {% if view == 'read' %}
