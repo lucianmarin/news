@@ -2,7 +2,7 @@ import urllib
 
 import requests
 from bs4 import BeautifulSoup
-from project.settings import HEADERS, TOKEN
+from project.settings import HEADERS
 
 from app.filters import hostname
 
@@ -58,14 +58,6 @@ def get_description(soup):
         meta_pretty = " ".join(meta_content.split())
         description = meta_pretty if meta_pretty else description
     return description
-
-
-def fetch_fb(link):
-    path = "https://graph.facebook.com/v4.0/?id={0}&fields=og_object,engagement&access_token={1}"
-    url = urllib.parse.quote(link)
-    graph = path.format(url, TOKEN)
-    r = requests.get(graph)
-    return r.json() if r.text else {}
 
 
 def fetch_content(link):

@@ -4,7 +4,7 @@ from datetime import datetime, timezone
 import feedparser
 import requests
 from app.filters import hostname
-from app.helpers import fetch_content, fetch_fb, get_url
+from app.helpers import fetch_content, get_url
 from app.models import Article
 from dateutil.parser import parse
 from django.core.management.base import BaseCommand
@@ -83,15 +83,7 @@ class Command(BaseCommand):
             ])
             print(article.url, article.score)
 
-    def grab_facebook(self):
-        articles = Article.objects.filter(
-            has_fb=False, pub__lt=self.now - 12 * 3600
-        ).order_by('id')
-        with ThreadPoolExecutor(max_workers=self.cores) as executor:
-            executor.map(self.get_facebook, articles)
-
     def handle(self, *args, **options):
         self.grab_entries()
         self.cleanup()
         self.grab_content()
-        # self.grab_facebook()
