@@ -1,4 +1,4 @@
-html { --col: 360px; --read: 510px; --small: 13px; --regular: 14px; --big: 20px; --d: 0.2s; --hl: yellow; --white: #fff; --whitesmoke: #f0f0f0; --gainsboro: #e0e0e0; --silver: #c0c0c0; --gray: #808080; --darkgray: #404040; --almostblack: #202020; --black: #000; }
+html { --col: 360px; --read: 500px; --small: 13px; --regular: 14px; --big: 20px; --d: 0.2s; --hl: yellow; --white: #fff; --whitesmoke: #f0f0f0; --gainsboro: #e0e0e0; --silver: #c0c0c0; --gray: #808080; --darkgray: #404040; --almostblack: #202020; --black: #000; }
 
 @media (prefers-color-scheme: dark) { html { --white: #000; --whitesmoke: #141414; --gainsboro: #242424; --silver: #404040; --gray: #808080; --darkgray: #c0c0c0; --almostblack: #e0e0e0; --black: #fff; } }
 
@@ -60,11 +60,11 @@ h2 { font-size: var(--big); line-height: 25px; }
 
 .column .title, .column .summary { margin-right: -5px; }
 
-.read { display: grid; grid-template-columns: calc(50% - var(--read) / 2 - 25px) 50px var(--read) calc(50% - var(--read) / 2 - 25px); }
+.read { display: grid; grid-template-columns: calc(50% - var(--read) / 2 - 20px) 40px var(--read) calc(50% - var(--read) / 2 - 20px); }
 
-.pane.left { background-color: var(--whitesmoke); padding: 15px; }
+.pane.left { background-color: var(--whitesmoke); padding: 15px 10px; }
 
-.pane.left .small { left: 0; position: sticky; top: 0; transform: rotate(180deg); writing-mode: vertical-lr; }
+.pane.left .small { left: 0; position: sticky; top: 15px; transform: rotate(180deg); writing-mode: vertical-lr; }
 
 .pane.left .small a { color: var(--gray); margin-top: 10px; }
 
@@ -72,7 +72,7 @@ h2 { font-size: var(--big); line-height: 25px; }
 
 .pane.left .small sup { font-size: 9px; }
 
-.pane.right { background-color: var(--white); padding: 15px; }
+.pane.right { background-color: var(--white); padding: 15px 10px; }
 
 .pane.right h3 a { color: var(--gray); }
 
@@ -80,7 +80,7 @@ h2 { font-size: var(--big); line-height: 25px; }
 
 .pane.right h2 a { color: var(--black); }
 
-.pane.right .text { color: var(--black); cursor: text; margin-right: -5px; }
+.pane.right .text { color: var(--black); cursor: text; }
 
 .pane.right .text p { padding: 5px 0; }
 
@@ -88,7 +88,7 @@ h2 { font-size: var(--big); line-height: 25px; }
 
 @media (max-width: 720px) { .main { grid-template-columns: 0 50% 50% 0; } }
 
-@media (max-width: 560px) { .read { grid-template-columns: 0 40px calc(100% - 40px) 0; } .read .pane.left, .read .pane.right { padding-left: 10px; padding-right: 10px; } }
+@media (max-width: 540px) { .read { grid-template-columns: 0 40px calc(100% - 40px) 0; } }
 
 @media (max-width: 480px) { .summary { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; } }
 
