@@ -72,7 +72,7 @@ h2 { font-size: var(--big); line-height: 25px; }
 
 .pane.right h3 a { color: var(--gray); }
 
-.pane.right h2 { padding-bottom: 15px; }
+.pane.right h2 { padding-bottom: 10px; }
 
 .pane.right h2 a { color: var(--black); }
 
