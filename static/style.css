@@ -26,17 +26,21 @@ h2 { font-size: var(--big); line-height: 25px; }
 
 .column.left { background-color: var(--whitesmoke); padding: 0 10px; }
 
+.column.left .entry { border-bottom: var(--gainsboro) 0.5px solid; }
+
 .column.right { background-color: var(--white); padding: 0 10px; }
+
+.column.right .entry { border-bottom: var(--whitesmoke) 0.5px solid; }
 
 .column h3 { padding-top: 15px; }
 
 .column h3 a { color: var(--gray); }
 
-.column h2 { padding-bottom: 10px; }
+.column h2 { padding-bottom: 15px; }
 
 .column h2 a { color: var(--black); }
 
-.column .entry { padding-bottom: 15px; }
+.column .entry { margin-bottom: 9.75px; padding-bottom: 9.75px; }
 
 .column .small { color: var(--silver); font-size: var(--small); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 
