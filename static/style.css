@@ -58,7 +58,7 @@ h2 { font-size: var(--big); line-height: 25px; }
 
 .column .title a:visited { color: var(--darkgray); }
 
-.column .title, .column .summary { margin-right: -5px; }
+.column .title, .column .summary { margin-right: -10px; }
 
 .read { display: grid; grid-template-columns: calc(50% - var(--read) / 2 - 20px) 40px var(--read) calc(50% - var(--read) / 2 - 20px); }
 
