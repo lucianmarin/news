@@ -68,23 +68,6 @@ class Command(BaseCommand):
         with ThreadPoolExecutor(max_workers=self.cores) as executor:
             executor.map(self.get_content, articles)
 
-    def get_facebook(self, article):
-        fb = fetch_fb(article.url)
-        if 'error' in fb:
-            print('error')
-            return
-        else:
-            engagement = fb.get('engagement', {})
-            article.comments = engagement.get('comment_count', 0)
-            article.reactions = engagement.get('reaction_count', 0)
-            article.shares = engagement.get('share_count', 0)
-            article.score = article.comments + article.reactions + article.shares
-            article.has_fb = True
-            article.save(update_fields=[
-                'comments', 'reactions', 'shares', 'score', 'has_fb'
-            ])
-            print(article.url, article.score)
-
     def handle(self, *args, **options):
         self.grab_entries()
         self.cleanup()

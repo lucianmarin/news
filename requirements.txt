@@ -3,17 +3,9 @@ django
 django-extensions
 falcon
 feedparser
-flake8
-flake8-comprehensions
-flake8-import-order
-flake8-return
-flake8-simplify
-flake8-tidy-imports
-flake8-unused-arguments
 gunicorn
 jinja2
 lxml
-pep8-naming
 psycopg2-binary
 python-dateutil
 requests
