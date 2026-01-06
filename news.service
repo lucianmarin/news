@@ -5,10 +5,10 @@ After=network.target
 [Service]
 User=lucian
 Group=lucian
-PIDFile=/home/lucian/newscafe/news.pid
+PIDFile=/home/lucian/news/news.pid
 RuntimeDirectory=gunicorn
-WorkingDirectory=/home/lucian/newscafe
-ExecStart=/usr/local/bin/gunicorn router:app -c gunicorn.conf.py
+WorkingDirectory=/home/lucian/news
+ExecStart=/home/lucian/news/venv/bin/gunicorn router:app -c gunicorn.conf.py
 ExecReload=/bin/kill -s HUP $MAINPID
 ExecStop=/bin/kill -s TERM $MAINPID
 PrivateTmp=true
