@@ -1,8 +1,11 @@
 .DS_Store
 __pycache__
 .pytest_cache
+
 db.json
 local.py
+
 news.pid
 news.socket
-*.log.gz
+
+*.ipynb
