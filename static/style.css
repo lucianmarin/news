@@ -40,7 +40,7 @@ h2 { font-size: var(--big); line-height: 25px; }
 
 .column h2 a { color: var(--black); }
 
-.column .entry { margin-bottom: 10px; padding-bottom: 10px; }
+.column .entry { margin-bottom: 9.5px; padding-bottom: 9.5px; }
 
 .column .entry:last-child { border-bottom: 0 none; margin-bottom: 10px; padding-bottom: 10px; }
 
