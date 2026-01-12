@@ -16,13 +16,13 @@ h3 { font-size: var(--regular); font-weight: normal; line-height: 15px; }
 
 h2 { font-size: var(--big); line-height: 25px; }
 
-.main { margin: 0 auto; max-width: 510px; }
+.main { margin: 0 auto; max-width: 520px; }
 
-.main h3 { padding-left: 15px; padding-top: 15px; }
+.main h3 { padding-left: 20px; padding-top: 15px; }
 
 .main h3 a { color: var(--gray); }
 
-.main h2 { padding-left: 15px; padding-bottom: 15px; }
+.main h2 { padding-left: 20px; padding-bottom: 15px; }
 
 .main h2 a { color: var(--silver); }
 
@@ -46,11 +46,11 @@ h2 { font-size: var(--big); line-height: 25px; }
 
 .main .title a:visited { color: var(--darkgray); }
 
-.main .title, .main .summary, .main .small { padding: 0 15px; }
+.main .title, .main .summary, .main .small { padding: 0 20px; }
 
 .main .text { color: var(--black); cursor: text; padding-bottom: 15px; }
 
-.main .text p { padding: 5px 15px; }
+.main .text p { padding: 5px 20px; }
 
 .main .text u { background-color: var(--hl); text-decoration: none; }
 

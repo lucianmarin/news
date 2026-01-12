@@ -14,4 +14,4 @@ env.filters['superscript'] = superscript
 env.filters['truncate'] = truncate
 
 env.globals['brand'] = "News"
-env.globals['v'] = 8
+env.globals['v'] = 9
