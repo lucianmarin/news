@@ -16,7 +16,7 @@ h3 { font-size: var(--regular); font-weight: normal; line-height: 15px; }
 
 h2 { font-size: var(--big); line-height: 25px; }
 
-.main { margin: 0 auto; max-width: 480px; }
+.main { margin: 0 auto; max-width: 510px; }
 
 .main h3 { padding-left: 15px; padding-top: 15px; }
 
