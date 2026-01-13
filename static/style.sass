@@ -72,8 +72,14 @@ h2
     h2
         padding-left: 20px
         padding-bottom: 15px
+        overflow: hidden
         a
             color: var(--silver)
+            display: block
+            float: left
+            margin-right: 10px
+            &:last-child
+                margin-right: 0
             &.active
                 color: var(--black)
     .entry

@@ -22,9 +22,11 @@ h2 { font-size: var(--big); line-height: 25px; }
 
 .main h3 a { color: var(--gray); }
 
-.main h2 { padding-left: 20px; padding-bottom: 15px; }
+.main h2 { padding-left: 20px; padding-bottom: 15px; overflow: hidden; }
 
-.main h2 a { color: var(--silver); }
+.main h2 a { color: var(--silver); display: block; float: left; margin-right: 10px; }
+
+.main h2 a:last-child { margin-right: 0; }
 
 .main h2 a.active { color: var(--black); }
 
