@@ -88,6 +88,7 @@ FEEDS = [
     # "https://liliputing.com/feed",
     "https://www.lifespan.io/feed/",
     "https://longreads.com/feed/",
+    "https://feeds.macrumors.com/MacRumors-All",
     "https://massivesci.com/feed.xml",
     "http://news.mit.edu/rss/feed",
     "https://mspoweruser.com/feed/",
