@@ -17,7 +17,7 @@ templates.env.filters['shortdate'] = shortdate
 templates.env.filters['superscript'] = superscript
 templates.env.filters['truncate'] = truncate
 templates.env.globals['brand'] = "News"
-templates.env.globals['v'] = 10
+templates.env.globals['v'] = 11
 
 if DEBUG:
     app.mount("/static", StaticFiles(directory="static"), name="static")

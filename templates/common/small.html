@@ -1,11 +1,14 @@
 <div class="small">
     <a href="/read/{{ entry.base }}" rel="nofollow">
-        {{ entry.domain | sitename }}<sup>{{ (entry.score * 1000)|round|int }}</sup>
+        {{ entry.domain | sitename }}
     </a>
     {% if view == 'read' %}
         <a class="done" onclick="listen(event)">listen</a>
     {% endif %}
     <a class="done" href="/read/{{ entry.base }}" rel="nofollow">
         {{ entry.pub | shortdate }} ago
+    </a>
+    <a class="done" href="/read/{{ entry.base }}" rel="nofollow">
+        {{ (entry.score * 100)|round|int }}&deg;
     </a>
 </div>
