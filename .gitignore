@@ -4,6 +4,7 @@ __pycache__
 .pytest_cache
 .ruff_cache
 
+static/logs.html
 data/articles.json
 app/local.py
 
