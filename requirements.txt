@@ -9,3 +9,4 @@ requests
 tldextract
 user-agents
 uvicorn
+python-Levenshtein
