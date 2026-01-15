@@ -1,6 +1,6 @@
 <div class="small">
     <a href="/read/{{ entry.base }}" rel="nofollow">
-        {{ entry.domain | sitename }}{% if entry.score %}<sup>{{ (entry.score * 1000)|round|int }}</sup>{% endif %}
+        {{ entry.domain | sitename }}<sup>{{ (entry.score * 1000)|round|int }}</sup>
     </a>
     {% if view == 'read' %}
         <a class="done" onclick="listen(event)">listen</a>
