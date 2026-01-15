@@ -11,9 +11,8 @@ app.resp_options.secure_cookies_by_default = not DEBUG
 
 app.add_route('/', resources.BreakingResource())
 app.add_route('/current', resources.CurrentResource())
-app.add_route('/link/{base}', resources.LinkResource())
 app.add_route('/read/{base}', resources.ReadResource())
-
+app.add_route('/about', resources.AboutResource())
 
 if DEBUG:
     app.add_route('/static/{filename}', resources.StaticResource())

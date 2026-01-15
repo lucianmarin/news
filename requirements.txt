@@ -6,7 +6,7 @@ lxml
 psycopg2-binary
 python-dateutil
 requests
+sentence-transformers
 tldextract
 user-agents
 uvicorn
-python-Levenshtein

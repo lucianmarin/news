@@ -4,8 +4,8 @@ from datetime import datetime, timezone
 import feedparser
 import requests
 from dateutil.parser import parse
-from Levenshtein import ratio
-from difflib import SequenceMatcher
+from sentence_transformers import SentenceTransformer
+import numpy as np
 
 from app.filters import hostname
 from app.helpers import fetch_content, get_url, load_articles, save_articles, md5
@@ -52,8 +52,7 @@ class ArticleFetcher:
                                 'author': getattr(entry, 'author', ''),
                                 'description': None,
                                 'score': 0,
-                                'paragraphs': [],
-                                'ips': []
+                                'paragraphs': []
                             }
                             print('Created', url)
                 except Exception as e:
@@ -71,20 +70,17 @@ class ArticleFetcher:
             del self.articles[k]
         print("Deleted {0} entries".format(len(keys_to_delete)))
 
-    def get_score(self, key, all_titles):
-        article = self.articles[key]
-        # Calculate similarity score between article title and all titles
-        score = ratio(article['title'], all_titles)
-        # score = SequenceMatcher(None, article['title'], all_titles).ratio()
-        self.articles[key]['score'] = score
-        print(score, article['title'])
-
     def grab_score(self):
         keys_to_fetch = [k for k, v in self.articles.items()]
         titles = [v['title'].strip() for v in self.articles.values()]
-        all_titles = " ".join(titles)
-        for key in keys_to_fetch:
-            self.get_score(key, all_titles)
+        model = SentenceTransformer('all-MiniLM-L6-v2')
+        embeddings = model.encode(titles)
+        for i, key in enumerate(keys_to_fetch):
+            similarities = np.dot(embeddings, embeddings[i])
+            similarities[i] = 0  # exclude self
+            score = np.mean(similarities) if len(similarities) > 1 else 0
+            self.articles[key]['score'] = float(score)
+            print(score, self.articles[key]['title'])
 
     def get_content(self, key):
         article = self.articles[key]

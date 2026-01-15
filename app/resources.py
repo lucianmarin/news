@@ -1,10 +1,8 @@
 from falcon import status_codes
 from falcon.errors import HTTPNotFound
-from falcon.redirects import HTTPFound
-from user_agents import parse
 
 from app.jinja import env
-from app.helpers import load_articles, save_articles
+from app.helpers import load_articles
 
 
 class StaticResource:
@@ -39,7 +37,6 @@ class BreakingResource:
         domains = set(a['domain'] for a in articles_list)
         sites_count = len(domains)
         limit = sites_count // 2
-        ip = req.access_route[0]
 
         # Order by domain, -score, pub to mimic distinct(domain) behavior logic
         # Python sort is stable, so we sort in reverse order of importance:
@@ -66,7 +63,7 @@ class BreakingResource:
         template = env.get_template('pages/main.html')
         resp.text = template.render(
             entries=entries,
-            articles=articles_count, sites=sites_count, ip=ip, view='breaking'
+            articles=articles_count, sites=sites_count, view='breaking'
         )
 
 
@@ -79,7 +76,6 @@ class CurrentResource:
         domains = set(a['domain'] for a in articles_list)
         sites_count = len(domains)
         limit = sites_count // 2
-        ip = req.access_route[0]
 
         # Order by domain, -pub to mimic distinct(domain)
         # Sort keys in reverse importance:
@@ -103,28 +99,8 @@ class CurrentResource:
         template = env.get_template('pages/main.html')
         resp.text = template.render(
             entries=entries,
-            articles=articles_count, sites=sites_count, ip=ip, view='current'
+            articles=articles_count, sites=sites_count, view='current'
         )
-
-
-class LinkResource:
-    def on_get(self, req, resp, base):
-        articles = load_articles()
-        article = articles.get(base)
-
-        if not article:
-            raise HTTPNotFound()
-
-        ip = req.access_route[0]
-        agent = parse(req.user_agent)
-
-        if ip and not agent.is_bot:
-            if ip not in article['ips']:
-                article['ips'].append(ip)
-                article['score'] = len(article['ips'])
-                save_articles(articles)
-
-        raise HTTPFound(article['url'])
 
 
 class ReadResource:
@@ -135,18 +111,9 @@ class ReadResource:
         if not entry:
             raise HTTPNotFound()
 
-        ip = req.access_route[0]
-        agent = parse(req.user_agent)
-
-        if ip and not agent.is_bot:
-            if ip not in entry['ips']:
-                entry['ips'].append(ip)
-                entry['score'] = len(entry['ips'])
-                save_articles(articles)
-
         template = env.get_template('pages/read.html')
         resp.text = template.render(
-            entry=entry, ip=ip, view='read'
+            entry=entry, view='read'
         )
 
 
