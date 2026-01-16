@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block main %}
+    <h3><a href="/">{{ brand }}</a></h3>
+    <h2>
+        <a class="active" href="/{{ site }}">{{ site }}</a>
+    </h2>
+    {% for entry in entries %}
+        {% include 'common/entry.html' %}
+    {% else %}
+        <div class="entry">
+            <div class="summary">Fetching articles...</div>
+        </div>
+    {% endfor %}
+{% endblock %}

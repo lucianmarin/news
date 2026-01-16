@@ -17,7 +17,7 @@ templates.env.filters['shortdate'] = shortdate
 templates.env.filters['superscript'] = superscript
 templates.env.filters['truncate'] = truncate
 templates.env.globals['brand'] = "News"
-templates.env.globals['v'] = 11
+templates.env.globals['v'] = 12
 
 if DEBUG:
     app.mount("/static", StaticFiles(directory="static"), name="static")
@@ -143,18 +143,19 @@ async def new_resource(request: Request):
     })
 
 
-@app.get("/read/{base}")
-async def read_resource(base: str, request: Request):
-    articles = load_articles()
-    entry = articles.get(base)
+@app.get("/{site}")
+async def site_resource(site: str, request: Request):
+    articles_data = load_articles()
+    articles_list = [v for v in articles_data.values() if v['site'] == site]
 
-    if not entry:
-        raise HTTPException(status_code=404, detail="Article not found")
+    articles_list.sort(key=lambda x: x['pub'])
+    articles_list.sort(key=lambda x: x['score'], reverse=True)
 
-    return templates.TemplateResponse("pages/read.html", {
+    return templates.TemplateResponse("pages/site.html", {
         "request": request,
-        "entry": entry,
-        "view": 'read'
+        "entries": articles_list,
+        "site": site,
+        "view": 'site'
     })
 
 

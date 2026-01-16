@@ -3,7 +3,7 @@ from datetime import datetime, timezone
 import tldextract
 
 
-def truncate(value, limit=256):
+def truncate(value, limit=480):
     """Truncate text based on sentences length."""
     sentences = []
     sentence = ""

@@ -36,11 +36,11 @@ h2 { font-size: var(--big); line-height: 25px; }
 
 .main .small { color: var(--silver); font-size: var(--small); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 
-.main .small a { color: var(--gray); float: left; margin-right: 5px; }
+.main .small a, .main .small b { color: var(--gray); float: left; margin-right: 5px; }
 
-.main .small a:last-child { margin-right: 0; }
+.main .small a:last-child, .main .small b:last-child { margin-right: 0; }
 
-.main .small a.done { color: var(--silver); }
+.main .small a.done, .main .small b { color: var(--silver); }
 
 .main .small sup { font-size: 8px; }
 

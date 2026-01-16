@@ -1,13 +1,17 @@
 <div class="entry">
-    {% include 'common/small.html' %}
+    <div class="small">
+        <a href="/{{ entry.site }}">
+            {{ entry.domain | sitename }}
+        </a>
+        <b>{{ entry.pub | shortdate }} ago</b>
+        <b>{{ (entry.score * 100)|round|int }}&deg;</b>
+    </div>
     <h4 class="title">
-        <a href="{{ entry.url }}" rel="nofollow">
+        <a href="{{ entry.url }}">
             {{ entry.title }}
         </a>
     </h4>
-    {% if entry.description != "..." %}
-        <div class="summary">
-            {{ entry.description | truncate }}
-        </div>
-    {% endif %}
+    <div class="summary">
+        {{ entry.description | truncate }}
+    </div>
 </div>
