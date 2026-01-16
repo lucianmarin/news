@@ -1,10 +1,11 @@
 #!/usr/bin/env python
 from datetime import datetime, timezone
 from dateutil.parser import parse
-from difflib import SequenceMatcher
 
 import feedparser
 import numpy as np
+from sklearn.feature_extraction.text import TfidfVectorizer
+from sklearn.metrics.pairwise import cosine_similarity
 
 from app.filters import hostname, sitename
 from app.helpers import get_url, get_description, load_articles, save_articles, md5
@@ -25,9 +26,6 @@ class ArticleFetcher:
     @property
     def cutoff(self):
         return self.now - 48 * 3600
-
-    def ratio(self, a, b):
-        return SequenceMatcher(None, a, b).ratio()
 
     def get_entries(self, feed):
         try:
@@ -71,8 +69,11 @@ class ArticleFetcher:
     def grab_score(self):
         keys_to_fetch = [k for k, v in self.articles.items()]
         titles = [v['title'].strip() for v in self.articles.values()]
+        vectorizer = TfidfVectorizer()
+        tfidf_matrix = vectorizer.fit_transform(titles)
+        cos_sim = cosine_similarity(tfidf_matrix)
         for i, key in enumerate(keys_to_fetch):
-            similarities = [self.ratio(titles[i], titles[j]) for j in range(len(titles)) if j != i]
+            similarities = [cos_sim[i][j] for j in range(len(titles)) if j != i]
             score = np.mean(similarities) if similarities else 0
             self.articles[key]['score'] = float(score)
             print(score, self.articles[key]['title'])

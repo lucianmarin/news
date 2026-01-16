@@ -4,7 +4,7 @@
             {{ entry.domain | sitename }}
         </a>
         <b>{{ entry.pub | shortdate }} ago</b>
-        <b>{{ (entry.score * 100)|round|int }}&deg;</b>
+        <b>{{ (entry.score * 1000)|round|int }}&deg;</b>
     </div>
     <h4 class="title">
         <a href="{{ entry.url }}">
