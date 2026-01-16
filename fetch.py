@@ -1,4 +1,5 @@
 #!/usr/bin/env python
+from concurrent.futures import ThreadPoolExecutor, as_completed
 from datetime import datetime, timezone
 from dateutil.parser import parse
 
@@ -27,38 +28,41 @@ class ArticleFetcher:
     def cutoff(self):
         return self.now - 48 * 3600
 
-    def get_entries(self, feed):
+    def insert_entry(self, entry):
         try:
-            print(feed)
-            entries = feedparser.parse(feed).entries
-            print(len(entries), "entries found")
-            for entry in entries:
-                try:
-                    origlink = entry.get('feedburner_origlink')
-                    entry.link = origlink if origlink else entry.link
-                    url = get_url(entry.link)
-                    published = parse(entry.published).timestamp()
-                    key = md5(url)
-                    if self.now > published > self.cutoff and url not in self.ignored and key not in self.articles:
-                        self.articles[key] = {
-                            'url': url,
-                            'title': entry.title,
-                            'domain': hostname(url),
-                            'site': sitename(url),
-                            'pub': published,
-                            'author': entry.get('author', ''),
-                            'description': get_description(entry),
-                            'score': 0
-                        }
-                        print('Created', url)
-                except Exception as e:
-                    print(e)
+            origlink = entry.get('feedburner_origlink')
+            entry.link = origlink if origlink else entry.link
+            url = get_url(entry.link)
+            published = parse(entry.published).timestamp()
+            key = md5(url)
+            if self.now > published > self.cutoff and url not in self.ignored and key not in self.articles:
+                self.articles[key] = {
+                    'url': url,
+                    'title': entry.title,
+                    'domain': hostname(url),
+                    'site': sitename(url),
+                    'pub': published,
+                    'author': entry.get('author', ''),
+                    'description': get_description(entry),
+                    'score': 0
+                }
+                print('Created', url)
         except Exception as e:
-            print(f"Error processing feed {feed}: {e}")
+            print(e)
+
+    def get_entries(self, feed):
+        print(feed)
+        return feedparser.parse(feed).entries
 
     def grab_entries(self):
-        for feed in FEEDS:
-            self.get_entries(feed)
+        all_entries = []
+        with ThreadPoolExecutor(max_workers=8) as executor:
+            future_to_feed = {executor.submit(self.get_entries, feed): feed for feed in FEEDS}
+            for future in as_completed(future_to_feed):
+                entries = future.result()
+                all_entries.extend(entries)
+        for entry in all_entries:
+            self.insert_entry(entry)
 
     def cleanup(self):
         keys_to_delete = [k for k, v in self.articles.items() if v['pub'] < self.cutoff]
