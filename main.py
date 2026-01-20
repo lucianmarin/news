@@ -18,8 +18,8 @@ env.filters['sitename'] = sitename
 env.filters['shortdate'] = shortdate
 env.filters['superscript'] = superscript
 env.filters['truncate'] = truncate
-env.globals['brand'] = "News"
-env.globals['v'] = 13
+env.globals['brand'] = "Hotnews"
+env.globals['v'] = 14
 
 if DEBUG:
     app.mount("/static", StaticFiles(directory="static"), name="static")
