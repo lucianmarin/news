@@ -1,8 +1,8 @@
 {
     "lang": "en",
-    "name": "News",
-    "short_name": "News",
-    "description": "Daily news aggregator and reader.",
+    "name": "Hotnews",
+    "short_name": "Hotnews",
+    "description": "Daily hottest news aggregator.",
     "icons": [
         {
             "src": "/static/192.png",
