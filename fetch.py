@@ -57,13 +57,12 @@ class ArticleFetcher:
         return feedparser.parse(r.text).entries
 
     def grab_entries(self):
-        all_entries = []
+        entries = []
         with ThreadPoolExecutor(max_workers=8) as executor:
-            future_to_feed = {executor.submit(self.get_entries, feed): feed for feed in FEEDS}
-            for future in as_completed(future_to_feed):
-                entries = future.result()
-                all_entries.extend(entries)
-        for entry in all_entries:
+            futures = {executor.submit(self.get_entries, f): f for f in FEEDS}
+            for future in as_completed(futures):
+                entries.extend(future.result())
+        for entry in entries:
             self.insert_entry(entry)
 
     def cleanup(self):
