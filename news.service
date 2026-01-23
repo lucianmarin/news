@@ -1,14 +1,14 @@
 [Unit]
-Description=News service
+Description=Hotnews service
 After=network.target
 
 [Service]
 User=lucian
 Group=lucian
-PIDFile=/home/lucian/news/news.pid
+PIDFile=/home/lucian/hotnews/news.pid
 RuntimeDirectory=uvicorn
-WorkingDirectory=/home/lucian/news
-ExecStart=/home/lucian/news/venv/bin/uvicorn main:app --uds news.socket
+WorkingDirectory=/home/lucian/hotnews
+ExecStart=/home/lucian/hotnews/venv/bin/uvicorn main:app --uds news.socket
 ExecReload=/bin/kill -s HUP $MAINPID
 ExecStop=/bin/kill -s TERM $MAINPID
 PrivateTmp=true
