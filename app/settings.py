@@ -59,6 +59,7 @@ FEEDS = [
     "https://www.omgubuntu.co.uk/feed",
     "https://peterattiamd.com/feed/",
     "https://www.polygon.com/rss/index.xml",
+    "https://www.popularmechanics.com/rss/all.xml",
     "https://www.producthunt.com/feed",
     "https://api.quantamagazine.org/feed/",
     "https://qz.com/feed",
