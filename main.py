@@ -12,6 +12,7 @@ from app.settings import TORTOISE_ORM
 from app.models import Article
 
 LIMIT = 16
+SQL = 'SELECT "id" FROM ({0}) GROUP BY "domain"'
 
 app = FastAPI()
 env = Environment(
@@ -41,16 +42,16 @@ register_tortoise(
 
 @app.get("/")
 async def hot_resource(request: Request, p: int = 1):
-    # Pagination
     page = p if p > 0 else 1
     offset = LIMIT * (page - 1)
 
-    SQL = 'SELECT "id" FROM (SELECT * FROM "articles" ORDER BY "score" DESC, "pub") GROUP BY "domain"'
-    max_ids =  await Article.raw(SQL)
+    order_by = ("-score", "pub")
+    ordered = Article.all().order_by(*order_by).sql()
+    max_ids = await Article.raw(SQL.format(ordered))
     count = len(max_ids)
     pages = (count + LIMIT - 1) // LIMIT
 
-    entries = await Article.filter(id__in=max_ids).order_by("-score", "pub").offset(offset).limit(LIMIT)
+    entries = await Article.filter(id__in=max_ids).order_by(*order_by).offset(offset).limit(LIMIT)
 
     content = await env.get_template("base.html").render_async({
         "request": request,
@@ -64,16 +65,17 @@ async def hot_resource(request: Request, p: int = 1):
 
 @app.get("/cold")
 async def cold_resource(request: Request, p: int = 1):
-    # Pagination
     page = p if p > 0 else 1
     offset = LIMIT * (page - 1)
 
-    SQL = 'SELECT "id" FROM (SELECT * FROM "articles" ORDER BY "score", "pub") GROUP BY "domain"'
-    max_ids =  await Article.raw(SQL)
+    order_by = ("score", "pub")
+    ordered = Article.all().order_by(*order_by).sql()
+    max_ids = await Article.raw(SQL.format(ordered))
     count = len(max_ids)
     pages = (count + LIMIT - 1) // LIMIT
 
-    entries = await Article.filter(id__in=max_ids).order_by("score", "pub").offset(offset).limit(LIMIT)
+    entries = await Article.filter(id__in=max_ids).order_by(*order_by).offset(offset).limit(LIMIT)
+
     content = await env.get_template("base.html").render_async({
         "request": request,
         "entries": entries,
@@ -86,16 +88,17 @@ async def cold_resource(request: Request, p: int = 1):
 
 @app.get("/new")
 async def new_resource(request: Request, p: int = 1):
-    # Pagination
     page = p if p > 0 else 1
     offset = LIMIT * (page - 1)
 
-    SQL = 'SELECT "id" FROM (SELECT * FROM "articles" ORDER BY "pub" DESC) GROUP BY "domain"'
-    max_ids =  await Article.raw(SQL)
+    order_by = ("-pub",)
+    ordered = Article.all().order_by(*order_by).sql()
+    max_ids = await Article.raw(SQL.format(ordered))
     count = len(max_ids)
     pages = (count + LIMIT - 1) // LIMIT
 
-    entries = await Article.filter(id__in=max_ids).order_by("-pub").offset(offset).limit(LIMIT)
+    entries = await Article.filter(id__in=max_ids).order_by(*order_by).offset(offset).limit(LIMIT)
+
     content = await env.get_template("base.html").render_async({
         "request": request,
         "entries": entries,
@@ -108,7 +111,6 @@ async def new_resource(request: Request, p: int = 1):
 
 @app.get("/{site}")
 async def site_resource(site: str, request: Request, p: int = 1):
-    # Pagination
     page = p if p > 0 else 1
     offset = LIMIT * (page - 1)
 
