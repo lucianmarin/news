@@ -7,7 +7,8 @@ from statistics import mean
 
 import feedparser
 import requests
-from Levenshtein import ratio
+from sklearn.feature_extraction.text import TfidfVectorizer
+from sklearn.metrics.pairwise import cosine_similarity
 from tortoise import Tortoise
 
 from app.filters import hostname, sitename
@@ -73,9 +74,16 @@ class ArticleFetcher:
 
     async def grab_score(self):
         articles = await Article.all()
-        for article in articles:
-            title = article.title.strip()
-            similarities = [ratio(title, a.title.strip()) for a in articles if a.id != article.id]
+        if not articles:
+            return
+
+        titles = [a.title.strip() for a in articles]
+        vectorizer = TfidfVectorizer()
+        tfidf_matrix = vectorizer.fit_transform(titles)
+        cos_sim = cosine_similarity(tfidf_matrix)
+
+        for i, article in enumerate(articles):
+            similarities = [cos_sim[i][j] for j in range(len(titles)) if j != i]
             article.score = mean(similarities) if similarities else 0
             await article.save(update_fields=['score'])
             print(f"{article.score:.4f} {article.title}")
