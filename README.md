@@ -11,7 +11,7 @@ Hotnews is a high-performance news aggregator built with **FastAPI** for serving
 *   **Scoring**: NumPy for similarity calculations
 *   **Data Storage**: JSON file (`data/articles.json`)
 *   **Server**: Uvicorn (ASGI server)
-*   **Other Libraries**: requests, python-dateutil, tldextract, user-agents
+*   **Other Libraries**: python-dateutil, tldextract, user-agents
 
 ## Features
 

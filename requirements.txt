@@ -7,7 +7,6 @@ feedparser
 jinja2
 lxml
 python-dateutil
-requests
 scikit-learn
 tldextract
 tortoise-orm
