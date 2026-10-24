@@ -8,6 +8,7 @@ jinja2
 lxml
 python-dateutil
 scikit-learn
+scipy
 tldextract
-tortoise-orm
+tortoise-orm>=1.1.9,<2.0
 uvicorn

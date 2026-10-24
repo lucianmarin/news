@@ -1,7 +1,8 @@
 from tortoise import fields, models
 
+
 class Article(models.Model):
-    id = fields.CharField(pk=True, max_length=32)  # md5 hash
+    id = fields.CharField(primary_key=True, max_length=32)  # md5 hash
     url = fields.TextField()
     title = fields.TextField()
     domain = fields.CharField(max_length=255, db_index=True)

@@ -4,12 +4,13 @@ Hotnews is a high-performance news aggregator built with **FastAPI** for serving
 
 ## Tech Stack
 
+*   **Python**: 3.10+
 *   **Web Framework**: [FastAPI](https://fastapi.tiangolo.com/) (for fast asynchronous HTTP handling)
 *   **Templating**: [Jinja2](https://jinja.palletsprojects.com/)
 *   **RSS Parsing**: `feedparser`
 *   **Content Extraction**: `BeautifulSoup` (bs4) with lxml
 *   **Scoring**: scikit-learn (TF-IDF vectorization + cosine similarity)
-*   **ORM**: Tortoise ORM with aiosqlite
+*   **ORM**: Tortoise ORM with aiosqlite (schema managed by migrations)
 *   **Data Storage**: SQLite (`db.sqlite3`)
 *   **Server**: Uvicorn (ASGI server)
 
@@ -39,6 +40,17 @@ Hotnews is a high-performance news aggregator built with **FastAPI** for serving
     pip install -r requirements.txt
     ```
 
+4.  **Apply database migrations:**
+    ```bash
+    tortoise -c app.settings.TORTOISE_ORM migrate
+    ```
+
+    If you already have a `db.sqlite3` that was created before migrations were
+    introduced, baseline it once instead of running the schema creation:
+    ```bash
+    tortoise -c app.settings.TORTOISE_ORM migrate --fake
+    ```
+
 ## Usage
 
 ### Running the Web Server
@@ -63,6 +75,18 @@ This script will:
 3.  Calculate similarity scores for articles.
 
 **Note:** Run this script periodically (e.g., via `cron` or a scheduler) to keep the news updated.
+
+### Changing the schema
+
+Tortoise ORM manages the database with migrations. After changing a model:
+
+```bash
+tortoise -c app.settings.TORTOISE_ORM makemigrations
+tortoise -c app.settings.TORTOISE_ORM migrate
+```
+
+Do not use `generate_schemas()` in the application or fetch script; it is only
+intended for throwaway/test databases.
 
 ### Routes
 

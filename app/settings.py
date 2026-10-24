@@ -1,11 +1,19 @@
+from pathlib import Path
+
+BASE_DIR = Path(__file__).resolve().parent.parent
+DB_PATH = BASE_DIR / "db.sqlite3"
+
 TORTOISE_ORM = {
-    "connections": {"default": "sqlite://db.sqlite3"},
+    "connections": {"default": f"sqlite://{DB_PATH}"},
     "apps": {
         "models": {
             "models": ["app.models"],
             "default_connection": "default",
+            "migrations": "app.migrations",
         },
     },
+    # Tortoise ORM 1.0 changed the default from False to True. Keep it explicit.
+    "use_tz": True,
 }
 
 FEEDS = [

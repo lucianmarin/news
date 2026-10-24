@@ -1,11 +1,11 @@
 #!/usr/bin/env python
 import asyncio
 from datetime import datetime, timezone
-from dateutil.parser import parse
 from statistics import mean
 
 import aiohttp
 import feedparser
+from dateutil.parser import parse
 from scipy.sparse import hstack
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
@@ -26,29 +26,49 @@ class ArticleFetcher:
     def cutoff(self):
         return self.now - 48 * 3600
 
-    async def insert_entry(self, entry):
+    def entry_to_article(self, entry):
         try:
-            origlink = entry.get('feedburner_origlink')
-            entry.link = origlink if origlink else entry.link
-            url = get_url(entry.link)
+            link = entry.get('feedburner_origlink') or entry.get('link')
+            if not link:
+                return None
+            url = get_url(link)
             published = parse(entry.published).timestamp()
-            key = md5(url)
-            if self.now > published > self.cutoff:
-                await Article.update_or_create(
-                    id=key,
-                    defaults={
-                        'url': url,
-                        'title': entry.title,
-                        'domain': hostname(url),
-                        'site': sitename(url),
-                        'pub': published,
-                        'author': entry.get('author', ''),
-                        'description': get_description(entry),
-                    }
-                )
-                print('Processed', url)
+            if not self.now > published > self.cutoff:
+                return None
+            return Article(
+                id=md5(url),
+                url=url,
+                title=entry.title,
+                domain=hostname(url),
+                site=sitename(url),
+                pub=published,
+                author=entry.get('author', ''),
+                description=get_description(entry),
+            )
         except Exception as e:
-            print(f"Error inserting {entry.link}: {e}")
+            print(f"Error preparing {entry.get('link', '<unknown>')}: {e}")
+            return None
+
+    async def insert_entries(self, entries):
+        articles = {}
+        for entry in entries:
+            article = self.entry_to_article(entry)
+            if article is not None:
+                articles[article.id] = article
+
+        if not articles:
+            return
+
+        # One upsert per batch instead of a SELECT + INSERT/UPDATE per entry.
+        await Article.bulk_create(
+            articles.values(),
+            update_fields=[
+                'url', 'title', 'domain', 'site', 'pub', 'author', 'description'
+            ],
+            on_conflict=['id'],
+        )
+        for article in articles.values():
+            print('Processed', article.url)
 
     async def get_entries(self, session, feed):
         try:
@@ -72,8 +92,7 @@ class ArticleFetcher:
                 print(f"Error collecting feed entries: {result}")
                 continue
             entries.extend(result)
-        for entry in entries:
-            await self.insert_entry(entry)
+        await self.insert_entries(entries)
 
     async def cleanup(self):
         deleted_count = await Article.filter(pub__lt=self.cutoff).delete()
@@ -99,20 +118,21 @@ class ArticleFetcher:
         for i, article in enumerate(articles):
             similarities = [cos_sim[i][j] for j in range(len(articles)) if j != i]
             article.score = mean(similarities) * 10 if similarities else 0
-            await article.save(update_fields=['score'])
+
+        await Article.bulk_update(articles, fields=['score'], batch_size=500)
+        for article in articles:
             print(f"{article.score:.4f} {article.title}")
 
 
 async def main():
     await Tortoise.init(config=TORTOISE_ORM)
-    await Tortoise.generate_schemas()
-
-    fetcher = ArticleFetcher()
-    await fetcher.grab_entries()
-    await fetcher.cleanup()
-    await fetcher.grab_score()
-
-    await Tortoise.close_connections()
+    try:
+        fetcher = ArticleFetcher()
+        await fetcher.grab_entries()
+        await fetcher.cleanup()
+        await fetcher.grab_score()
+    finally:
+        await Tortoise.close_connections()
 
 
 if __name__ == "__main__":
