@@ -1,5 +1,7 @@
 # Hotnews
 
+![screenshot](screenshot.png)
+
 Hotnews is a high-performance news aggregator built with **FastAPI** for serving web requests. It aggregates news from a curated list of RSS feeds, scores them based on title/description uniqueness (higher score means more similar articles), and presents them in a clean interface.
 
 ## Tech Stack
