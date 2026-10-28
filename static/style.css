@@ -66,7 +66,7 @@ h2 { font-size: var(--big); line-height: 25px; }
 
 .main .small .score { color: orangered; }
 
-.main .summary { color: var(--gray); cursor: text; }
+.main .summary { color: var(--darkgray); cursor: text; }
 
 .main .title a { color: var(--black); }
 
