@@ -65,8 +65,29 @@ async def top_entries(order_by: tuple[str, ...], page: int) -> tuple[list[Articl
             ids.append(article_id)
 
     page_ids = ids[offset:offset + LIMIT]
+    if not page_ids:
+        return [], len(ids)
     entries = await Article.filter(id__in=page_ids).order_by(*order_by)
     return entries, len(ids)
+
+
+def serialize_article(entry: Article) -> dict:
+    description = entry.description or ""
+    summary = env.filters["truncate"](env, description, 480, False, "...")
+    return {
+        "id": entry.id,
+        "url": entry.url,
+        "title": entry.title,
+        "domain": entry.domain,
+        "site": sitename(entry.domain),
+        "pub": entry.pub,
+        "age": shortdate(entry.pub),
+        "author": entry.author or "",
+        "description": description,
+        "summary": summary,
+        "score": entry.score,
+        "degrees": round(entry.score * 1000),
+    }
 
 
 async def render(request: Request, p: int, order_by: tuple[str, ...], view: str, **context):
@@ -81,6 +102,48 @@ async def render(request: Request, p: int, order_by: tuple[str, ...], view: str,
         **context,
     })
     return HTMLResponse(content)
+
+
+async def render_api(p: int, order_by: tuple[str, ...], view: str, **context) -> dict:
+    page, _ = current_page(p)
+    entries, count = await top_entries(order_by, page)
+    return {
+        "page": page,
+        "pages": (count + LIMIT - 1) // LIMIT,
+        "view": view,
+        **context,
+        "entries": [serialize_article(entry) for entry in entries],
+    }
+
+
+@app.get("/api/hot")
+async def api_hot_resource(p: int = 1):
+    return await render_api(p, ("-score", "pub"), "hottest")
+
+
+@app.get("/api/cold")
+async def api_cold_resource(p: int = 1):
+    return await render_api(p, ("score", "pub"), "coldest")
+
+
+@app.get("/api/new")
+async def api_new_resource(p: int = 1):
+    return await render_api(p, ("-pub",), "newest")
+
+
+@app.get("/api/{site}")
+async def api_site_resource(site: str, p: int = 1):
+    page, offset = current_page(p)
+    query = Article.filter(site=site)
+    count = await query.count()
+    entries = await query.order_by("-score", "pub").offset(offset).limit(LIMIT)
+    return {
+        "page": page,
+        "pages": (count + LIMIT - 1) // LIMIT,
+        "site": site,
+        "view": "site",
+        "entries": [serialize_article(entry) for entry in entries],
+    }
 
 
 @app.get("/")

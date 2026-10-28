@@ -92,9 +92,14 @@ intended for throwaway/test databases.
 
 ### Routes
 
-- `/` - Hottest articles (most unique titles)
-- `/cold` - Coldest articles (least unique titles)
+- `/` - Hottest articles (most similar titles/descriptions)
+- `/cold` - Coldest articles (most unique titles/descriptions)
 - `/new` - Newest articles
+- `/{site}` - Articles from a specific site
+- `/api/hot` - Paginated JSON API for hottest articles (`?p=1`)
+- `/api/cold` - Paginated JSON API for coldest articles (`?p=1`)
+- `/api/new` - Paginated JSON API for newest articles (`?p=1`)
+- `/api/{site}` - Paginated JSON API for site-specific articles (`?p=1`)
 
 ## Configuration
 
