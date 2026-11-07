@@ -106,8 +106,8 @@ class ArticleFetcher:
         titles = [a.title.strip() for a in articles]
         descriptions = [a.description.strip() if a.description else "" for a in articles]
 
-        title_vectorizer = TfidfVectorizer(ngram_range=(1, 2), stop_words='english')
-        desc_vectorizer = TfidfVectorizer(ngram_range=(1, 2), stop_words='english')
+        title_vectorizer = TfidfVectorizer(ngram_range=(1, 2), stop_words='english', sublinear_tf=True)
+        desc_vectorizer = TfidfVectorizer(ngram_range=(1, 2), stop_words='english', sublinear_tf=True)
 
         title_matrix = title_vectorizer.fit_transform(titles) * 2.0
         desc_matrix = desc_vectorizer.fit_transform(descriptions)
@@ -116,7 +116,11 @@ class ArticleFetcher:
         cos_sim = cosine_similarity(tfidf_matrix)
 
         for i, article in enumerate(articles):
-            similarities = [cos_sim[i][j] for j in range(len(articles)) if j != i]
+            similarities = [
+                cos_sim[i][j]
+                for j, other in enumerate(articles)
+                if other.domain != article.domain
+            ]
             article.score = mean(similarities) * 10 if similarities else 0
 
         await Article.bulk_update(articles, fields=['score'], batch_size=500)
