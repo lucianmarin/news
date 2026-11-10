@@ -9,10 +9,9 @@ from tortoise.contrib.fastapi import RegisterTortoise, tortoise_exception_handle
 from app.filters import hostname, shortdate, sitename, superscript
 from app.local import DEBUG
 from app.models import Article
-from app.settings import FEEDS, TORTOISE_ORM
+from app.settings import TORTOISE_ORM
 
 LIMIT = 10
-SITES = sorted({sitename(feed) for feed in FEEDS})
 
 
 @asynccontextmanager
@@ -164,9 +163,10 @@ async def new_resource(request: Request, p: int = 1):
 
 @app.get("/about")
 async def about_resource(request: Request):
+    sites = await Article.all().distinct().order_by("site").values_list("site", flat=True)
     content = await env.get_template("about.html").render_async({
         "request": request,
-        "sites": SITES,
+        "sites": sites,
         "view": "about",
     })
     return HTMLResponse(content)

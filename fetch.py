@@ -35,12 +35,17 @@ class ArticleFetcher:
             published = parse(entry.published).timestamp()
             if not self.now > published > self.cutoff:
                 return None
+            domain = hostname(url)
+            site = sitename(url)
+            if not site:
+                print(f"Skipping {link} because site could not be determined")
+                return None
             return Article(
                 id=md5(url),
                 url=url,
                 title=entry.title,
-                domain=hostname(url),
-                site=sitename(url),
+                domain=domain,
+                site=site,
                 pub=published,
                 author=entry.get('author', ''),
                 description=get_description(entry),
