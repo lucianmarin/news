@@ -48,16 +48,19 @@
                     <div class="summary">Fetching articles...</div>
                 </div>
             {% endfor %}
-            {% if pages and pages > 1 %}
-                <div class="entry">
-                    <div class="pages">
-                        {% for n in range(1, pages + 1) %}
-                            <a class="{% if n == page %}selected{% endif %}" href="?p={{ n }}">{{ n }}</a>
-                        {% endfor %}
-                    </div>
-                </div>
-            {% endif %}
         {% endblock %}
+        <div class="entry">
+            <div class="pages">
+                {% if pages and pages > 1 %}
+                    {% for n in range(1, pages + 1) %}
+                        <a class="{% if n == page %}selected{% endif %}" href="?p={{ n }}">{{ n }}</a>
+                    {% endfor %}
+                {% else %}
+                    <a href="https://lucianmarin.com/">LM</a>
+                    <a href="https://subreply.com/">Subreply</a>
+                {% endif %}
+            </div>
+        </div>
     </div>
 </body>
 </html>
