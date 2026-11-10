@@ -1,12 +1,17 @@
+// compile with sassc -t compact
+
 html
     --col: 360px
     --read: 500px
     --caps: 10px
+    --tiny: 12px
     --small: 13px
     --regular: 14px
     --big: 20px
+    --indent: 30px
     --d: 0.2s
     --hl: yellow
+    --accent: orangered
     --white: #fff
     --whitesmoke: #f0f0f0
     --gainsboro: #e0e0e0
@@ -80,8 +85,21 @@ b, i
     font-style: normal
     font-weight: normal
 
+code
+    color: var(--accent)
+    font-family: "Hack", monospace
+    font-size: var(--tiny)
+
 sup
     line-height: 0
+
+svg
+    stroke-linecap: round
+    stroke-linejoin: round
+    stroke-width: 2
+    path
+        fill: none
+        stroke: var(--black)
 
 h3
     font-size: var(--caps)
@@ -116,7 +134,7 @@ h2
             border-bottom: 0 none
             margin-bottom: 10px
             padding-bottom: 10px
-        div, h4, h3, h2
+        h4, h3, h2, .small, .summary
             margin: 0 auto
             max-width: 520px
     .small
@@ -176,6 +194,50 @@ h2
             padding-right: 0
         &.selected
             color: var(--black)
+
+.about
+    margin: 0 auto
+    max-width: 520px
+    padding: 10px 20px
+    a
+        color: var(--accent)
+        &.name
+            color: var(--black)
+            font-weight: bold
+        &:hover
+            color: var(--gray)
+    h4
+        margin-top: 10px
+        margin-bottom: 3px
+        padding: 0
+        &+ p
+            text-indent: 0
+    p
+        padding-bottom: 3px
+        text-indent: var(--indent)
+        &:first-child
+            text-indent: 0
+        &:last-child
+            padding-bottom: 0
+    .block
+        margin-bottom: 10px
+    ol, ul
+        margin-bottom: 10px
+        li
+            border-bottom: var(--white) 1px solid
+            padding: 3px 0
+            &:last-child
+                border-bottom: 0 none
+    ul
+        list-style: none
+        li
+            padding-left: var(--indent)
+    ol
+        margin-left: var(--indent)
+    svg
+        float: left
+        margin-left: calc(0px - var(--indent))
+        padding: 2px calc((var(--indent) - 16px)/2)
 
 @font-face
     font-family: "Route 159"

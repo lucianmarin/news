@@ -9,9 +9,10 @@ from tortoise.contrib.fastapi import RegisterTortoise, tortoise_exception_handle
 from app.filters import hostname, shortdate, sitename, superscript
 from app.local import DEBUG
 from app.models import Article
-from app.settings import TORTOISE_ORM
+from app.settings import FEEDS, TORTOISE_ORM
 
 LIMIT = 10
+SITES = sorted({sitename(feed) for feed in FEEDS})
 
 
 @asynccontextmanager
@@ -36,7 +37,7 @@ env.filters['sitename'] = sitename
 env.filters['shortdate'] = shortdate
 env.filters['superscript'] = superscript
 env.globals['brand'] = "Hotnews"
-env.globals['v'] = 18
+env.globals['v'] = 20
 
 if DEBUG:
     app.mount("/static", StaticFiles(directory="static"), name="static")
@@ -159,6 +160,34 @@ async def cold_resource(request: Request, p: int = 1):
 @app.get("/new")
 async def new_resource(request: Request, p: int = 1):
     return await render(request, p, ("-pub",), "newest")
+
+
+@app.get("/about")
+async def about_resource(request: Request):
+    content = await env.get_template("about.html").render_async({
+        "request": request,
+        "sites": SITES,
+        "view": "about",
+    })
+    return HTMLResponse(content)
+
+
+@app.get("/api")
+async def api_resource(request: Request):
+    content = await env.get_template("api.html").render_async({
+        "request": request,
+        "view": "api",
+    })
+    return HTMLResponse(content)
+
+
+@app.get("/privacy")
+async def privacy_resource(request: Request):
+    content = await env.get_template("privacy.html").render_async({
+        "request": request,
+        "view": "privacy",
+    })
+    return HTMLResponse(content)
 
 
 @app.get("/{site}")

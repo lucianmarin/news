@@ -21,7 +21,7 @@ Hotnews is a high-performance news aggregator built with **FastAPI** for serving
 *   **RSS Aggregation**: Fetches articles from a wide range of tech, science, and news sources (configured in `app/settings.py`).
 *   **Article Scoring**: Scores articles based on title and description similarity using TF-IDF vectorization and cosine similarity.
 *   **Cleanup**: Automatically removes articles older than 48 hours to keep the content fresh.
-*   **Views**: Multiple views - hottest (lowest score), coldest (highest score), newest articles.
+*   **Views**: Multiple views - hottest (highest similarity score), coldest (lowest similarity score), newest articles.
 
 ## Setup & Installation
 
@@ -95,6 +95,9 @@ intended for throwaway/test databases.
 - `/` - Hottest articles (most similar titles/descriptions)
 - `/cold` - Coldest articles (most unique titles/descriptions)
 - `/new` - Newest articles
+- `/about` - About Hotnews
+- `/api` - API documentation
+- `/privacy` - Privacy policy
 - `/{site}` - Articles from a specific site
 - `/api/hot` - Paginated JSON API for hottest articles (`?p=1`)
 - `/api/cold` - Paginated JSON API for coldest articles (`?p=1`)

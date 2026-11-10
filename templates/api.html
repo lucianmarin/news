@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+
+{% block main %}
+<div class="entry bg-color-4">
+    <div class="about">
+        <div class="block">
+            <p>
+                Build your own native client for iOS, Android, desktop or the web with the {{ brand }} API. Third-party apps — such as <a href="https://github.com/lucianmarin/hotdroid">Hotdroid</a> for Android and <a href="https://github.com/lucianmarin/macnews">Macnews</a> for macOS — can extend the core reading experience with features like offline reading, custom filters and notifications.
+            </p>
+            <p>
+                The API is public, read-only and requires no authentication.
+                Paginate any GET endpoint by appending the <code>?p=number</code> query parameter (10 entries per page).
+            </p>
+        </div>
+
+        <h4>GET Endpoints</h4>
+        <ul>
+            <li><code>/api/hot</code> &mdash; hottest articles ordered by highest similarity score, one per domain</li>
+            <li><code>/api/cold</code> &mdash; coldest articles ordered by lowest similarity score, one per domain</li>
+            <li><code>/api/new</code> &mdash; newest articles ordered by publication time, one per domain</li>
+            <li><code>/api/{site}</code> &mdash; articles from a specific publication ordered by highest similarity score</li>
+        </ul>
+
+        <h4>Response Envelope</h4>
+        <ul>
+            <li><code>page</code> &mdash; current page number (integer, starts at <code>1</code>)</li>
+            <li><code>pages</code> &mdash; total number of available pages (integer)</li>
+            <li><code>view</code> &mdash; active view name (<code>hottest</code>, <code>coldest</code>, <code>newest</code> or <code>site</code>)</li>
+            <li><code>site</code> &mdash; publication identifier (present on <code>/api/{site}</code> responses)</li>
+            <li><code>entries</code> &mdash; list of serialized article objects for the current page</li>
+        </ul>
+
+        <h4>Article Object</h4>
+        <ul>
+            <li><code>id</code> &mdash; unique MD5 identifier of the canonical article URL</li>
+            <li><code>url</code> &mdash; canonical URL of the article</li>
+            <li><code>title</code> &mdash; article headline</li>
+            <li><code>domain</code> &mdash; publisher hostname without <code>www.</code> (e.g. <code>theverge.com</code>)</li>
+            <li><code>site</code> &mdash; publication slug used in routes (e.g. <code>theverge</code>)</li>
+            <li><code>pub</code> &mdash; publication UTC timestamp in seconds (float)</li>
+            <li><code>age</code> &mdash; human-readable relative age (e.g. <code>2h</code>, <code>1d</code>)</li>
+            <li><code>author</code> &mdash; article author name when provided by the feed</li>
+            <li><code>description</code> &mdash; full plain-text description extracted from the RSS entry</li>
+            <li><code>summary</code> &mdash; description truncated to 480 characters</li>
+            <li><code>score</code> &mdash; raw cross-publication similarity score (float)</li>
+            <li><code>degrees</code> &mdash; rounded temperature score (<code>round(score * 1000)</code>)</li>
+        </ul>
+    </div>
+</div>
+{% endblock %}
