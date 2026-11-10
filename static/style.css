@@ -58,7 +58,7 @@ h2 { font-size: var(--big); line-height: 25px; }
 
 .main .entry:last-child { border-bottom: 0 none; margin-bottom: 10px; padding-bottom: 10px; }
 
-.main .entry h4, .main .entry h3, .main .entry h2, .main .entry .small, .main .entry .summary { margin: 0 auto; max-width: 520px; }
+.main .entry h4, .main .entry h3, .main .entry h2, .main .entry .small, .main .entry .summary, .main .entry .pages { margin: 0 auto; max-width: 520px; }
 
 .main .small { color: var(--gray); font-size: var(--small); overflow: hidden; }
 
