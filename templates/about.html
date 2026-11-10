@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+
+{% block main %}
+<div class="entry bg-color-4">
+    <div class="about">
+        <div class="block">
+            <p>
+                Welcome to a minimalist news aggregator built for signal over noise. By stripping away engagement bait, comment sections and visual clutter, {{ brand }} lets you focus on what actually matters: the stories shaping the day.
+            </p>
+            <p>
+                <a class="name" href="/">{{ brand }}</a> aggregates articles from a curated list of RSS feeds, scores them based on title and description similarity across publications, and surfaces the top story from each domain in a calm, distraction-free interface.
+            </p>
+            <p>
+                <a class="name" href="https://lucianmarin.com/">Lucian Marin</a> created {{ brand }} for busy people who don't want to spend more than a few minutes getting the most important news of the day without algorithmic manipulation or endless doomscrolling.
+            </p>
+        </div>
+
+        <h4>Install as a web app</h4>
+        <ul>
+            <li>
+                <svg width="16" height="16" viewBox="0 0 24 24">
+                    <path id="play" d="M5.25 5.653c0-.856.917-1.398 1.667-.986l11.54 6.348a1.125 1.125 0 010 1.971l-11.54 6.347a1.125 1.125 0 01-1.667-.985V5.653z" />
+                </svg>
+                Install on Android by <a href="https://support.google.com/chrome/answer/9658361">adding it to your home screen</a> from Chrome, or use the native <a href="https://github.com/lucianmarin/hotdroid">Android</a> client.
+            </li>
+            <li>
+                <svg width="16" height="16" viewBox="0 0 24 24">
+                    <path id="device-phone-mobile" d="M10.5 1.5H8.25A2.25 2.25 0 006 3.75v16.5a2.25 2.25 0 002.25 2.25h7.5A2.25 2.25 0 0018 20.25V3.75a2.25 2.25 0 00-2.25-2.25H13.5m-3 0V3h3V1.5m-3 0h3m-3 18.75h3" />
+                </svg>
+                Install on iPhone or iPad by <a href="https://support.apple.com/guide/iphone/bookmark-favorite-webpages-iph42ab2f3a7/ios">adding it to your home screen</a> from Safari.
+            </li>
+            <li>
+                <!-- icon from sidekickicons.com -->
+                <svg width="16" height="16" viewBox="0 0 24 24">
+                    <path id="computer-laptop" d="M10.5 17.5h3M4.75 15l-1.302 1.632a.996.996 0 0 0 .779 1.618h15.546a.996.996 0 0 0 .778-1.618L19.25 15zM7 5.75A2.25 2.25 0 0 0 4.75 8v7h14.5V8A2.25 2.25 0 0 0 17 5.75z" />
+                </svg>
+                Also available on Windows, Linux and natively on <a href="https://github.com/lucianmarin/macnews">macOS</a>.
+            </li>
+        </ul>
+
+        <h4>Tech stack and support</h4>
+        <ol>
+            <li>Hosted on a high-frequency <a href="https://vultr.com/?ref=8946799-8H">Vultr VPS</a> running Ubuntu 24.04 LTS.</li>
+            <li>Built with Python 3.12, <a href="https://fastapi.tiangolo.com/">FastAPI</a>, <a href="https://jinja.palletsprojects.com/">Jinja2</a> and Tortoise ORM.</li>
+            <li>Powered by Uvicorn behind Nginx and backed by SQLite with aiosqlite.</li>
+            <li>RSS aggregation with aiohttp, feedparser and BeautifulSoup; similarity scoring with scikit-learn and SciPy.</li>
+            <li>Icons by <a href="https://heroicons.com/">Heroicons</a> and <a href="https://sidekickicons.com/">Sidekickicons</a>, Route 159 typeface by <a href="https://dotcolon.net/fonts/route159">Sora Sagano</a>.</li>
+            <li><a href="https://paypal.com/donate/?hosted_button_id=586UTPPSHBWAN">Donate via PayPal</a> to keep {{ brand }} ad-free and running indefinitely.</li>
+        </ol>
+
+        <h4>Features and design constraints</h4>
+        <ol>
+            <li>Curated RSS aggregation across {{ sites | length }} tech, science, culture and news publications.</li>
+            <li>TF-IDF vectorization and cosine similarity scoring across article titles and descriptions.</li>
+            <li>Hottest view ranks stories covered across multiple publications by highest similarity score.</li>
+            <li>Coldest view highlights unique stories with the lowest similarity score across publications.</li>
+            <li>Newest view presents the latest stories in reverse-chronological order.</li>
+            <li>One top story per domain in main feeds so no single publication dominates the page.</li>
+            <li>Dedicated per-publication feeds showing all recent stories from a specific source.</li>
+            <li>Automatic cleanup of articles older than 48 hours to keep every feed fresh.</li>
+            <li>Concise summaries truncated to 480 characters with temperature scores in degrees.</li>
+            <li>Automatic light and dark themes following your OS preference.</li>
+        </ol>
+
+        <h4>{{ sites | length }} publications</h4>
+        <p>
+            {% for site in sites %}<a href="/{{ site }}">{{ site }}</a>{% if not loop.last %}, {% endif %}{% endfor %}.
+        </p>
+    </div>
+</div>
+{% endblock %}

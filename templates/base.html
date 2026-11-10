@@ -17,12 +17,20 @@
     <div class="main">
         <div class="entry">
             <h3>
-                <a href="/">{{ brand }}</a>
-                {% if page > 1 %}&frasl; <span>{{ page }}</span>{% endif %}
+                {% if view in ['hottest', 'coldest', 'newest'] %}
+                    <a href="/about">{{ brand }}</a>
+                {% else %}
+                    <a href="/">{{ brand }}</a>
+                {% endif %}
+                {% if page and page > 1 %}&frasl; <span>{{ page }}</span>{% endif %}
             </h3>
             <h2>
                 {% if view == 'site' %}
                     <a class="active" href="/{{ site }}">{{ site }}</a>
+                {% elif view in ['about', 'api', 'privacy'] %}
+                    <a class="{% if view == 'about' %}active{% endif %}" href="/about">About</a>
+                    <a class="{% if view == 'api' %}active{% endif %}" href="/api">API</a>
+                    <a class="{% if view == 'privacy' %}active{% endif %}" href="/privacy">Privacy</a>
                 {% else %}
                     <a class="{% if view == 'hottest' %}active{% endif %}" href="/">Hottest</a>
                     <a class="{% if view == 'coldest' %}active{% endif %}" href="/cold">Coldest</a>
@@ -30,24 +38,26 @@
                 {% endif %}
             </h2>
         </div>
-        {% for entry in entries %}
-            {% with revindex0=loop.revindex0 %}
-                {% include 'entry.html' %}
-            {% endwith %}
-        {% else %}
-            <div class="entry">
-                <div class="summary">Fetching articles...</div>
-            </div>
-        {% endfor %}
-        {% if pages > 1 %}
-            <div class="entry">
-                <div class="pages">
-                    {% for n in range(1, pages + 1) %}
-                        <a class="{% if n == page %}selected{% endif %}" href="?p={{ n }}">{{ n }}</a>
-                    {% endfor %}
+        {% block main %}
+            {% for entry in entries %}
+                {% with revindex0=loop.revindex0 %}
+                    {% include 'entry.html' %}
+                {% endwith %}
+            {% else %}
+                <div class="entry">
+                    <div class="summary">Fetching articles...</div>
                 </div>
-            </div>
-        {% endif %}
+            {% endfor %}
+            {% if pages and pages > 1 %}
+                <div class="entry">
+                    <div class="pages">
+                        {% for n in range(1, pages + 1) %}
+                            <a class="{% if n == page %}selected{% endif %}" href="?p={{ n }}">{{ n }}</a>
+                        {% endfor %}
+                    </div>
+                </div>
+            {% endif %}
+        {% endblock %}
     </div>
 </body>
 </html>

@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% block main %}
+<div class="entry bg-color-4">
+    <div class="about">
+        <p class="block">Read this page to learn about information that {{ brand }} collects and how it may be used.</p>
+
+        <h4>Links to third party web sites</h4>
+
+        <p class="block">Our service aggregates headlines, summaries and links to third-party news websites and publications. We are not responsible for the privacy practices or the content of these external websites. Please visit the privacy policies of these third-party sites in order to understand their privacy and information collection practices.</p>
+
+        <h4>Disclosures required by law</h4>
+
+        <p class="block">We reserve the right to disclose server log information when we believe in good faith that an applicable law, regulation, or legal process requires it, or when we believe disclosure is necessary to protect or enforce our rights or the security of the service.</p>
+
+        <h4>Cookies</h4>
+
+        <p class="block">Cookies are small text files stored by your browser on your computer when you visit a website. {{ brand }} does not require user accounts, logins or tracking cookies. Standard web server access logs and browser caching are used solely to deliver the service reliably and efficiently. You may configure your browser settings to refuse cookies at any time.</p>
+
+        <h4>Your privacy</h4>
+
+        <p>Respecting readers' privacy is important to {{ brand }}. Here's a small list of things you should know when using the service:</p>
+        <ul class="list">
+            <li>
+                No registration, user accounts or personal profiles are required to read {{ brand }}.
+            </li>
+            <li>
+                No third-party analytics, advertising trackers or behavioral profiling scripts are used.
+            </li>
+            <li>
+                Articles and metadata are fetched automatically from publicly available RSS feeds.
+            </li>
+            <li>
+                Links and summaries are cached for 48 hours and then permanently erased.
+            </li>
+            <li>
+                Clicking an article headline takes you directly to the publisher's original website.
+            </li>
+            <li>
+                Activities and content are subject to local laws and authorities.<br> {{ brand }} wouldn't and shouldn't be included in any justice process or legal dispute.
+            </li>
+        </ul>
+    </div>
+</div>
+{% endblock %}

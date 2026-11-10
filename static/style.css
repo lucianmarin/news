@@ -1,4 +1,4 @@
-html { --col: 360px; --read: 500px; --caps: 10px; --small: 13px; --regular: 14px; --big: 20px; --d: 0.2s; --hl: yellow; --white: #fff; --whitesmoke: #f0f0f0; --gainsboro: #e0e0e0; --silver: #c0c0c0; --gray: #808080; --darkgray: #404040; --almostblack: #202020; --black: #000; --bg-color-9: rgb(215, 215, 215); --bg-color-8: rgb(219, 219, 219); --bg-color-7: rgb(223, 223, 223); --bg-color-6: rgb(227, 227, 227); --bg-color-5: rgb(231, 231, 231); --bg-color-4: rgb(235, 235, 235); --bg-color-3: rgb(239, 239, 239); --bg-color-2: rgb(243, 243, 243); --bg-color-1: rgb(247, 247, 247); --bg-color-0: rgb(251, 251, 251); }
+html { --col: 360px; --read: 500px; --caps: 10px; --tiny: 12px; --small: 13px; --regular: 14px; --big: 20px; --indent: 30px; --d: 0.2s; --hl: yellow; --accent: orangered; --white: #fff; --whitesmoke: #f0f0f0; --gainsboro: #e0e0e0; --silver: #c0c0c0; --gray: #808080; --darkgray: #404040; --almostblack: #202020; --black: #000; --bg-color-9: rgb(215, 215, 215); --bg-color-8: rgb(219, 219, 219); --bg-color-7: rgb(223, 223, 223); --bg-color-6: rgb(227, 227, 227); --bg-color-5: rgb(231, 231, 231); --bg-color-4: rgb(235, 235, 235); --bg-color-3: rgb(239, 239, 239); --bg-color-2: rgb(243, 243, 243); --bg-color-1: rgb(247, 247, 247); --bg-color-0: rgb(251, 251, 251); }
 
 @media (prefers-color-scheme: dark) { html { --white: #000; --whitesmoke: #141414; --gainsboro: #242424; --silver: #404040; --gray: #808080; --darkgray: #c0c0c0; --almostblack: #e0e0e0; --black: #fff; --bg-color-9: rgb(44, 44, 44); --bg-color-8: rgb(40, 40, 40); --bg-color-7: rgb(36, 36, 36); --bg-color-6: rgb(32, 32, 32); --bg-color-5: rgb(28, 28, 28); --bg-color-4: rgb(24, 24, 24); --bg-color-3: rgb(20, 20, 20); --bg-color-2: rgb(16, 16, 16); --bg-color-1: rgb(12, 12, 12); --bg-color-0: rgb(8, 8, 8); } }
 
@@ -30,7 +30,13 @@ a { color: var(--black); cursor: pointer; text-decoration: none; transition: col
 
 b, i { font-style: normal; font-weight: normal; }
 
+code { color: var(--accent); font-family: "Hack", monospace; font-size: var(--tiny); }
+
 sup { line-height: 0; }
+
+svg { stroke-linecap: round; stroke-linejoin: round; stroke-width: 2; }
+
+svg path { fill: none; stroke: var(--black); }
 
 h3 { font-size: var(--caps); font-weight: bold; letter-spacing: 1px; line-height: 15px; text-transform: uppercase; }
 
@@ -52,7 +58,7 @@ h2 { font-size: var(--big); line-height: 25px; }
 
 .main .entry:last-child { border-bottom: 0 none; margin-bottom: 10px; padding-bottom: 10px; }
 
-.main .entry div, .main .entry h4, .main .entry h3, .main .entry h2 { margin: 0 auto; max-width: 520px; }
+.main .entry h4, .main .entry h3, .main .entry h2, .main .entry .small, .main .entry .summary { margin: 0 auto; max-width: 520px; }
 
 .main .small { color: var(--gray); font-size: var(--small); overflow: hidden; }
 
@@ -91,6 +97,40 @@ h2 { font-size: var(--big); line-height: 25px; }
 .pages a:last-child { border-right: 0 none; padding-right: 0; }
 
 .pages a.selected { color: var(--black); }
+
+.about { margin: 0 auto; max-width: 520px; padding: 10px 20px; }
+
+.about a { color: var(--accent); }
+
+.about a.name { color: var(--black); font-weight: bold; }
+
+.about a:hover { color: var(--gray); }
+
+.about h4 { margin-top: 10px; margin-bottom: 3px; padding: 0; }
+
+.about h4 + p { text-indent: 0; }
+
+.about p { padding-bottom: 3px; text-indent: var(--indent); }
+
+.about p:first-child { text-indent: 0; }
+
+.about p:last-child { padding-bottom: 0; }
+
+.about .block { margin-bottom: 10px; }
+
+.about ol, .about ul { margin-bottom: 10px; }
+
+.about ol li, .about ul li { border-bottom: var(--white) 1px solid; padding: 3px 0; }
+
+.about ol li:last-child, .about ul li:last-child { border-bottom: 0 none; }
+
+.about ul { list-style: none; }
+
+.about ul li { padding-left: var(--indent); }
+
+.about ol { margin-left: var(--indent); }
+
+.about svg { float: left; margin-left: calc(0px - var(--indent)); padding: 2px calc((var(--indent) - 16px)/2); }
 
 @font-face { font-family: "Route 159"; font-style: normal; font-weight: normal; src: url(/static/route159/regular.woff2) format("woff2"); }
 
