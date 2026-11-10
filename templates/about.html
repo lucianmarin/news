@@ -64,7 +64,7 @@
 
         <h4>{{ sites | length }} publications</h4>
         <p>
-            {% for site in sites %}<a href="/{{ site }}">{{ site }}</a>{% if not loop.last %}, {% endif %}{% endfor %}.
+            {% for site in sites if site %}<a href="/{{ site }}">{{ site }}</a>{% if not loop.last %}, {% endif %}{% endfor %}.
         </p>
     </div>
 </div>
