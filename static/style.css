@@ -98,7 +98,7 @@ h2 { font-size: var(--big); line-height: 25px; }
 
 .pages a.selected { color: var(--black); }
 
-.about { margin: 0 auto; max-width: 520px; padding: 10px 20px; }
+.about { margin: 0 auto; max-width: 520px; padding: 5px 20px; }
 
 .about a { color: var(--accent); }
 
@@ -106,7 +106,7 @@ h2 { font-size: var(--big); line-height: 25px; }
 
 .about a:hover { color: var(--gray); }
 
-.about h4 { margin-top: 10px; margin-bottom: 3px; padding: 0; }
+.about h4 { margin-top: 10px !important; margin-bottom: 3px !important; padding: 0; }
 
 .about h4 + p { text-indent: 0; }
 

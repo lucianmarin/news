@@ -50,6 +50,13 @@
         <p>
             {% for site in sites if site %}<a href="/{{ site }}">{{ site }}</a>{% if not loop.last %}, {% endif %}{% endfor %}.
         </p>
+
+        <h4>Contact and privacy</h4>
+        <p>
+            Respecting readers' privacy is important to {{ brand }}. Under our <a href="/privacy">privacy policy</a>, no registration, user accounts, tracking cookies, third-party analytics or advertising trackers are used. Articles and metadata are fetched from publicly available RSS feeds, cached for 48 hours and then permanently erased, while clicking a headline takes you directly to the publisher's original website.
+        </p>
+        <p>Gmail &mdash; marin.lucian@gmail.com</p>
+        <p>Phone &mdash; +40 726 210 589</p>
     </div>
 </div>
 {% endblock %}
